@@ -1,5 +1,17 @@
-from FFClass import Championship
+'''
+Created on 12 de jun de 2018
 
-c = Championship.Championship("Brasileiro","Pontos Corridos", "jogo 1","tablea","brasil")
+@author: jeanm
+'''
 
-c.oi()
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+if __name__ == '__main__':
+    app.run()
+
+
