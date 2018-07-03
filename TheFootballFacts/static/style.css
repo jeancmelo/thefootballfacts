@@ -1,0 +1,14 @@
+.bg-white{
+	    background-color: #55a547 !important;
+}
+.list-group-item{
+	border-left: 0px !important;
+    border-right: 0px !important;
+
+}
+.caixa-imagem{
+	text-align: center;
+    border: 1px solid #dedede;
+    background-color: #fff;
+    padding: 10px;
+}

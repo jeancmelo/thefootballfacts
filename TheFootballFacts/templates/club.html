@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<!-- Required meta tags -->
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.com/libraries/Chart.js">
+
+		<link rel="stylesheet" type="text/css" href="http://127.0.0.1:5000/static/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+		<title>Clube {{nome}}</title>
+	</head>
+	<body style="background-color: #f9f9f9; font-family: roboto;">
+
+		<!-- Menu superior -->
+		<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    		<h5 class="my-0 mr-md-auto font-weight-normal">The Football Facts</h5>
+		     <nav class="my-2 my-md-0 mr-md-3">
+		     	<a class="p-2 text-dark" href="#">Clubes</a>
+		        <a class="p-2 text-dark" href="#">Jogadores</a>
+		        <a class="p-2 text-dark" href="#">Campeonatos</a>
+		        <a class="p-2 text-dark" href="#">Comprativo</a>
+		     </nav>
+    	</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-2 caixa-imagem">
+					<img src="https://www.ogol.com.br/img/logos/equipas/2235_imgbank.png" style="width: 150px;">
+				</div>
+				<div class="col-4">
+					<h1>{{nome}}</h1>
+					<p>Data Fundação: {{datafundacao}}</p>
+					<p>Cidade/País: {{paiscidade}}</p>
+				</div>
+				<div class="col-4">
+					<p>Título Principal: {{tituloprincipal}}</p>
+					<p>Rank FIFA: {{rankfifa}}</p>
+					<p>RANK PAÍS: {{score}}</p>
+				</div>				
+			</div>
+<div style="border: 1px solid #DEDEDE; margin-top: 2%; margin-bottom: 2%;"></div>
+			<div class="row">
+				<div class="dropdown">
+				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    Campeonato:
+				  </button>
+				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				    <a class="dropdown-item" href="#">Brasiilerão</a>
+				    <a class="dropdown-item" href="#">Copa do Brasil</a>
+				  </div>
+				</div>		
+			</div>
+			<div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>
+
+			<div class="row">
+			    	<div class="col-sm">
+			      	<h2>TOP Scout</h2>
+			     	<ul class="list-group">
+			     		{% for player in players %}
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+						    	{{ player }}
+						    <span class="badge badge-primary badge-pill">14</span>					   
+						{% endfor %}
+					</ul>
+		   		</div>
+		    	<div class="col-sm">
+			      	<h2>Jogos Dentro x Fora</h2>		    		
+			     	<ul class="list-group">
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+					    Cras justo odio
+					    <span class="badge badge-primary badge-pill">14</span>
+					  </li>
+					  <li class="list-group-item d-flex justify-content-between align-items-center">
+					    Dapibus ac facilisis in
+					    <span class="badge badge-primary badge-pill">2</span>
+					  </li>
+					  <li class="list-group-item d-flex justify-content-between align-items-center">
+					    Morbi leo risus
+					    <span class="badge badge-primary badge-pill">1</span>
+					  </li>
+					  <li class="list-group-item d-flex justify-content-between align-items-center">
+					    Dapibus ac facilisis in
+					    <span class="badge badge-primary badge-pill">2</span>
+					  </li>
+					  <li class="list-group-item d-flex justify-content-between align-items-center">
+					    Morbi leo risus
+					    <span class="badge badge-primary badge-pill">1</span>
+					  </li>				 
+					</ul>
+		   		</div>
+		    <div class="col-sm">
+			    <h2>Previa de SCOUTS</h2>		    	
+		      	<ul class="list-group">
+				  <li class="list-group-item">Cras justo odio</li>
+				  <li class="list-group-item">Dapibus ac facilisis in</li>
+				  <li class="list-group-item">Morbi leo risus</li>
+				  <li class="list-group-item">Porta ac consectetur ac</li>
+				  <li class="list-group-item">Vestibulum at eros</li>
+				</ul>
+		    </div>
+		  </div>
+<div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>			
+		  <div class="row">
+		    <div class="col-sm">
+			    <h2>TOP Players para Estatística</h2>		    	
+		      	<ul class="list-group">
+				  <li class="list-group-item">Cras justo odio</li>
+				  <li class="list-group-item">Dapibus ac facilisis in</li>
+				  <li class="list-group-item">Morbi leo risus</li>
+				  <li class="list-group-item">Porta ac consectetur ac</li>
+				  <li class="list-group-item">Vestibulum at eros</li>
+				</ul>
+		    </div>
+		    <div class="col-sm">
+			    <h2>Pior Players</h2>		    	
+		      	<ul class="list-group">
+				  <li class="list-group-item">Cras justo odio</li>
+				  <li class="list-group-item">Dapibus ac facilisis in</li>
+				  <li class="list-group-item">Morbi leo risus</li>
+				  <li class="list-group-item">Porta ac consectetur ac</li>
+				  <li class="list-group-item">Vestibulum at eros</li>
+				</ul>
+		    </div>		    
+		  </div>
+<div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>					  
+		  <div class="row">
+		    <div class="col-sm">
+			    <h2>Vitórias x Derrotas</h2>		    	
+		      	<ul class="list-group">
+				  <li class="list-group-item">Cras justo odio</li>
+				  <li class="list-group-item">Dapibus ac facilisis in</li>
+				  <li class="list-group-item">Morbi leo risus</li>
+				  <li class="list-group-item">Porta ac consectetur ac</li>
+				  <li class="list-group-item">Vestibulum at eros</li>
+				</ul>
+		    </div>
+		    <div class="col-sm">
+			    <h2>Home x AWAY</h2>		    	
+		      	<ul class="list-group">
+				  <li class="list-group-item">Cras justo odio</li>
+				  <li class="list-group-item">Dapibus ac facilisis in</li>
+				  <li class="list-group-item">Morbi leo risus</li>
+				  <li class="list-group-item">Porta ac consectetur ac</li>
+				  <li class="list-group-item">Vestibulum at eros</li>
+				</ul>
+		    </div>		    
+		  </div>		  
+<div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>					  
+		  <div class="row">
+		    <div class="col-sm">
+			    <h2>PRÓXIMOS JOGOS/Probabilidade de Ganho</h2>		    	
+		      	<ul class="list-group">
+				  <li class="list-group-item">Cras justo odio</li>
+				  <li class="list-group-item">Dapibus ac facilisis in</li>
+				  <li class="list-group-item">Morbi leo risus</li>
+				  <li class="list-group-item">Porta ac consectetur ac</li>
+				  <li class="list-group-item">Vestibulum at eros</li>
+				</ul>
+		    </div>
+		  </div>	
+<div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>				  
+		  <div class="row">
+		    <div class="col-sm">
+			    <h2>Histórico de Confrontos Dentro</h2>		    	
+		      	<ul class="list-group">
+				  <li class="list-group-item">Cras justo odio</li>
+				  <li class="list-group-item">Dapibus ac facilisis in</li>
+				  <li class="list-group-item">Morbi leo risus</li>
+				  <li class="list-group-item">Porta ac consectetur ac</li>
+				  <li class="list-group-item">Vestibulum at eros</li>
+				</ul>
+		    </div>
+		    <div class="col-sm">
+			    <h2>Histórico de Confrontos Fora</h2>		    	
+		      	<ul class="list-group">
+				  <li class="list-group-item">Cras justo odio</li>
+				  <li class="list-group-item">Dapibus ac facilisis in</li>
+				  <li class="list-group-item">Morbi leo risus</li>
+				  <li class="list-group-item">Porta ac consectetur ac</li>
+				  <li class="list-group-item">Vestibulum at eros</li>
+				</ul>
+		    </div>		    
+		  </div>		  	  
+		</div>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	</body>
+</html>
