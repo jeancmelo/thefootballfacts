@@ -4,15 +4,19 @@ Created on 12 de jun de 2018
 @author: jeanm
 '''
 
+from _hashlib import new
 from builtins import str
 
-#FLASK IMPORT
 from flask import Flask
 from flask import render_template
 from flask.globals import request
 from flask_bootstrap  import  Bootstrap
 
+from FFClass.Player import Player
+from FFutils.UtilPlayer import UtilPlayer
 
+
+#FLASK IMPORT
 app = Flask(__name__)
 
 @app.route('/')
@@ -21,8 +25,22 @@ def html_home():
 
 @app.route("/player/<nome>")
 def html_player(nome):
-    return render_template("player.html", nome=nome)
+    
+    p = Player("Jean Melo", "24", "http://s2.glbimg.com/FEOzbUht1L9IAr98ARmMvw722dQ=/top/s.glbimg.com/jo/eg/f/original/2014/04/25/adriano.png", "Brasileira", "Meio Campo",
+               20, 5, 10, 20, 100)
+    
+    util = UtilPlayer(p)
+    score_area = util.score_player_meia(p)
 
+    return render_template("player.html",
+                            nome=p.player_name,
+                            age=p.player_age,
+                            image=p.player_photo,
+                            nacionality=p.player_nationality,
+                            position=p.player_position,
+                            score_player=score_area
+                            )
+    
 @app.route("/club/<nome>")
 def html_club(nome):
     

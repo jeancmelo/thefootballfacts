@@ -1,27 +1,25 @@
 class Player(object):
 	"""docstring for Player"""
 
-	#ATRIBUTOS DO JOGADOR
-	player_name        = "vazio"
-	player_age         = "vazio"
-	player_photo       = "vazio"
-	player_nationality = "vazio"
-	player_position    = "vazio"
+	def __init__(self, player_name, player_age, player_photo, player_nationality, player_position, player_n_gols, player_n_disarm, player_n_right_passes,player_n_wrong_passes, player_n_kick):
 
-	#ATRIBUTOS ESPECÍFICOS JOGADOR
-	player_n_gols         = 0
-	player_n_disarm       = 0
-	player_n_right_passes = 0
-	player_n_wrong_passes = 0
-	player_n_kick         = 0
-
-	#STATUS DO JOGADOR (1 = Ok | 2 = Cartão Amarelo | 3 - Expulso | 4 - Contundido)
-	player_status         = 1
-
-	#ATRIBUTO DE MACHINE LEARNING
-	score_player          = 0
+		#ATRIBUTOS DO JOGADOR
+		self.player_name        = player_name
+		self.player_age         = player_age
+		self.player_photo       = player_photo
+		self.player_nationality = player_nationality
+		self.player_position    = player_nationality
 	
-	def __init__(self):
-
-		self.player_name = player_name
+		#ATRIBUTOS ESPECÃ�FICOS JOGADOR
+		self.player_n_gols         = player_n_gols
+		self.player_n_disarm       = player_n_disarm
+		self.player_n_right_passes = player_n_right_passes
+		self.player_n_wrong_passes = player_n_wrong_passes
+		self.player_n_kick         = player_n_kick
+	
+		#STATUS DO JOGADOR (1 = Ok | 2 = CartÃ£o Amarelo | 3 - Expulso | 4 - Contundido)
+		#player_status         = 1
+	
+		#ATRIBUTO DE MACHINE LEARNING
+		#score_player          = 0
 		

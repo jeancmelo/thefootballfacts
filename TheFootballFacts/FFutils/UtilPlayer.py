@@ -1,37 +1,30 @@
+from FFClass.Player import Player
+
 class UtilPlayer(object):
 	"""docstring for UtilPlayer"""
-	def __init__(self, arg):
-		super(UtilPlayer, self).__init__()
-		self.arg = arg
-
+	def __init__(self, Player):
+		pass
+	
 	#DEFINIR SCORE DO GOLEIRO
-	def score_player_keeper():
-		int score_player
-
-		return score_player
-	
+	def score_player_keeper(self, Player):
+		pass
+		
 	#DEFINIR SCORE DO ZAGUEIRO
-	def score_player_zagueiro():
-		int score_player
+	def score_player_zagueiro(self, Player):
+		pass
 	
-		return score_player
-
 	#DEFINIR SCORE DO MEIA
-	def score_player_meia():
-		int score_player
-
-		return score_player
+	def score_player_meia(self, Player):
+		score_player = Player.player_n_right_passes / Player.player_n_wrong_passes
 	
+		return score_player
+		
 	#DEFINIR SCORE DO LATERAL
-	def score_player_lateral():
-		int score_player
-
-		return score_player
-
+	def score_player_lateral(self, Player):
+		pass
+	
 	#DEFINIR SCORE DO ATACANTE
-	def score_player_atacante():
-		int score_player
-
-		return score_player
+	def score_player_atacante(self, Player):
+		pass
 
 
