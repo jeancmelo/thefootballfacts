@@ -1,7 +1,8 @@
 class Player(object):
 	"""docstring for Player"""
 
-	def __init__(self, player_name, player_age, player_club, player_photo, player_nationality, player_position, player_n_gols=0, player_n_disarm=0, player_n_right_passes=0,player_n_wrong_passes=0, player_n_kick=0):
+	def __init__(self, player_name, player_age, player_club, player_photo, player_nationality, player_position, player_n_gols=0, 
+				player_n_disarm=0, player_n_right_passes=0,player_n_wrong_passes=0, player_n_kick=0):
 
 		#ATRIBUTOS DO JOGADOR
 		self.player_name           = player_name

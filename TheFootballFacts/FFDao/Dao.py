@@ -3,9 +3,7 @@ Created on 15 de jun de 2018
 
 @author: jeanm
 '''
-from _overlapped import NULL
 import sqlite3
-
 
 #conn = sqlite3.connect('C:/Users/jeanm/Desktop/banco/sql_minhaAgenda.db')
 class Dao():
@@ -55,7 +53,8 @@ class Dao():
         
         return rows
     
-    def add_club(self, club_name, club_n_win, club_n_defeat, club_n_tie, club_emblem, club_country, club_n_win_in, club_n_defeat_in, club_n_tie_in, club_fundation_Date="00/00/0000",  club_city="none"):
+    def add_club(self, club_name, club_n_win, club_n_defeat, club_n_tie, club_emblem, club_country, club_n_win_in, club_n_defeat_in, 
+                 club_n_tie_in, club_fundation_Date="00/00/0000",  club_city="none"):
         conn = sqlite3.connect('C:/Users/jeanm/Desktop/banco/sql_thefootbalfact.db')
         
         #VERIFICAR SE JA EXISTE E CASO NAO, ADICIONAR

@@ -4,17 +4,12 @@ Created on 12 de jun de 2018
 @author: jeanm
 '''
 
-from builtins import str
-
 from flask import Flask
 from flask import render_template
-from flask.globals import request
 
 from FFDao.Dao import Dao
-from FFutils.UtilPlayer import UtilPlayer
 from FFClass.Club import Club
 from FFClass.Player import Player
-
 
 bd = Dao
 
@@ -28,9 +23,8 @@ def html_home():
 @app.route("/player/<player_name>")
 def html_player(player_name):
     
-    #Fazer Consulta no Banco pelo Nome
+    #CONSULTA NO BANCO PELO NOME
     aux = bd.consultar_Players("", player_name)
-
     
     #RECONSTRUINDO O OBJETO
     p = Player(aux[0][1],aux[0][2],aux[0][3],aux[0][4],aux[0][5],aux[0][6])   
@@ -42,19 +36,21 @@ def html_player(player_name):
     #score_area = util.score_player_meia(p)
 
     return render_template("player.html",
-                            nome=p.player_name,
-                            age=p.player_age,
-                            image=p.player_photo,
-                            nacionality=p.player_nationality,
-                            position=p.player_position,
-                            score_player=10
+                            nome                = p.player_name,
+                            age                 = p.player_age,
+                            image               = p.player_photo,
+                            nacionality         = p.player_nationality,
+                            position            = p.player_position,
+                            score_player        = 10
                             )
     
 @app.route("/club/<club_name>")
 def html_club(club_name):
     
-    #RECONSTRUINDO O OBJETO
+    #CONSULTA NO BANCO PELO NOME
     aux = bd.consultar_Club("", club_name)
+    
+    #RECONSTRUINDO O OBJETO
     c = Club(aux[0][1],aux[0][2],aux[0][3],aux[0][4],aux[0][5], aux[0][6], aux[0][7], aux[0][8])
 
     #RETORNA OS JOGADOES DAQUELE TIME

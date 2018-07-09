@@ -1,29 +1,23 @@
-from _operator import concat
-from _sqlite3 import sqlite_version
-import sqlite3
-from unicodedata import normalize 
-
-from bs4 import BeautifulSoup
 import requests
-
+from unicodedata import normalize 
+from bs4 import BeautifulSoup
 from FFDao.Dao import Dao
 
-
 bd = Dao
-	
-
 
 def scrapperPlayers():
+	
 	url = 'https://www.scoreboard.com/br/equipe/flamengo/WjxY29qB/'
-	r = requests.get(url)
-	soup =  BeautifulSoup(r.text, 'lxml')
-	lista_nome = soup.find_all('span', class_='flag fl_39')
 	url2 = 'https://www.scoreboard.com'
 	url_player = []
+	
+	r = requests.get(url)
+	soup =  BeautifulSoup(r.text, 'lxml')
+	
+	lista_nome = soup.find_all('span', class_='flag fl_39')
 	for lista_url in lista_nome:
 		if lista_url.next_element.name == 'a':
 			url_player.append('{0}{1}'.format(url2, lista_url.next_element.get('href')))
-
 	
 	for url_player in url_player:
 		validador = url_player.find("jogador")
