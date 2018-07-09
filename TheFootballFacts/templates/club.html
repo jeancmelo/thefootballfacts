@@ -12,7 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="http://127.0.0.1:5000/static/style.css">
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-		<title>Clube {{nome}}</title>
+		<title>Clube {{club_name}}</title>
 	</head>
 	<body style="background-color: #f9f9f9; font-family: roboto;">
 
@@ -30,17 +30,17 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-2 caixa-imagem">
-					<img src="https://www.ogol.com.br/img/logos/equipas/2235_imgbank.png" style="width: 150px;">
+					<img src="{{club_emblem}}" style="width: 150px;">
 				</div>
 				<div class="col-4">
-					<h1>{{nome}}</h1>
-					<p>Data Fundação: {{datafundacao}}</p>
-					<p>Cidade/País: {{paiscidade}}</p>
+					<h1>{{club_name}}</h1>
+					<p>Data Fundação: {{club_fundation_Date}}</p>
+					<p>Cidade/País: {{club_country}}</p>
 				</div>
 				<div class="col-4">
-					<p>Título Principal: {{tituloprincipal}}</p>
-					<p>Rank FIFA: {{rankfifa}}</p>
-					<p>RANK PAÍS: {{score}}</p>
+					<p>Título Principal: </p>
+					<p>SCORE:</p>
+					<p>SCORE:</p>
 				</div>				
 			</div>
 <div style="border: 1px solid #DEDEDE; margin-top: 2%; margin-bottom: 2%;"></div>
@@ -129,26 +129,48 @@
 		  </div>
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>					  
 		  <div class="row">
-		    <div class="col-sm">
-			    <h2>Vitórias x Derrotas</h2>		    	
-		      	<ul class="list-group">
-				  <li class="list-group-item">Cras justo odio</li>
-				  <li class="list-group-item">Dapibus ac facilisis in</li>
-				  <li class="list-group-item">Morbi leo risus</li>
-				  <li class="list-group-item">Porta ac consectetur ac</li>
-				  <li class="list-group-item">Vestibulum at eros</li>
-				</ul>
-		    </div>
-		    <div class="col-sm">
-			    <h2>Home x AWAY</h2>		    	
-		      	<ul class="list-group">
-				  <li class="list-group-item">Cras justo odio</li>
-				  <li class="list-group-item">Dapibus ac facilisis in</li>
-				  <li class="list-group-item">Morbi leo risus</li>
-				  <li class="list-group-item">Porta ac consectetur ac</li>
-				  <li class="list-group-item">Vestibulum at eros</li>
-				</ul>
-		    </div>		    
+		    	<div class="col-sm">
+			      	<h2>Vitórias e Derrotas</h2>		    		
+			     	<ul class="list-group">
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+					    Vitórias
+					    <span class="badge badge-primary badge-pill">{{club_n_win}}</span>
+					  </li>
+					  <li class="list-group-item d-flex justify-content-between align-items-center">
+					    Derrotas
+					    <span class="badge badge-primary badge-pill">{{club_n_defeat}}</span>
+					  </li>
+					  <li class="list-group-item d-flex justify-content-between align-items-center">
+					    Empates
+					    <span class="badge badge-primary badge-pill">{{club_n_tie}}</span>
+					  </li>
+					</ul>
+		   		</div>
+		    	<div class="col-sm">
+			      	<h2> Dentro e Fora de Casa</h2>		    		
+			     	<ul class="list-group">
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+					    Cras justo odio
+					    <span class="badge badge-primary badge-pill">14</span>
+					  </li>
+					  <li class="list-group-item d-flex justify-content-between align-items-center">
+					    Dapibus ac facilisis in
+					    <span class="badge badge-primary badge-pill">2</span>
+					  </li>
+					  <li class="list-group-item d-flex justify-content-between align-items-center">
+					    Morbi leo risus
+					    <span class="badge badge-primary badge-pill">1</span>
+					  </li>
+					  <li class="list-group-item d-flex justify-content-between align-items-center">
+					    Dapibus ac facilisis in
+					    <span class="badge badge-primary badge-pill">2</span>
+					  </li>
+					  <li class="list-group-item d-flex justify-content-between align-items-center">
+					    Morbi leo risus
+					    <span class="badge badge-primary badge-pill">1</span>
+					  </li>				 
+					</ul>
+		   		</div>	    
 		  </div>		  
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>					  
 		  <div class="row">
