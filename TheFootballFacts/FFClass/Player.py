@@ -1,8 +1,9 @@
 class Player(object):
 	"""docstring for Player"""
 
-	def __init__(self, player_name, player_age, player_club, player_photo, player_nationality, player_position, player_n_gols=0, 
-				player_n_disarm=0, player_n_right_passes=0,player_n_wrong_passes=0, player_n_kick=0):
+	def __init__(self, player_name, player_club, player_position, player_age, player_nationality, p_matches_played, p_gols, p_assistence,
+		              p_yellow_card, p_red_card, p_penaulti, p_played_time, player_photo=""):
+
 
 		#ATRIBUTOS DO JOGADOR
 		self.player_name           = player_name
@@ -13,11 +14,13 @@ class Player(object):
 		self.player_club 	 	   = player_club
 	
 		#ATRIBUTOS ESPECÃ�FICOS JOGADOR
-		self.player_n_gols         = player_n_gols
-		self.player_n_disarm       = player_n_disarm
-		self.player_n_right_passes = player_n_right_passes
-		self.player_n_wrong_passes = player_n_wrong_passes
-		self.player_n_kick         = player_n_kick
+		self.p_matches_played      = p_matches_played
+		self.p_gols                = p_gols
+		self.p_assistence          = p_assistence
+		self.p_yellow_card         = p_yellow_card
+		self.p_red_card            = p_penaulti
+		self.p_played_time         = p_played_time										
+
 	
 		#STATUS DO JOGADOR (1 = Ok | 2 = CartÃ£o Amarelo | 3 - Expulso | 4 - Contundido)
 		#player_status         = 1

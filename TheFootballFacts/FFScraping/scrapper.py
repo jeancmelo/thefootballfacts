@@ -2,57 +2,90 @@ import requests
 from unicodedata import normalize 
 from bs4 import BeautifulSoup
 from FFDao.Dao import Dao
+from nt import stat
 
 bd = Dao
 
 def scrapperPlayers():
-	
-	url = 'https://www.scoreboard.com/br/equipe/flamengo/WjxY29qB/'
-	url2 = 'https://www.scoreboard.com'
+	i = 1	
+	url = 'https://footystats.org/brazil/serie-a'
+	url2 = 'https://footystats.org'
+		
 	url_player = []
+	url_player2 = []
 	
 	r = requests.get(url)
 	soup =  BeautifulSoup(r.text, 'lxml')
 	
-	lista_nome = soup.find_all('span', class_='flag fl_39')
+	#lista_nome = soup.find_all('span', class_='flag fl_39')
+	#PEGA A URL DO TIME
+	lista_nome = soup.find_all('td', class_='team borderRightContent')
 	for lista_url in lista_nome:
 		if lista_url.next_element.name == 'a':
 			url_player.append('{0}{1}'.format(url2, lista_url.next_element.get('href')))
 	
-	for url_player in url_player:
-		validador = url_player.find("jogador")
-		if(validador > 0):
-			r = requests.get(url_player)
-			soup =  BeautifulSoup(r.text, 'lxml')
-			
-			player_name = soup.find('div', class_='team-name')
-			
-			#LIMPA AS INFORMACOES
-			aux = player_name.text
-			aux = aux.split("(")
+	for url_time in url_player:
+		r = requests.get(url_time)
+		soup =  BeautifulSoup(r.text, 'lxml')
 				
-			#PEGA O NOME DO JOGADOR
-			aux2 = aux[0].lower()
-			valor = len(aux2)
-			aux2 = aux2[0:valor -1]
-			player_name = aux2
+		#PEGA A URL DOS JOGADORES DOS TIMES		
+		lista_player = soup.find_all('p', class_='col-lg-6 ellipses')
+
+		for lista_url in lista_player:
+			url_player2.append('{0}{1}'.format(url2, lista_url.next_element.get('href')))
+		
+		for url_player2 in url_player2:
+				r = requests.get(url_player2)
+				soup =  BeautifulSoup(r.text, 'lxml')
 			
-			#PEGA O TIME DO JOGADOR
-			aux2 = aux[1].lower()
-			valor = len(aux2)
-			aux2 = aux2[0:valor -1]
-			player_club = aux2
+				#PEGAR INFO DO JOGADOR
+				info_p = []
+				#player_info = soup.find_all('div', class_='row cf lightGrayBorderBottom ')
+				player_info = soup.find_all('p', class_='col-lg-7 lh14e')
+				for p_info in player_info:
+					info_p.append(p_info.text) 
+		
+				#TRATAR O NOME
+				p_name = info_p[0]			
+			
+				#TRATAR PARA USAR O NOME COMO URL
+				p_url = p_name.lower() 
+				p_url = p_url.replace(" ","-")
+				p_url = normalize('NFKD', p_url).encode('ASCII', 'ignore').decode('ASCII')			
+				
+				#PAIS DE ORIGEM
+				p_origem = info_p[1]
+				
+				#POSICAO DO JOGADOR
+				p_position = info_p[2]		
 	
-			
-			#PEGA A IDADE DO JOGADOR
-			
-			#PEGA A POSICAO DO JOGADOR
-			player_position = soup.find('div', class_='player-type-name')
-			player_position = player_position.text
+				#IDADE DO JOGADOR
+				p_age = info_p[3]	
 				
-			#GRAVA JOGADOR NO BANCO
-			bd.add_Player("", player_name, player_club, player_position)
-			print("Adicionado ", player_name, " com Sucesso no time:", player_club)
+				player_club = soup.find('span', class_='fa-adjust-h3')
+				p_club = player_club.text
+				p_club = p_club[0:len(p_club)-6]
+				
+				stats_p = []
+				#RETIRA AS STATS DO JOGADOR
+				player_stats = soup.find('div', class_='w100 cf player_season_row')
+				player_stats = player_stats.find_all('p', class_='mild-small')
+				for p_stats in player_stats:
+					stats_p.append(p_stats)
+	
+				p_matches_played = stats_p[0].text 
+				p_gols           = stats_p[1].text
+				p_assistence     = stats_p[2].text
+				p_yellow_card    = stats_p[3].text
+				p_red_card		 = stats_p[4].text
+				p_penaulti       = stats_p[5].text
+				p_played_time    = stats_p[6].text     
+					
+			
+				#GRAVA JOGADOR NO BANCO
+				#bd.add_Player("", p_name, p_club, p_position, p_origem, p_matches_played,  p_gols, p_assistence, p_yellow_card, p_red_card, p_penaulti, p_played_time)
+				print(i,"Adicionado ", p_name, " com Sucesso no time:", p_club)
+				i = i+1
 
 
 
@@ -137,7 +170,7 @@ def scrapperClub():
 
 
 if __name__ == '__main__':
-    #scrapperPlayers()
-    scrapperClub()
+    scrapperPlayers()
+    #scrapperClub()
 	#print(bd.consultar_all_Club(""))
 	#print(bd.consultar_all_Players(""))

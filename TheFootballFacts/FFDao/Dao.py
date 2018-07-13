@@ -78,7 +78,7 @@ class Dao():
         conn.commit()
         
         
-    def add_Player(self, player_name, player_club, player_position, player_age="00", player_photo="", player_nationality="Brasileira"):
+    def add_Player(self, player_name, player_club, player_position, player_age, p_matches_played, p_gols, p_assistence, p_yellow_card, p_red_card, p_penaulti, p_played_time, player_photo="", player_nationality="none"):
         conn = sqlite3.connect('C:/Users/jeanm/Desktop/banco/sql_thefootbalfact.db')
         
         #VERIFICAR SE JA EXISTE E CASO NAO, ADICIONAR
