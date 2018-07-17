@@ -10,6 +10,7 @@ from flask import render_template
 from FFDao.Dao import Dao
 from FFClass.Club import Club
 from FFClass.Player import Player
+from FFutils.UtilPlayer import UtilPlayer
 
 bd = Dao
 
@@ -52,9 +53,15 @@ def html_club(club_name):
     
     #RECONSTRUINDO O OBJETO
     c = Club(aux[0][1],aux[0][2],aux[0][3],aux[0][4],aux[0][5], aux[0][6], aux[0][7], aux[0][8])
-
+    
     #RETORNA OS JOGADOES DAQUELE TIME
-    arr_club_players = bd.consultar_Players_by_Club("",club_name)
+    arr_club_players = bd.consultar_Players_by_Club("", club_name)
+    
+    #CHAMA A METODO DE SCORE DOS PLAYERS
+    u = UtilPlayer
+    best_players = u.best_5_players("", arr_club_players)
+
+    
     
     #RENDERIZAR A PAGINA COM AS INFORMACOES
     return render_template("club.html", 
@@ -65,7 +72,8 @@ def html_club(club_name):
                            club_n_win           = c.club_n_win,
                            club_n_defeat        = c.club_n_defeat,
                            club_n_tie           = c.club_n_tie,
-                           players              = arr_club_players
+                           players              = arr_club_players,
+                           best_players         = best_players
                            ), 200
 
 if __name__ == '__main__':

@@ -27,7 +27,15 @@ class Dao():
         rows = cursor.fetchall()
         
         return rows
-    
+
+    def consultar_Players_by_Position(self, player_position, player_club):  
+        conn = sqlite3.connect('C:/Users/jeanm/Desktop/banco/sql_thefootbalfact.db')
+        
+        cursor = conn.execute("select * from player WHERE player_position LIKE ? AND player_club LIKE?", (player_position, player_club,))
+        rows = cursor.fetchall()
+        
+        return rows
+        
     def consultar_Club(self, club_name):  
         conn = sqlite3.connect('C:/Users/jeanm/Desktop/banco/sql_thefootbalfact.db')
         
@@ -86,9 +94,9 @@ class Dao():
         rows = cursor.fetchall()
         if not rows:
             conn.execute("""
-            INSERT INTO player (player_name, player_age, player_photo, player_nationality, player_position, player_club)
-            VALUES (?,?,?,?,?,?)
-           """, (player_name, player_age, player_photo, player_nationality, player_position, player_club))
+            INSERT INTO player (player_name, player_age, player_photo, player_nationality, player_position, player_club, p_matches_played, p_gols, p_assistence, p_yellow_card, p_red_card, p_penaulti, p_played_time)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+           """, (player_name, player_age, player_photo, player_nationality, player_position, player_club, p_matches_played, p_gols, p_assistence, p_yellow_card, p_red_card, p_penaulti, p_played_time,))
             conn.commit()           
         else:
             pass

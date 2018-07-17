@@ -6,6 +6,8 @@ from nt import stat
 
 bd = Dao
 
+#global url_player2 
+
 def scrapperPlayers():
 	i = 1	
 	url = 'https://footystats.org/brazil/serie-a'
@@ -17,22 +19,22 @@ def scrapperPlayers():
 	r = requests.get(url)
 	soup =  BeautifulSoup(r.text, 'lxml')
 	
-	#lista_nome = soup.find_all('span', class_='flag fl_39')
-	#PEGA A URL DO TIME
 	lista_nome = soup.find_all('td', class_='team borderRightContent')
 	for lista_url in lista_nome:
 		if lista_url.next_element.name == 'a':
 			url_player.append('{0}{1}'.format(url2, lista_url.next_element.get('href')))
 	
 	for url_time in url_player:
+		url_player2 = []
 		r = requests.get(url_time)
 		soup =  BeautifulSoup(r.text, 'lxml')
-				
+		
 		#PEGA A URL DOS JOGADORES DOS TIMES		
 		lista_player = soup.find_all('p', class_='col-lg-6 ellipses')
 
 		for lista_url in lista_player:
 			url_player2.append('{0}{1}'.format(url2, lista_url.next_element.get('href')))
+			#print(('{0}{1}'.format(url2, lista_url.next_element.get('href'))))
 		
 		for url_player2 in url_player2:
 				r = requests.get(url_player2)
@@ -79,14 +81,12 @@ def scrapperPlayers():
 				p_yellow_card    = stats_p[3].text
 				p_red_card		 = stats_p[4].text
 				p_penaulti       = stats_p[5].text
-				p_played_time    = stats_p[6].text     
-					
-			
+				p_played_time    = stats_p[6].text.replace("'","")
+		
 				#GRAVA JOGADOR NO BANCO
-				#bd.add_Player("", p_name, p_club, p_position, p_origem, p_matches_played,  p_gols, p_assistence, p_yellow_card, p_red_card, p_penaulti, p_played_time)
+				bd.add_Player("", p_name, p_club, p_position, p_origem, p_matches_played,  p_gols, p_assistence, p_yellow_card, p_red_card, p_penaulti, p_played_time)
 				print(i,"Adicionado ", p_name, " com Sucesso no time:", p_club)
 				i = i+1
-
 
 
 def scrapperClub():
@@ -170,7 +170,7 @@ def scrapperClub():
 
 
 if __name__ == '__main__':
-    scrapperPlayers()
+    #scrapperPlayers()
     #scrapperClub()
-	#print(bd.consultar_all_Club(""))
-	#print(bd.consultar_all_Players(""))
+	print(bd.consultar_all_Club(""))
+	print(bd.consultar_all_Players(""))
