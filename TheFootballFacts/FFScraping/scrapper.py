@@ -172,5 +172,5 @@ def scrapperClub():
 if __name__ == '__main__':
     #scrapperPlayers()
     #scrapperClub()
-	print(bd.consultar_all_Club(""))
+	#print(bd.consultar_all_Club(""))
 	print(bd.consultar_all_Players(""))

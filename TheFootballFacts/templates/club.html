@@ -18,7 +18,7 @@
 
 		<!-- Menu superior -->
 		<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-    		<h5 class="my-0 mr-md-auto font-weight-normal">The Football Facts</h5>
+    		<span class="my-0 mr-md-auto font-weight-normal">The Football Facts</span>
 		     <nav class="my-2 my-md-0 mr-md-3">
 		     	<a class="p-2 text-dark" href="#">Clubes</a>
 		        <a class="p-2 text-dark" href="#">Jogadores</a>
@@ -27,7 +27,7 @@
 		     </nav>
     	</div>
 
-		<div class="container">
+		<div class="container-fluid" style="background-color: #dedede; padding: 50px;">
 			<div class="row">
 				<div class="col-2 caixa-imagem">
 					<img src="{{club_emblem}}" style="width: 150px;">
@@ -43,6 +43,8 @@
 					<p>SCORE:</p>
 				</div>				
 			</div>
+		</div>
+			<div class="container">
 <div style="border: 1px solid #DEDEDE; margin-top: 2%; margin-bottom: 2%;"></div>
 			<div class="row">
 				<div class="dropdown">
@@ -58,22 +60,53 @@
 			<div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>
 
 			<div class="row">
-			    	<div class="col-sm">
-			    	<div class="cabecalhos">
-			      		<h2>Scout Clube</h2>
-			      	</div>
-			     	<ul class="list-group">
-						<li class="list-group-item d-flex justify-content-between align-items-center">
-				    	Gols Marcados:
-					    <span class="badge badge-primary badge-pill">{{goal_done}}</span>		
-						<li class="list-group-item d-flex justify-content-between align-items-center">
-				    	Cartões Amarelos:
-					    <span class="badge badge-primary badge-pill">{{yellow_cards}}</span>	
-						<li class="list-group-item d-flex justify-content-between align-items-center">
-				    	Cartões Vermelhos:
-					    <span class="badge badge-primary badge-pill">{{red_cards}}</span>						    					       
-					</ul>
-		   		</div>
+				<div class="col-sm-3" >
+					<div class="card" style="width: 17rem; text-align: center;">
+						<div style="text-align: center;">
+			 	  			<img src="/static/icon/goal.png" style="height: 100%; margin-top: 10%">
+				  		</div>			
+					  <div class="card-body">
+					    <h3 class="card-title">Gols Marcados</h3>
+					    <h4 class="card-text">{{goal_done}}</h4>
+					  </div>
+					</div>					
+				</div>
+				<div class="col-sm-3">
+					<div class="card" style="width: 17rem; text-align: center;">
+						<div style="text-align: center;">
+			 	  			<img src="/static/icon/assistence.png" style="height: 100%; margin-top: 10%">
+				  		</div>							
+					  <div class="card-body">
+					    <h3 class="card-title">Assistencias </h3>
+					    <h4 class="card-text">{{assistence}}</h4>
+					  </div>
+					</div>					
+				</div>
+				<div class="col-sm-3">
+					<div class="card" style="width: 17rem; text-align: center;">
+						<div style="text-align: center;">
+			 	  			<img src="/static/icon/yellow-card.png" style="height: 100%; margin-top: 10%">
+				  		</div>							
+					  <div class="card-body">
+					    <h3 class="card-title">Cartões Amarelos</h3>
+					    <h4 class="card-text">{{yellow_cards}}</h4>
+					  </div>
+					</div>					
+				</div>		
+				<div class="col-sm-3">
+					<div class="card" style="width: 17rem; text-align: center;">
+						<div style="text-align: center;">
+			 	  			<img src="/static/icon/red-card.png" style="height: 100%; margin-top: 10%">
+				  		</div>							
+					  <div class="card-body">
+					    <h3 class="card-title">Cartões Vermelhos</h3>
+					    <h4 class="card-text">{{red_cards}}</h4>
+					  </div>
+					</div>					
+				</div>					
+			</div>
+<div style="margin-top: 2%; margin-bottom: 2%;"></div>			
+			<div class="row">
 		    	<div class="col-sm">
 		    		<div class="cabecalhos">
 				    	<h2>Assistentes do Time</h2>		    		
@@ -82,7 +115,7 @@
 			     		{% for best_assistence in best_assistence %}
 					  	<li class="list-group-item player-name">
 					  		<div style="width: 20%; float: left">
-					  			<img src="{{club_emblem}}" style="height: 50px;">
+					  			<img src="/static/icon/player.png" style="height: 40px;">
 					  		</div>
 					  		<div style="width: 70%  float: left">
 						  		<h3>
@@ -101,7 +134,7 @@
 		     		{% for best_scores in best_scores %}
 				  	<li class="list-group-item player-name">
 					  		<div style="width: 20%; float: left">
-					  			<img src="{{club_emblem}}" style="height: 50px;">
+					  			<img src="/static/icon/player.png" style="height: 40px;">
 					  		</div>
 					  		<div style="width: 70%  float: left">
 						  		<h3>
@@ -111,7 +144,26 @@
 				  	</li>
 					{% endfor %}
 				</ul>
-		    </div>
+		    </div>				
+			<div class="col-sm">
+		    	<div class="cabecalhos">
+			    	<h2>Mais Jogaram</h2>		    	
+			    </div>
+		      	<ul class="list-group">
+		     		{% for more_played in more_played %}
+				  	<li class="list-group-item player-name">
+					  		<div style="width: 20%; float: left">
+					  			<img src="/static/icon/player.png" style="height: 40px;">
+					  		</div>
+					  		<div style="width: 70%  float: left">
+						  		<h3>
+						  			{{ more_played }}
+								</h3>
+							</div>
+				  	</li>
+					{% endfor %}
+				</ul>
+		   		</div>
 		  </div>
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>			
 		  <div class="row">
@@ -150,28 +202,63 @@
 		    		<div class="cabecalhos">
 			      		<h2> Dentro e Fora de Casa</h2>		    		
 			      	</div>
-			     	<ul class="list-group">
-						<li class="list-group-item d-flex justify-content-between align-items-center">
-					    Vitórias Dentro
-					    <span class="badge badge-primary badge-pill">{{club_n_win_in}}</span>
-					  </li>
-					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					     Vitórias Fora
-					    <span class="badge badge-primary badge-pill">{{club_n_win_out}}</span>
-					  </li>
-					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Derrotas Dentro
-					    <span class="badge badge-primary badge-pill">{{club_n_defeat_in}}</span>
-					  </li>
-					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Derrotas Fora
-					    <span class="badge badge-primary badge-pill">{{club_n_defeat_out}}</span>
-					  </li>
-					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Empates Dentro
-					    <span class="badge badge-primary badge-pill">{{club_n_tie_in}}</span>
-					  </li>				 
-					</ul>
+
+		    			<div class="card" style="width: 32%; text-align: center; float: left;  margin-top: 15px; margin-right: 10px;     height: 180px;">
+							<div style="text-align: center;">
+			 	  				<img src="/static/icon/victory.png" style="height: 40px; margin-top: 10%">
+				  			</div>							
+					  		<div class="card-body">
+					    		<h3 class="card-title">Rate Vitórias</h3>
+					    		<h4 class="card-text">{{rate_win}}</h4>
+					  		</div>
+						</div>	
+
+
+		    			<div class="card" style="width: 32%; text-align: center; float: left;  margin-top: 15px; margin-right: 10px;     height: 180px;">
+							<div style="text-align: center;">
+			 	  				<img src="/static/icon/defeat.png" style="height: 40px; margin-top: 10%">
+				  			</div>							
+					  		<div class="card-body">
+					    		<h3 class="card-title">Rate Derrotas</h3>
+					    		<h4 class="card-text">{{rate_defeat}}</h4>
+					  		</div>
+						</div>	
+
+
+		    			<div class="card" style="width: 32%; text-align: center;     margin-bottom: 15px;     margin-top: 15px; margin-right: 10px;     height: 180px;">
+							<div style="text-align: center;">
+			 	  				<img src="/static/icon/tie.png" style="height: 40px; margin-top: 10%">
+				  			</div>							
+					  		<div class="card-body">
+					    		<h3 class="card-title">Rate Empates</h3>
+					    		<h4 class="card-text">{{rate_tie}}</h4>
+					  		</div>
+						</div>	
+
+		    		<div>
+				     	<ul class="list-group">
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+						    Vitórias Dentro
+						    <span class="badge badge-primary badge-pill">{{club_n_win_in}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						     Vitórias Fora
+						    <span class="badge badge-primary badge-pill">{{club_n_win_out}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						    Derrotas Dentro
+						    <span class="badge badge-primary badge-pill">{{club_n_defeat_in}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						    Derrotas Fora
+						    <span class="badge badge-primary badge-pill">{{club_n_defeat_out}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						    Empates Dentro
+						    <span class="badge badge-primary badge-pill">{{club_n_tie_in}}</span>
+						  </li>				 
+						</ul>
+					</div>
 		   		</div>	    
 		  </div>		  
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>					  
@@ -193,7 +280,7 @@
 			    	<h2>Score Por Area</h2>		    	
 			    </div>
 			    <div id="canvas-holder" style="width: 90%; margin-left: 5%">	
-					<canvas id="line-chart" width="800" height="450"></canvas>
+					<canvas id="bar-chart" width="800" height="450"></canvas>
 				</div>
 		    </div>		    
 		  </div>	
@@ -287,6 +374,30 @@
 	    }
 	  }
 	});		
+	</script>
+	<script type="text/javascript">
+		// Bar chart
+		new Chart(document.getElementById("bar-chart"), {
+		    type: 'bar',
+		    data: {
+		      labels: ["Forward", "Midfielder", "Defender", "Goalkeeper"],
+		      datasets: [
+		        {
+		          label: "Dados Até a Última Rodada",
+		          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
+		          data: [{{score_forward}},{{score_midfielder}},{{score_defender}},{{score_goalkeeper}}
+		          ]
+		        }
+		      ]
+		    },
+		    options: {
+		      legend: { display: false },
+		      title: {
+		        display: true,
+		        text: 'Dados Até a Última Rodada'
+		      }
+		    }
+});
 	</script>
 	</body>
 </html>

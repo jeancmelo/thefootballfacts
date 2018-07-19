@@ -67,11 +67,14 @@ def html_club(club_name):
     worst_players   = up.worst_5_players("", arr_club_players)
     best_scores     = up.best_scores("", arr_club_players)
     best_assistence = up.best_assistence("", arr_club_players)
+    more_played     = up.more_played("", arr_club_players)
     
     #UTILIZACAO DAS UTIL DE CLUB
     goal_done      = uc.goal_done("", arr_club_players)
     yellow_cards   = uc.yellow_cards("", arr_club_players)
     red_cards      = uc.red_cards("", arr_club_players)
+    score_per_area = uc.score_per_area("", arr_club_players)
+    assistence     = uc.assistence("", arr_club_players)
     
     #RENDERIZAR A PAGINA COM AS INFORMACOES
     return render_template("club.html", 
@@ -94,7 +97,16 @@ def html_club(club_name):
                            yellow_cards         = yellow_cards,
                            red_cards            = red_cards,
                            best_scores          = best_scores,
-                           best_assistence      = best_assistence
+                           best_assistence      = best_assistence,
+                           score_forward       = score_per_area[0],
+                           score_midfielder    = score_per_area[1],
+                           score_defender      = score_per_area[2],
+                           score_goalkeeper    = score_per_area[3],
+                           more_played         = more_played,
+                           rate_win            = c.club_n_win_in/((c.club_n_win_in - c.club_n_win)*-1),
+                           rate_defeat         = c.club_n_defeat_in/((c.club_n_defeat_in - c.club_n_defeat)*-1),
+                           rate_tie            = c.club_n_tie_in/((c.club_n_tie_in - c.club_n_tie)*-1),
+                           assistence          = assistence
                            ), 200
 
 if __name__ == '__main__':

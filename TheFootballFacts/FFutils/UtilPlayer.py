@@ -285,6 +285,45 @@ class UtilPlayer(object):
 			
 		return name_best_player	
 	
+	def more_played(self, Arr_Players):
+		
+		best_scores = []
+		name_best_player = []
+		
+		for player_name in Arr_Players:
+			
+			#RECONSTRUINDO O OBJETO
+			p = Player(player_name[1],player_name[6],player_name[5],player_name[3],player_name[2],player_name[7], player_name[8], player_name[9], player_name[10], player_name[11], player_name[12], player_name[13]) 
+			
+			#ADICIONA OS MELHORES 5 (BobbleSort)
+			if len(best_scores) < 5:
+				best_scores.append(p)
+			else:
+				if p.p_played_time > best_scores[0].p_played_time:
+					best_scores[4] = best_scores[3]
+					best_scores[3] = best_scores[2]
+					best_scores[2] = best_scores[1]
+					best_scores[1] = best_scores[0]
+					best_scores[0] = p
+				elif p.p_played_time > best_scores[1].p_played_time:
+					best_scores[4] = best_scores[3]
+					best_scores[3] = best_scores[2]
+					best_scores[2] = best_scores[1]
+					best_scores[1] = p													
+				elif p.p_played_time > best_scores[2].p_played_time:
+					best_scores[4] = best_scores[3]
+					best_scores[3] = best_scores[2]
+					best_scores[2] = p
+				elif p.p_played_time > best_scores[3].p_played_time:
+					best_scores[4] = best_scores[3]
+					best_scores[3] = p
+				elif p.p_played_time > best_scores[4].p_played_time:
+					best_scores[4] = p
+							
+		for bp in best_scores:
+			name_best_player.append(bp.player_name)	
+			
+		return name_best_player		
 	
 	
 		
