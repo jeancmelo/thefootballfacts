@@ -59,115 +59,117 @@
 
 			<div class="row">
 			    	<div class="col-sm">
-			      	<h2>TOP Scout</h2>
+			    	<div class="cabecalhos">
+			      		<h2>Scout Clube</h2>
+			      	</div>
 			     	<ul class="list-group">
-			     		{% for player in players %}
-							<li class="list-group-item d-flex justify-content-between align-items-center">
-						    	{{ player }}
-						    <span class="badge badge-primary badge-pill">14</span>					   
-						{% endfor %}
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+				    	Gols Marcados:
+					    <span class="badge badge-primary badge-pill">{{goal_done}}</span>		
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+				    	Cartões Amarelos:
+					    <span class="badge badge-primary badge-pill">{{yellow_cards}}</span>	
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+				    	Cartões Vermelhos:
+					    <span class="badge badge-primary badge-pill">{{red_cards}}</span>						    					       
 					</ul>
 		   		</div>
 		    	<div class="col-sm">
-			      	<h2>Jogos Dentro x Fora</h2>		    		
-			     	<ul class="list-group">
-						<li class="list-group-item d-flex justify-content-between align-items-center">
-					    Cras justo odio
-					    <span class="badge badge-primary badge-pill">14</span>
-					  </li>
-					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Dapibus ac facilisis in
-					    <span class="badge badge-primary badge-pill">2</span>
-					  </li>
-					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Morbi leo risus
-					    <span class="badge badge-primary badge-pill">1</span>
-					  </li>
-					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Dapibus ac facilisis in
-					    <span class="badge badge-primary badge-pill">2</span>
-					  </li>
-					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Morbi leo risus
-					    <span class="badge badge-primary badge-pill">1</span>
-					  </li>				 
+		    		<div class="cabecalhos">
+				    	<h2>Assistentes do Time</h2>		    		
+				    </div>
+			      	<ul class="list-group">
+			     		{% for best_assistence in best_assistence %}
+					  	<li class="list-group-item player-name">
+					  		<div style="width: 20%; float: left">
+					  			<img src="{{club_emblem}}" style="height: 50px;">
+					  		</div>
+					  		<div style="width: 70%  float: left">
+						  		<h3>
+						  			{{ best_assistence }}
+								</h3>
+							</div>
+					  	</li>
+						{% endfor %}
 					</ul>
 		   		</div>
 		    <div class="col-sm">
-			    <h2>Previa de SCOUTS</h2>		    	
+		    	<div class="cabecalhos">
+			    	<h2>Artilheiros do Time</h2>		    	
+			    </div>
 		      	<ul class="list-group">
-				  <li class="list-group-item">Cras justo odio</li>
-				  <li class="list-group-item">Dapibus ac facilisis in</li>
-				  <li class="list-group-item">Morbi leo risus</li>
-				  <li class="list-group-item">Porta ac consectetur ac</li>
-				  <li class="list-group-item">Vestibulum at eros</li>
+		     		{% for best_scores in best_scores %}
+				  	<li class="list-group-item player-name">
+					  		<div style="width: 20%; float: left">
+					  			<img src="{{club_emblem}}" style="height: 50px;">
+					  		</div>
+					  		<div style="width: 70%  float: left">
+						  		<h3>
+						  			{{ best_scores }}
+								</h3>
+							</div>
+				  	</li>
+					{% endfor %}
 				</ul>
 		    </div>
 		  </div>
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>			
 		  <div class="row">
 		    <div class="col-sm">
-			    <h2>TOP Players para Estatística</h2>		    	
+		    	<div class="cabecalhos">
+			    	<h2>TOP Score</h2>		    	
+			    </div>
 		      	<ul class="list-group">
-				  <li class="list-group-item">Cras justo odio</li>
-				  <li class="list-group-item">Dapibus ac facilisis in</li>
-				  <li class="list-group-item">Morbi leo risus</li>
-				  <li class="list-group-item">Porta ac consectetur ac</li>
-				  <li class="list-group-item">Vestibulum at eros</li>
+		     		{% for best_players in best_players %}
+				  	<li class="list-group-item">{{ best_players }}</li>
+					{% endfor %}
 				</ul>
 		    </div>
 		    <div class="col-sm">
-			    <h2>Pior Players</h2>		    	
+		    	<div class="cabecalhos">
+			    	<h2>Piores Score</h2>		    	
+			    </div>
 		      	<ul class="list-group">
-				  <li class="list-group-item">Cras justo odio</li>
-				  <li class="list-group-item">Dapibus ac facilisis in</li>
-				  <li class="list-group-item">Morbi leo risus</li>
-				  <li class="list-group-item">Porta ac consectetur ac</li>
-				  <li class="list-group-item">Vestibulum at eros</li>
+		     		{% for worst_players in worst_players %}
+				  	<li class="list-group-item">{{ worst_players }}</li>
+					{% endfor %}
 				</ul>
 		    </div>		    
 		  </div>
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>					  
 		  <div class="row">
-		    	<div class="col-sm">
-			      	<h2>Vitórias e Derrotas</h2>		    		
-			     	<ul class="list-group">
-						<li class="list-group-item d-flex justify-content-between align-items-center">
-					    Vitórias
-					    <span class="badge badge-primary badge-pill">{{club_n_win}}</span>
-					  </li>
-					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Derrotas
-					    <span class="badge badge-primary badge-pill">{{club_n_defeat}}</span>
-					  </li>
-					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Empates
-					    <span class="badge badge-primary badge-pill">{{club_n_tie}}</span>
-					  </li>
-					</ul>
+		    	<div class="col-sm" style="text-align: center">
+		    		<div class="cabecalhos">
+			      		<h2>Vitórias e Derrotas</h2>	
+			      	</div>
+			      	<div id="canvas-holder" style="width: 62%;text-align: center;margin-left: 20%;">		      		
+				     	<canvas id="pie-chart" height="350"></canvas>	    		
+				    </div>
 		   		</div>
 		    	<div class="col-sm">
-			      	<h2> Dentro e Fora de Casa</h2>		    		
+		    		<div class="cabecalhos">
+			      		<h2> Dentro e Fora de Casa</h2>		    		
+			      	</div>
 			     	<ul class="list-group">
 						<li class="list-group-item d-flex justify-content-between align-items-center">
-					    Cras justo odio
-					    <span class="badge badge-primary badge-pill">14</span>
+					    Vitórias Dentro
+					    <span class="badge badge-primary badge-pill">{{club_n_win_in}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Dapibus ac facilisis in
-					    <span class="badge badge-primary badge-pill">2</span>
+					     Vitórias Fora
+					    <span class="badge badge-primary badge-pill">{{club_n_win_out}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Morbi leo risus
-					    <span class="badge badge-primary badge-pill">1</span>
+					    Derrotas Dentro
+					    <span class="badge badge-primary badge-pill">{{club_n_defeat_in}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Dapibus ac facilisis in
-					    <span class="badge badge-primary badge-pill">2</span>
+					    Derrotas Fora
+					    <span class="badge badge-primary badge-pill">{{club_n_defeat_out}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Morbi leo risus
-					    <span class="badge badge-primary badge-pill">1</span>
+					    Empates Dentro
+					    <span class="badge badge-primary badge-pill">{{club_n_tie_in}}</span>
 					  </li>				 
 					</ul>
 		   		</div>	    
@@ -175,7 +177,9 @@
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>					  
 		  <div class="row">
 		    <div class="col-sm">
-			    <h2>PRÓXIMOS JOGOS/Probabilidade de Ganho</h2>		    	
+		    	<div class="cabecalhos">
+			    	<h2>PRÓXIMOS JOGOS/Probabilidade de Ganho</h2>		    	
+			    </div>
 		      	<ul class="list-group">
 				  <li class="list-group-item">Cras justo odio</li>
 				  <li class="list-group-item">Dapibus ac facilisis in</li>
@@ -184,6 +188,14 @@
 				  <li class="list-group-item">Vestibulum at eros</li>
 				</ul>
 		    </div>
+		    <div class="col-sm">
+		    	<div class="cabecalhos">
+			    	<h2>Score Por Area</h2>		    	
+			    </div>
+			    <div id="canvas-holder" style="width: 90%; margin-left: 5%">	
+					<canvas id="line-chart" width="800" height="450"></canvas>
+				</div>
+		    </div>		    
 		  </div>	
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>				  
 		  <div class="row">
@@ -215,5 +227,66 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	<script type="text/javascript">
+		new Chart(document.getElementById("pie-chart"), {
+		    type: 'pie',
+		    data: {
+		      labels: ["Vitórias", "Derrotas", "Empates"],
+		      datasets: [{
+		        label: "Partidas (Unitario)",
+		        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+		        data: [{{club_n_win}},{{club_n_defeat}},{{club_n_tie}}]
+		      }]
+		    },
+		    options: {
+		      title: {
+		        display: true,
+		        text: 'Cameponato Brasileiro de 2018'
+		      }
+		    }
+		});
+	</script>
+	<script type="text/javascript">
+	new Chart(document.getElementById("line-chart"), {
+	  type: 'line',
+	  data: {
+	    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+	    datasets: [{ 
+	        data: [86,114,106,106,107,111,133,221,783,2478],
+	        label: "Africa",
+	        borderColor: "#3e95cd",
+	        fill: false
+	      }, { 
+	        data: [282,350,411,502,635,809,947,1402,3700,5267],
+	        label: "Asia",
+	        borderColor: "#8e5ea2",
+	        fill: false
+	      }, { 
+	        data: [168,170,178,190,203,276,408,547,675,734],
+	        label: "Europe",
+	        borderColor: "#3cba9f",
+	        fill: false
+	      }, { 
+	        data: [40,20,10,16,24,38,74,167,508,784],
+	        label: "Latin America",
+	        borderColor: "#e8c3b9",
+	        fill: false
+	      }, { 
+	        data: [6,3,2,2,7,26,82,172,312,433],
+	        label: "North America",
+	        borderColor: "#c45850",
+	        fill: false
+	      }
+	    ]
+	  },
+	  options: {
+	    title: {
+	      display: true,
+	      text: 'World population per region (in millions)'
+	    }
+	  }
+	});		
+	</script>
 	</body>
 </html>

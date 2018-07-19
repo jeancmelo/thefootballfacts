@@ -6,3 +6,10 @@
     border-right: 0px !important;
 
 }
+.player-name{
+	height: 70px;
+}
+h3{
+	font-size: 18px;
+    font-weight: 800;
+}
