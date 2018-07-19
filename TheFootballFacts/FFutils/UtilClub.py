@@ -44,3 +44,5 @@ class UtilClub(object):
 			red_cards = red_cards + p.p_red_card
 		
 			return red_cards
+		
+		

@@ -284,5 +284,7 @@ class UtilPlayer(object):
 			name_best_player.append(bp.player_name)	
 			
 		return name_best_player	
-		
+	
+	
+	
 		
