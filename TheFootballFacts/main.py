@@ -97,6 +97,7 @@ def html_club(club_name):
     score_per_area = uc.score_per_area("", arr_club_players)
     assistence     = uc.assistence("", arr_club_players)
     
+    
     #RENDERIZAR A PAGINA COM AS INFORMACOES
     return render_template("club.html", 
                            club_name            = c.club_name,

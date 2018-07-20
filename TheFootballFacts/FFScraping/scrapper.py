@@ -183,6 +183,7 @@ def search(busca):
 				valor.append(aux)
 				pass
 			
+			
 		  
 	print(valor)	
 	return valor
