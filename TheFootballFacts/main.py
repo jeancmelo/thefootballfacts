@@ -57,6 +57,27 @@ def html_club(club_name):
     
     #RETORNA OS JOGADOES DAQUELE TIME
     arr_club_players = bd.consultar_Players_by_Club("", club_name)
+    arr_clubs_footer = bd.consultar_all_Club("")
+    arr_clubs_name1 = []
+    arr_clubs_name2 = []
+    arr_clubs_name3 = []
+    arr_clubs_name4 = []
+    
+    #PEGAR OS CLUBES PARA COLOCAR NO RODAPE
+    i = 0
+    for arr in arr_clubs_footer:
+        if i < 5:
+            arr_clubs_name1.append(arr[1])
+            i = i + 1
+        elif i < 10:
+            arr_clubs_name2.append(arr[1])
+            i = i + 1
+        elif i < 15:
+            arr_clubs_name3.append(arr[1])
+            i = i + 1            
+        else:
+            arr_clubs_name4.append(arr[1])
+            i = i + 1
     
     #CHAMA A METODO DE SCORE DOS PLAYERS
     up = UtilPlayer
@@ -106,7 +127,11 @@ def html_club(club_name):
                            rate_win            = c.club_n_win_in/((c.club_n_win_in - c.club_n_win)*-1),
                            rate_defeat         = c.club_n_defeat_in/((c.club_n_defeat_in - c.club_n_defeat)*-1),
                            rate_tie            = c.club_n_tie_in/((c.club_n_tie_in - c.club_n_tie)*-1),
-                           assistence          = assistence
+                           assistence          = assistence,
+                           arr_clubs_name1    = arr_clubs_name1,
+                           arr_clubs_name2    = arr_clubs_name2,
+                           arr_clubs_name3    = arr_clubs_name3,
+                           arr_clubs_name4    = arr_clubs_name4                                                                                 
                            ), 200
 
 if __name__ == '__main__':

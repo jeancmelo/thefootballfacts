@@ -27,10 +27,11 @@
 		     </nav>
     	</div>
 
-		<div class="container-fluid" style="background-color: #dedede; padding: 50px;">
+		<div class="container-fluid" style="background-color: #fff; padding: 50px; border-bottom: 4px solid #efefef; height: 200px;">
 			<div class="row">
+				<div class="col-md-2"></div>
 				<div class="col-2 caixa-imagem">
-					<img src="{{club_emblem}}" style="width: 150px;">
+					<img src="{{club_emblem}}" style="width: 170px;">
 				</div>
 				<div class="col-4">
 					<h1>{{club_name}}</h1>
@@ -38,27 +39,12 @@
 					<p>Cidade/País: {{club_country}}</p>
 				</div>
 				<div class="col-4">
-					<p>Título Principal: </p>
-					<p>SCORE:</p>
-					<p>SCORE:</p>
+					<p>#28</p>
 				</div>				
 			</div>
 		</div>
+			<div style="border: 1px solid #f9f9f9; margin-top: 5%; margin-bottom: 2%;"></div>
 			<div class="container">
-<div style="border: 1px solid #DEDEDE; margin-top: 2%; margin-bottom: 2%;"></div>
-			<div class="row">
-				<div class="dropdown">
-				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    Campeonato:
-				  </button>
-				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				    <a class="dropdown-item" href="#">Brasiilerão</a>
-				    <a class="dropdown-item" href="#">Copa do Brasil</a>
-				  </div>
-				</div>		
-			</div>
-			<div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>
-
 			<div class="row">
 				<div class="col-sm-3" >
 					<div class="card" style="width: 17rem; text-align: center;">
@@ -114,14 +100,16 @@
 			      	<ul class="list-group">
 			     		{% for best_assistence in best_assistence %}
 					  	<li class="list-group-item player-name">
-					  		<div style="width: 20%; float: left">
+					  		<div style="width: 20%; height: 100%; float: left">
 					  			<img src="/static/icon/player.png" style="height: 40px;">
 					  		</div>
-					  		<div style="width: 70%  float: left">
+					  		<div style="width: 65%; float: left">
 						  		<h3>
 						  			{{ best_assistence }}
 								</h3>
+								<span>Foword</span>
 							</div>
+							<span class="badge badge-primary badge-pill" style="width: 15%;">10</span>
 					  	</li>
 						{% endfor %}
 					</ul>
@@ -133,14 +121,16 @@
 		      	<ul class="list-group">
 		     		{% for best_scores in best_scores %}
 				  	<li class="list-group-item player-name">
-					  		<div style="width: 20%; float: left">
+					  		<div style="width: 20%;  height: 100%; float: left">
 					  			<img src="/static/icon/player.png" style="height: 40px;">
 					  		</div>
-					  		<div style="width: 70%  float: left">
+					  		<div style="width: 65%;  float: left">
 						  		<h3>
 						  			{{ best_scores }}
 								</h3>
+								<span>Foword</span>
 							</div>
+							<span class="badge badge-primary badge-pill" style="width: 15%;">10</span>							
 				  	</li>
 					{% endfor %}
 				</ul>
@@ -152,14 +142,16 @@
 		      	<ul class="list-group">
 		     		{% for more_played in more_played %}
 				  	<li class="list-group-item player-name">
-					  		<div style="width: 20%; float: left">
+					  		<div style="width: 20%; height: 100%; float: left">
 					  			<img src="/static/icon/player.png" style="height: 40px;">
 					  		</div>
-					  		<div style="width: 70%  float: left">
+					  		<div style="width: 65%; float: left">
 						  		<h3>
 						  			{{ more_played }}
 								</h3>
+								<span>Foword</span>
 							</div>
+						<span class="badge badge-primary badge-pill" style="width: 15%;">10</span>							
 				  	</li>
 					{% endfor %}
 				</ul>
@@ -173,7 +165,10 @@
 			    </div>
 		      	<ul class="list-group">
 		     		{% for best_players in best_players %}
-				  	<li class="list-group-item">{{ best_players }}</li>
+				  	<li class="list-group-item d-flex justify-content-between align-items-center">
+				  		{{ best_players }}
+				  		<span class="badge badge-primary badge-pill">10</span>
+				  	</li>
 					{% endfor %}
 				</ul>
 		    </div>
@@ -183,7 +178,10 @@
 			    </div>
 		      	<ul class="list-group">
 		     		{% for worst_players in worst_players %}
-				  	<li class="list-group-item">{{ worst_players }}</li>
+				  	<li class="list-group-item d-flex justify-content-between align-items-center">
+				  		{{ worst_players }}
+				  		<span class="badge badge-primary badge-pill">10</span>				  		
+				  	</li>
 					{% endfor %}
 				</ul>
 		    </div>		    
@@ -194,8 +192,10 @@
 		    		<div class="cabecalhos">
 			      		<h2>Vitórias e Derrotas</h2>	
 			      	</div>
-			      	<div id="canvas-holder" style="width: 62%;text-align: center;margin-left: 20%;">		      		
-				     	<canvas id="pie-chart" height="350"></canvas>	    		
+			      	<div style="height: 478px; background-color: #FFF; border: 1px solid #f7f3f3;" >
+				      	<div id="canvas-holder" style="width: 62%;text-align: center;margin-left: 20%;">		      		
+					     	<canvas id="pie-chart" height="350"></canvas>	    		
+					    </div>
 				    </div>
 		   		</div>
 		    	<div class="col-sm">
@@ -253,10 +253,6 @@
 						    Derrotas Fora
 						    <span class="badge badge-primary badge-pill">{{club_n_defeat_out}}</span>
 						  </li>
-						  <li class="list-group-item d-flex justify-content-between align-items-center">
-						    Empates Dentro
-						    <span class="badge badge-primary badge-pill">{{club_n_tie_in}}</span>
-						  </li>				 
 						</ul>
 					</div>
 		   		</div>	    
@@ -279,15 +275,19 @@
 		    	<div class="cabecalhos">
 			    	<h2>Score Por Area</h2>		    	
 			    </div>
-			    <div id="canvas-holder" style="width: 90%; margin-left: 5%">	
-					<canvas id="bar-chart" width="800" height="450"></canvas>
+			    <div style="height: 270px; background-color: #FFF; border: 1px solid #f7f3f3;" >
+				    <div id="canvas-holder" style="width: 90%; margin-left: 5%">	
+						<canvas id="bar-chart" width="800" height="450"></canvas>
+					</div>
 				</div>
 		    </div>		    
 		  </div>	
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>				  
 		  <div class="row">
 		    <div class="col-sm">
-			    <h2>Histórico de Confrontos Dentro</h2>		    	
+		    	<div class="cabecalhos">
+			    	<h2>Histórico de Confrontos Dentro</h2>		    	
+			    </div>
 		      	<ul class="list-group">
 				  <li class="list-group-item">Cras justo odio</li>
 				  <li class="list-group-item">Dapibus ac facilisis in</li>
@@ -297,7 +297,9 @@
 				</ul>
 		    </div>
 		    <div class="col-sm">
-			    <h2>Histórico de Confrontos Fora</h2>		    	
+		    	<div class="cabecalhos">
+			    	<h2>Histórico de Confrontos Fora</h2>		    	
+			    </div>
 		      	<ul class="list-group">
 				  <li class="list-group-item">Cras justo odio</li>
 				  <li class="list-group-item">Dapibus ac facilisis in</li>
@@ -308,6 +310,47 @@
 		    </div>		    
 		  </div>		  	  
 		</div>
+<div style=" margin-top: 2%; margin-bottom: 2%;"></div>					
+		<div class="container-fluid" style="background-color: #5ea052 ; padding: 50px; border-top: 4px solid #efefef;  height: 280px;">
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-2">
+				{% for arr_clubs_name1 in arr_clubs_name1 %}
+				<li style="list-style: none; text-transform: uppercase;">
+					<a href="/club/{{ arr_clubs_name1 }}" style="color: #ffffff;">{{ arr_clubs_name1 }}</a>
+				</li>
+				{% endfor %}					
+				</div>
+				<div class="col-sm-2">
+				{% for arr_clubs_name2 in arr_clubs_name2 %}
+				<li style="list-style: none; text-transform: uppercase;">
+					<a href="/club/{{ arr_clubs_name2 }}" style="color: #ffffff;">{{ arr_clubs_name2 }}</a>
+				</li>
+				{% endfor %}				
+				</div>
+				<div class="col-sm-2">
+				{% for arr_clubs_name3 in arr_clubs_name3 %}
+				<li style="list-style: none; text-transform: uppercase;">
+					<a href="/club/{{ arr_clubs_name3 }}" style="color: #ffffff;">{{ arr_clubs_name3 }}</a>
+				</li>
+				{% endfor %}					
+				</div>
+				<div class="col-sm-2">
+				{% for arr_clubs_name4 in arr_clubs_name4 %}
+				<li style="list-style: none; text-transform: uppercase;">
+					<a href="/club/{{ arr_clubs_name4 }}" style="color: #ffffff;">{{ arr_clubs_name4 }}</a>
+				</li>
+				{% endfor %}					
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+<div style="border: 0.5px solid #a9a9a9; margin-top: 1%; margin-bottom: 1%;"></div>				
+			<div class="row" style="text-align: center">
+				<div  style="width: 100%; color: #FFF">
+					The Football Facts - 2018
+				</div>
+			</div>
+		</div>		
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

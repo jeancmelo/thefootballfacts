@@ -1,5 +1,8 @@
 .bg-white{
-	    background-color: #55a547 !important;
+	background-color: #5ea052 !important;
+	margin-bottom: 0px !important;
+	border-bottom: 5px solid #46843c !important;
+    	color: #FFF !important;
 }
 .list-group-item{
 	border-left: 0px !important;
@@ -7,9 +10,7 @@
 
 }
 .caixa-imagem{
-	text-align: center;
-    border: 1px solid #dedede;
-    background-color: #fff;
+    text-align: center;
     padding: 10px;
 }
 
@@ -18,22 +19,28 @@
 }
 .cabecalhos{
     margin-bottom: 0px;
-    background-color: #e0e0e0;
+    background-color: #5ea052;
     color: #5d5d5d;
     border: 1px solid #dedede;
     border-bottom: 0px;
     height: 50px;
 }
 h3{
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 800;
+}
+h1{
+    font-size: 50px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #4e4e4e;
 }
 h2{
     margin-bottom: 0px;
     padding-left: 10px;
-    color: #545151;
+    color: #FFF;
     padding-top: 11px;
-    font-size: 24px;
+    font-size: 20px;
     border-radius: 5px;
 }
 h4{
@@ -45,4 +52,10 @@ h4{
     margin-bottom: 5px;
     border: 1px solid #f7f3f3;
     border-radius: 5px;
+    line-height: 10px
+}
+.badge-primary{
+    background-color: #FFF;
+    color: #55a547;
+    font-size: 25px;
 }

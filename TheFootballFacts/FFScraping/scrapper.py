@@ -3,6 +3,8 @@ from unicodedata import normalize
 from bs4 import BeautifulSoup
 from FFDao.Dao import Dao
 from nt import stat
+from re import search
+from numpy.f2py.rules import aux_rules
 
 bd = Dao
 
@@ -169,8 +171,26 @@ def scrapperClub():
 		print("Adicionado ", club_name, " Vitorias: ", club_n_win, " Derrotas: ",  club_n_defeat, " Empates: ", club_n_tie, " Emblema: ",club_emblem, " Pais: ",club_country, "Vitoria Dentro :",  club_n_win_in)
 
 
+def search(busca):
+	valor = []
+		
+	all_player = bd.consultar_all_Players("")
+	
+	for player in all_player:
+		aux = player[1].split(" ")
+		for i in aux:
+			if busca == i:
+				valor.append(aux)
+				pass
+			
+		  
+	print(valor)	
+	return valor
+		
+		
 if __name__ == '__main__':
     #scrapperPlayers()
     #scrapperClub()
 	#print(bd.consultar_all_Club(""))
-	print(bd.consultar_all_Players(""))
+	#print(bd.consultar_all_Players(""))
+	search("Henrique")
