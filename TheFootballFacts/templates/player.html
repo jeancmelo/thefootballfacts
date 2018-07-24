@@ -9,9 +9,13 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.com/libraries/Chart.js">
 
+		<link rel="stylesheet" type="text/css" href="http://127.0.0.1:5000/static/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+		<link rel="shortcut icon" href="caminhodoarquivo/favicon.ico" />
+
 		<title>Player {{nome}}</title>
 	</head>
-	<body>
+	<body style="background-color: #f9f9f9; font-family: roboto;">
 
 		<!-- Menu superior -->
 		<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
@@ -24,19 +28,71 @@
 		     </nav>
     	</div>
 
-		<div class="container">
+		<div class="container-fluid" style="background-color: #fff; padding: 50px; border-bottom: 4px solid #efefef; height: 200px;">
 			<div class="row">
-				<div class="col-8">
-					<p>{{nome}}</p>
-					<p>Idade: {{age}}</p>
-					<p>Nacionalidade: {{nacionality}}</p>
-					<p>Posição: {{position}}</p>
+				<div class="col-md-2"></div>
+				<div class="col-2 caixa-imagem">
+					<img src="{{club_emblem}}" style="width: 170px;">
 				</div>
 				<div class="col-4">
-					<img src="{{image}}" style="width: 150px;">
-					<p>Score: {{score_player}}</p>
+					<h1>{{player_name}}</h1>
+					<p>Posição: {{player_position}}</p>
 				</div>
+				<div class="col-4">
+					<p>Idade: {{player_age}}</p>
+					<p>Cidade/País: {{player_nacionality}}</p>
+				</div>				
 			</div>
+		</div>
+		<div class="container">
+			<div style="border: 1px solid #f9f9f9; margin-top: 5%; margin-bottom: 2%;"></div>
+			<div class="row">
+				<div class="col-sm-3" >
+					<div class="card" style="width: 17rem; text-align: center;">
+						<div style="text-align: center;">
+			 	  			<img src="/static/icon/goal.png" style="height: 100%; margin-top: 10%">
+				  		</div>			
+					  <div class="card-body">
+					    <h3 class="card-title">Gols Marcados</h3>
+					    <h4 class="card-text">{{player_goal}}</h4>
+					  </div>
+					</div>					
+				</div>
+				<div class="col-sm-3">
+					<div class="card" style="width: 17rem; text-align: center;">
+						<div style="text-align: center;">
+			 	  			<img src="/static/icon/assistence.png" style="height: 100%; margin-top: 10%">
+				  		</div>							
+					  <div class="card-body">
+					    <h3 class="card-title">Assistencias </h3>
+					    <h4 class="card-text">{{player_assistence}}</h4>
+					  </div>
+					</div>					
+				</div>
+				<div class="col-sm-3">
+					<div class="card" style="width: 17rem; text-align: center;">
+						<div style="text-align: center;">
+			 	  			<img src="/static/icon/yellow-card.png" style="height: 100%; margin-top: 10%">
+				  		</div>							
+					  <div class="card-body">
+					    <h3 class="card-title">Cartões Amarelos</h3>
+					    <h4 class="card-text">{{player_yellow_card}}</h4>
+					  </div>
+					</div>					
+				</div>		
+				<div class="col-sm-3">
+					<div class="card" style="width: 17rem; text-align: center;">
+						<div style="text-align: center;">
+			 	  			<img src="/static/icon/red-card.png" style="height: 100%; margin-top: 10%">
+				  		</div>							
+					  <div class="card-body">
+					    <h3 class="card-title">Cartões Vermelhos</h3>
+					    <h4 class="card-text">{{player_red_card}}</h4>
+					  </div>
+					</div>					
+				</div>					
+			</div>
+<div style="margin-top: 2%; margin-bottom: 2%;"></div>					
           <div style="border: 1px solid #F8F8F8"></div>
 			<div class="row" style="text-align: center">
 		    	<div class="col-sm">
@@ -104,6 +160,17 @@
 
 		  </div>
 		</div>
+<div style=" margin-top: 2%; margin-bottom: 2%;"></div>					
+		<div class="container-fluid" style="background-color: #5ea052 ; padding: 50px; border-top: 4px solid #efefef;  height: 280px;">
+			<div class="row">
+			</div>		
+		<div style="border: 0.5px solid #a9a9a9; margin-top: 1%; margin-bottom: 1%;"></div>				
+			<div class="row" style="text-align: center">
+				<div  style="width: 100%; color: #FFF">
+					The Football Facts - 2018
+				</div>
+			</div>
+		</div>	
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

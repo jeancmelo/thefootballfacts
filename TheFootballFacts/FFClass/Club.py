@@ -1,7 +1,7 @@
 class Club(object):
 	"""docstring for Club"""
 	
-	def __init__(self, club_name, club_fundation_Date = "", club_country = "", club_city = "", club_emblem = "", club_n_win=0, club_n_defeat = 0, club_n_tie=0, club_n_win_in=0, club_n_defeat_in=0, club_n_tie_in=0 ):
+	def __init__(self, club_name, club_fundation_Date = "", club_country = "", club_city = "", club_emblem = "", club_n_win=0, club_n_defeat = 0, club_n_tie=0, club_n_win_in=0, club_n_defeat_in=0, club_n_tie_in=0):
 
 		#ATRIBUTOS DO CLUBE
 		self.club_name        		= club_name
@@ -20,5 +20,7 @@ class Club(object):
 		self.club_n_defeat_in  		= club_n_defeat_in
 		self.club_n_tie_in  		= club_n_tie_in
 	
+		#ATRIBUTO DE JOGOS
+		#self.club_games            = club_games
 
 

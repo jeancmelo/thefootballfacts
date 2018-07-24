@@ -29,7 +29,7 @@ def html_player(player_name):
     aux = bd.consultar_Players("", player_name)
     
     #RECONSTRUINDO O OBJETO
-    p = Player(aux[0][1],aux[0][2],aux[0][3],aux[0][4],aux[0][5],aux[0][6])   
+    p = Player(aux[0][1],aux[0][2],aux[0][3],aux[0][4],aux[0][5],aux[0][6], aux[0][7],aux[0][8],aux[0][9],aux[0][10],aux[0][11],aux[0][12])   
  
     #if(p.player.name == ""):
     #    return render_template("notfound.html",player_name-p.player_name)
@@ -38,12 +38,16 @@ def html_player(player_name):
     #score_area = util.score_player_meia(p)
 
     return render_template("player.html",
-                            nome                = p.player_name,
-                            age                 = p.player_age,
-                            image               = p.player_photo,
-                            nacionality         = p.player_nationality,
-                            position            = p.player_position,
-                            score_player        = 10
+                            player_name           = p.player_name,
+                            player_age            = p.player_age,
+                            image                 = p.player_photo,
+                            player_nacionality    = p.player_nationality,
+                            player_position       = p.player_position,
+                            player_goal           = p.p_gols,
+                            player_assistence     = p.p_assistence,
+                            player_yellow_card    = p.p_yellow_card,
+                            player_red_card       = p.p_red_card,
+                            score_player          = 10
                             )
     
 @app.route("/club/<club_name>")

@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from FFDao.Dao import Dao
 from nt import stat
 from re import search
-from numpy.f2py.rules import aux_rules
+from FFClass.Player import Player
 
 bd = Dao
 
@@ -154,8 +154,22 @@ def scrapperClub():
 				i = i+1
 			elif (i == 1):
 				club_n_tie_in = empates.text			
-		#print(club_n_win, club_n_defeat, club_n_tie)
 		
+		#PEGAR OS UTLIMOS JOGOS E OS PROXIMOS
+		
+		#***** VEERIFICAR GRAVACAO NO BANCO********"
+		club_games = []
+		
+		time_in = soup.find_all('div', class_='homeTeamInfo')
+		time_out = soup.find_all('div', class_='awayTeamInfo')
+		date = soup.find_all('span', class_='monthAndDay')
+				
+		for i, val in enumerate(time_in):
+			club_games.append(date[i].text)
+			club_games.append(time_in[i].text)
+			club_games.append(time_out[i].text)
+
+
 		#CRIAR A URL COM O EMBLEMA DO CLUBE
 		nome = club_name.replace(" ","-")
 		nome = normalize('NFKD', nome).encode('ASCII', 'ignore').decode('ASCII')
@@ -173,8 +187,15 @@ def scrapperClub():
 
 def search(busca):
 	valor = []
-		
+	s_search = []
+	
+	j  = busca.split(" ")
+	
+	for i in j:
+		s_search.append(i)
+
 	all_player = bd.consultar_all_Players("")
+	
 	
 	for player in all_player:
 		aux = player[1].split(" ")
@@ -187,11 +208,77 @@ def search(busca):
 		  
 	print(valor)	
 	return valor
+
+def scrapperteste():
+	
+		arr =  []
+		arr2 = []
+		url_player = []
 		
+		#ENCONTRA AS URLS DOS JOGADORES COM BASE EM UM DELES:
+		#url = "https://www.academiadasapostasbrasil.com/stats/person/brasil/norberto-neto/163583"	
+		#r = requests.get(url)
+		#soup =  BeautifulSoup(r.text, 'lxml')
+		#players =  soup.find_all('tr', class_='even')
+				
+		#for p in players:
+		#	arr.append(p.find('a'))
+
+		#for i in arr:
+		#	arr2.append(i.get('href'))
+			
+		#for j in arr2:
+		#	if j.find('person') == -1:
+		#	 	pass
+		#	else:
+		#	 	url_player.append(j)
+		#	 	print(j)
+				
+		#PEGA AS INFO DOS JOGADORES:
+		url = "https://www.academiadasapostasbrasil.com/stats/person/brasil/norberto-neto/163583"	
+		r = requests.get(url)
+		soup =  BeautifulSoup(r.text, 'lxml')
+		players =  soup.find('tr', class_='even')		
+
+		aux = []
+				
+		for p in players.find_all('td'):
+			aux.append(p.text)
+
+		anos = aux[0]
+		time = aux[1]
+		camp = aux[2]
+		min_jogados = aux[3]
+		jogos       = aux[4]
+		titular     = aux[5]
+		subs_entrou = aux[6]
+		subs_saiu   = aux[7]
+		substituto  = aux[8]
+		gols        = aux[9]
+		penalti     = aux[10]
+		amarelo     = aux[11]
+		seg_amarelo = aux[12]
+		vermelho    = aux[13]
+		
+		print("Ano  |  time  | campeonato   | min JOgador  | jogos | titular | subs_entrou | substitutido | gols | penaltui | amarelo | seg_amarelo | vermelho")
+		print(anos + "  |  "  +  time  + "  |  "+ camp + "  |  "      + min_jogados + "  |  "     + jogos + "  |  "     + titular + "  |  "    + subs_entrou  + "  |  "   + subs_saiu + substituto + gols  + penalti  + amarelo + seg_amarelo + vermelho)
+		
+			
+		#for p in players:
+			#print((p.find('td', class_="stats-player-borderleft")))
+			#print(p.find('td', class_='hide-mobile'))
+
+			#anos.append(p.find('a'))
+		
+
+			
+
+
 		
 if __name__ == '__main__':
     #scrapperPlayers()
     #scrapperClub()
+    scrapperteste()
 	#print(bd.consultar_all_Club(""))
 	#print(bd.consultar_all_Players(""))
-	search("Henrique")
+	#search("Jose Henrique")
