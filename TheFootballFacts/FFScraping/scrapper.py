@@ -1,12 +1,13 @@
-import requests
 from unicodedata import normalize 
+
 from bs4 import BeautifulSoup
+import requests
 from FFDao.Dao import Dao
-from nt import stat
-from re import search
-from FFClass.Player import Player
+from FFDao import core, core_insert
+
 
 bd = Dao
+core = core_insert
 
 #global url_player2 
 
@@ -116,18 +117,18 @@ def scrapperClub():
 		soup =  BeautifulSoup(r.text, 'lxml')
 
 		#PEGAR NOME DO CLUBE
-		aux = soup.find('h1', class_='teamName')
-		aux = aux.text.split("-")
-		aux2 = aux[0].lower()
-		valor = len(aux2)
-		aux2 = aux2[0:valor -1]
-		club_name = aux2[1:len(aux2)]		
+		even = soup.find('h1', class_='teamName')
+		even = even.text.split("-")
+		even2 = even[0].lower()
+		valor = len(even2)
+		even2 = even2[0:valor -1]
+		club_name = even2[1:len(even2)]		
 		
 				
 		#PEGANDO NUMERO DE VITORIAS DENTRO E FORA
-		aux = soup.find_all('td', class_='w')
+		even = soup.find_all('td', class_='w')
 		i = 0;
-		for vitorias in aux:
+		for vitorias in even:
 			if (i == 0):
 				club_n_win    = vitorias.text
 				i = i+1
@@ -136,9 +137,9 @@ def scrapperClub():
 
 		
 		#PEGANDO NUMERO DE DERROTAS DENTRO E FORA
-		aux = soup.find_all('td', class_='d')
+		even = soup.find_all('td', class_='d')
 		i = 0;
-		for derrotas in aux:
+		for derrotas in even:
 			if (i == 0):
 				club_n_defeat    = derrotas.text
 				i = i+1
@@ -146,9 +147,9 @@ def scrapperClub():
 				club_n_defeat_in = derrotas.text		
 	
 		#PEGANDO NUMERO DE EMPATES DENTRO E FORA
-		aux = soup.find_all('td', class_='l')
+		even = soup.find_all('td', class_='l')
 		i = 0;
-		for empates in aux:
+		for empates in even:
 			if (i == 0):
 				club_n_tie    = empates.text
 				i = i+1
@@ -198,10 +199,10 @@ def search(busca):
 	
 	
 	for player in all_player:
-		aux = player[1].split(" ")
-		for i in aux:
+		even = player[1].split(" ")
+		for i in even:
 			if busca == i:
-				valor.append(aux)
+				valor.append(even)
 				pass
 			
 			
@@ -209,76 +210,130 @@ def search(busca):
 	print(valor)	
 	return valor
 
-def scrapperteste():
+def scrapperPlayers2():
 	
+		aux = "https://www.academiadasapostasbrasil.com/stats/person/brasil/"
 		arr =  []
 		arr2 = []
 		url_player = []
+		jogadores = ["diego-alves/8905", "/sidao/112354", "keiller/446980","lucas-franca/431776",  "fabio-santos/8968", "mayke/268729","marcelo-grohe/9187","corinthians/320",
+					 "cassio/17304", "fernando-prass/16938","agenor/64369",  "gilberto/187555", "jefferson/4802", "douglas-pires/191016", "rafael-thyere/286196", "joao-paulo/317934",
+					 "pedro-botelho/9116", "giovanni/115289","mansur/185489", "otavio/328063",  "tiago-alves/80072"]
 		
 		#ENCONTRA AS URLS DOS JOGADORES COM BASE EM UM DELES:
-		#url = "https://www.academiadasapostasbrasil.com/stats/person/brasil/norberto-neto/163583"	
-		#r = requests.get(url)
-		#soup =  BeautifulSoup(r.text, 'lxml')
-		#players =  soup.find_all('tr', class_='even')
-				
-		#for p in players:
-		#	arr.append(p.find('a'))
-
-		#for i in arr:
-		#	arr2.append(i.get('href'))
+		for j in jogadores:
+			url = aux + j
+			print(url)
+			#url = aux + "/norberto-neto/163583"	
+			r = requests.get(url)
+			soup =  BeautifulSoup(r.text, 'lxml')
 			
-		#for j in arr2:
-		#	if j.find('person') == -1:
-		#	 	pass
-		#	else:
-		#	 	url_player.append(j)
-		#	 	print(j)
-				
-		#PEGA AS INFO DOS JOGADORES:
-		url = "https://www.academiadasapostasbrasil.com/stats/person/brasil/norberto-neto/163583"	
-		r = requests.get(url)
-		soup =  BeautifulSoup(r.text, 'lxml')
-		players =  soup.find('tr', class_='even')		
-
-		aux = []
-				
-		for p in players.find_all('td'):
-			aux.append(p.text)
-
-		anos = aux[0]
-		time = aux[1]
-		camp = aux[2]
-		min_jogados = aux[3]
-		jogos       = aux[4]
-		titular     = aux[5]
-		subs_entrou = aux[6]
-		subs_saiu   = aux[7]
-		substituto  = aux[8]
-		gols        = aux[9]
-		penalti     = aux[10]
-		amarelo     = aux[11]
-		seg_amarelo = aux[12]
-		vermelho    = aux[13]
-		
-		print("Ano  |  time  | campeonato   | min JOgador  | jogos | titular | subs_entrou | substitutido | gols | penaltui | amarelo | seg_amarelo | vermelho")
-		print(anos + "  |  "  +  time  + "  |  "+ camp + "  |  "      + min_jogados + "  |  "     + jogos + "  |  "     + titular + "  |  "    + subs_entrou  + "  |  "   + subs_saiu + substituto + gols  + penalti  + amarelo + seg_amarelo + vermelho)
-		
+			#PEGA VALORES DA LINHA EVEN
+			players =  soup.find_all('tr', class_='even')
 			
-		#for p in players:
-			#print((p.find('td', class_="stats-player-borderleft")))
-			#print(p.find('td', class_='hide-mobile'))
-
-			#anos.append(p.find('a'))
-		
-
+			for p in players:
+				arr.append(p.find('a'))
+	
+			for i in arr:
+				if i is None:
+					pass
+				else:
+					arr2.append(i.get('href'))
+				
+			for j in arr2:
+				if j.find('person') == -1:
+				 	pass
+				else:
+				 	url_player.append(j)
+			 	
+			#PEGA VALORES DA LINHA ODD				
+			players =  soup.find_all('tr', class_='odd')
+			for p in players:
+				arr.append(p.find('a'))
+	
+			for i in arr:
+				if i is None:
+					pass
+				else:
+					arr2.append(i.get('href'))
+				
+			for j in arr2:
+				if j.find('person') == -1:
+				 	pass
+				else:
+				 	url_player.append(j)
+				 	
+			for url in url_player:
 			
-
-
+				#PEGA DADOS DE JOGO DO JOGADORES:
+			    #url = "https://www.academiadasapostasbrasil.com/stats/person/brasil/norberto-neto/163583"	
+				r = requests.get(url)
+				soup =  BeautifulSoup(r.text, 'lxml')
+				
+				players =  soup.find_all('tr', class_='stats-player-odd')
+					
+				p_stats = []
+				odd  = []
+				
+				#PEGA VALORES DA LINHA EVEN
+				players =  soup.find_all('tr', class_='even')		
+				for i, val in enumerate(players):
+					p = players[i].find_all('td')
+					for row in p:
+						p_stats.append(row.text.replace("\n", "").replace("  ", "").replace("\r", ""))
+				
+				#PEGA VALORES DA LINHA ODD
+				players =  soup.find_all('tr', class_='odd')
+				for i, val in enumerate(players):
+					p = players[i].find_all('td')
+					for row in p:
+						p_stats.append(row.text.replace("\n", "").replace("  ", "").replace("\r", ""))
+				
+				#PEGA NOME E ATRIBUTOS DO JOGADOR:
+				name =  soup.find_all('h2', class_='boxed-header')
+				p_name = name[0].text.replace("\n", "").replace("  ", "")
+				
+				position = soup.find_all('img', class_='player_pos_img')
+				p_position = position[0].get('title')
 		
+				#PEGA DADOS GERAIS
+				info =  soup.find_all('tr', class_='stats-player-odd')
+				p_info = []
+				for i, val in enumerate(info):
+					p = info[i].find_all('td')
+					for row in p:
+						p_info.append(row.text.replace("\n", "").replace("  ", ""))		
+		
+				info =  soup.find_all('tr', class_='stats-player-even')
+				for i, val in enumerate(info):
+					p = info[i].find_all('td')
+					for row in p:
+						p_info.append(row.text.replace("\n", "").replace("  ", ""))		
+						
+				#TRATAMENTO DOS DADOS RECEBIDOS
+				p_info.pop(0)
+				p_info.pop(1)
+				p_info.pop(1)
+				p_info.pop(1)
+				p_info.pop(2)
+				p_info.pop(3)
+				p_info.pop(4)
+				p_info.pop(5)
+				p_info.pop(6)		
+				
+				p_photo = "/static/photo/default.png"
+				
+				if p_position is "coach":
+					pass
+				else:	
+					core.insert_Player(p_name, p_info[0], p_info[5], p_photo, p_info[4], p_position, p_stats[1], p_stats[4], p_stats[9], 0, p_stats[11], p_stats[13], p_stats[12], 
+		                  p_stats[3], p_stats[5], p_stats[8])
+					print("Jogador " + p_name + " adicionado com sucesso no:" + p_stats[1])
+
 if __name__ == '__main__':
     #scrapperPlayers()
     #scrapperClub()
-    scrapperteste()
+    scrapperPlayers2()
 	#print(bd.consultar_all_Club(""))
 	#print(bd.consultar_all_Players(""))
 	#search("Jose Henrique")
