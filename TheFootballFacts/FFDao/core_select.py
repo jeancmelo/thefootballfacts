@@ -3,10 +3,17 @@ Created on 24 de jul de 2018
 
 @author: jeanm
 '''
-from sqlalchemy import select
-from FFDao.core import players_table
+from sqlalchemy import select, and_
+from FFDao.core import players_table, stats_table
 
-s = select([players_table])
+s = select([stats_table])
+a = select([stats_table]).where(
+                and_(
+                    stats_table.c.s_club == 'Flamengo',
+                    stats_table.c.s_year == '2018'
+                ) )
 
-for row in s.execute():
-    print(row.c.p_name)
+b = select([stats_table]).where( stats_table.c.s_club == 'Flamengo')
+
+for row in a.execute():
+    print(row)
