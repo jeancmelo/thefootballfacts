@@ -12,8 +12,11 @@ from FFClass.Club import Club
 from FFClass.Player import Player
 from FFutils.UtilPlayer import UtilPlayer
 from FFutils.UtilClub import UtilClub
+from FFDao import core, core_insert, core_select
+
 
 bd = Dao
+core = core_select
 
 #FLASK IMPORT
 app = Flask(__name__)
@@ -26,117 +29,52 @@ def html_home():
 def html_player(player_name):
     
     #CONSULTA NO BANCO PELO NOME
-    aux = bd.consultar_Players("", player_name)
+    #aux = bd.consultar_Players("", player_name)
     
     #RECONSTRUINDO O OBJETO
-    p = Player(aux[0][1],aux[0][2],aux[0][3],aux[0][4],aux[0][5],aux[0][6], aux[0][7],aux[0][8],aux[0][9],aux[0][10],aux[0][11],aux[0][12])   
- 
-    #if(p.player.name == ""):
-    #    return render_template("notfound.html",player_name-p.player_name)
-            
-    #util = UtilPlayer(p)
-    #score_area = util.score_player_meia(p)
+    p  = core.select_player_by_name(player_name)
+    ps = core.selec_stats_by_name(player_name) 
 
+    #p = Player(aux[0][1],aux[0][2],aux[0][3],aux[0][4],aux[0][5],aux[0][6], aux[0][7],aux[0][8],aux[0][9],aux[0][10],aux[0][11],aux[0][12])   
+ 
     return render_template("player.html",
-                            player_name           = p.player_name,
-                            player_age            = p.player_age,
-                            image                 = p.player_photo,
-                            player_nacionality    = p.player_nationality,
-                            player_position       = p.player_position,
-                            player_goal           = p.p_gols,
-                            player_assistence     = p.p_assistence,
-                            player_yellow_card    = p.p_yellow_card,
-                            player_red_card       = p.p_red_card,
-                            score_player          = 10
+                            player_name           = p[0][1],
+                            player_age            = p[0][3],
+                            p_photo               = p[0][4],
+                            player_nacionality    = p[0][9],
+                            player_position       = p[0][10],
+                            player_goal           = ps[0][6],
+                            player_yellow_card    = ps[0][8],
+                            player_red_card       = ps[0][10],
+                            score_player          = 10                            
                             )
     
 @app.route("/club/<club_name>")
 def html_club(club_name):
     
-    #CONSULTA NO BANCO PELO NOME
-    aux = bd.consultar_Club("", club_name)
-    
     #RECONSTRUINDO O OBJETO
-    c = Club(aux[0][1],aux[0][2],aux[0][3],aux[0][4],aux[0][5], aux[0][6], aux[0][7], aux[0][8], aux[0][8])
+    c = core.select_club_by_name(club_name)
     
-    #RETORNA OS JOGADOES DAQUELE TIME
-    arr_club_players = bd.consultar_Players_by_Club("", club_name)
-    arr_clubs_footer = bd.consultar_all_Club("")
-    arr_clubs_name1 = []
-    arr_clubs_name2 = []
-    arr_clubs_name3 = []
-    arr_clubs_name4 = []
-    
-    #PEGAR OS CLUBES PARA COLOCAR NO RODAPE
-    i = 0
-    for arr in arr_clubs_footer:
-        if i < 5:
-            arr_clubs_name1.append(arr[1])
-            i = i + 1
-        elif i < 10:
-            arr_clubs_name2.append(arr[1])
-            i = i + 1
-        elif i < 15:
-            arr_clubs_name3.append(arr[1])
-            i = i + 1            
-        else:
-            arr_clubs_name4.append(arr[1])
-            i = i + 1
-    
-    #CHAMA A METODO DE SCORE DOS PLAYERS
-    up = UtilPlayer
-    uc = UtilClub
-    
-    #UTILIZACAO DAS UTIL DE PLAYER
-    best_players    = up.best_5_players("", arr_club_players)
-    worst_players   = up.worst_5_players("", arr_club_players)
-    best_scores     = up.best_scores("", arr_club_players)
-    best_assistence = up.best_assistence("", arr_club_players)
-    more_played     = up.more_played("", arr_club_players)
-    
-    #UTILIZACAO DAS UTIL DE CLUB
-    goal_done      = uc.goal_done("", arr_club_players)
-    yellow_cards   = uc.yellow_cards("", arr_club_players)
-    red_cards      = uc.red_cards("", arr_club_players)
-    score_per_area = uc.score_per_area("", arr_club_players)
-    assistence     = uc.assistence("", arr_club_players)
-    
+
+   
     
     #RENDERIZAR A PAGINA COM AS INFORMACOES
     return render_template("club.html", 
-                           club_name            = c.club_name,
-                           club_fundation_Date  = c.club_fundation_Date,
-                           club_country         = c.club_country,
-                           club_emblem          = c.club_emblem,
-                           club_n_win           = c.club_n_win,
-                           club_n_defeat        = c.club_n_defeat,
-                           club_n_tie           = c.club_n_tie,
-                           players              = arr_club_players,
-                           club_n_win_in        = c.club_n_win_in,
-                           club_n_win_out       = (c.club_n_win_in - c.club_n_win)*-1,
-                           club_n_defeat_in     = c.club_n_defeat_in,
-                           club_n_defeat_out    = (c.club_n_defeat_in - c.club_n_defeat)*-1,
-                           club_n_tie_in        = c.club_n_tie_in,
-                           best_players         = best_players,
-                           worst_players        = worst_players,
-                           goal_done            = goal_done,
-                           yellow_cards         = yellow_cards,
-                           red_cards            = red_cards,
-                           best_scores          = best_scores,
-                           best_assistence      = best_assistence,
-                           score_forward       = score_per_area[0],
-                           score_midfielder    = score_per_area[1],
-                           score_defender      = score_per_area[2],
-                           score_goalkeeper    = score_per_area[3],
-                           more_played         = more_played,
-                           rate_win            = c.club_n_win_in/((c.club_n_win_in - c.club_n_win)*-1),
-                           rate_defeat         = c.club_n_defeat_in/((c.club_n_defeat_in - c.club_n_defeat)*-1),
-                           rate_tie            = c.club_n_tie_in/((c.club_n_tie_in - c.club_n_tie)*-1),
-                           assistence          = assistence,
-                           arr_clubs_name1    = arr_clubs_name1,
-                           arr_clubs_name2    = arr_clubs_name2,
-                           arr_clubs_name3    = arr_clubs_name3,
-                           arr_clubs_name4    = arr_clubs_name4                                                                                 
+                           club_name            = c[0][1],
+                           club_fundation_Date  = c[0][2],
+                           club_country         = "Brasil",
+                           club_emblem          = c[0][3],
+                           club_n_win           = c[0][4],
+                           club_n_defeat        = c[0][5],
+                           club_n_tie           = c[0][6],
+                           club_n_win_in        = c[0][7],
+                           club_n_win_out       = (c[0][7] - c[0][4])*-1,
+                           club_n_defeat_in     = c[0][8],
+                           club_n_defeat_out    = (c[0][8] - c[0][5])*-1,
+                           club_n_tie_in        = c[0][9],
+                           rate_win             = c[0][7]/(c[0][7] - c[0][4])*-1,
+                           rate_defeat          = c[0][8]/(c[0][8] - c[0][5])*-1,
+                           rate_tie             = c[0][9]/(c[0][9] - c[0][6])*-1,
                            ), 200
 
 if __name__ == '__main__':

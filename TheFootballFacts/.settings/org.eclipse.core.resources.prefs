@@ -2,4 +2,5 @@ eclipse.preferences.version=1
 encoding//FFClass/Club.py=UTF-8
 encoding//FFClass/Player.py=UTF-8
 encoding//FFDao/core_insert.py=utf-8
+encoding//FFDao/core_select.py=utf-8
 encoding//FFScraping/scrapper.py=utf-8
