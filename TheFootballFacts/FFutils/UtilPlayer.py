@@ -326,4 +326,3 @@ class UtilPlayer(object):
 		return name_best_player		
 	
 	
-		

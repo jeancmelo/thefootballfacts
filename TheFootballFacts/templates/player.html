@@ -12,13 +12,13 @@
 		<link rel="stylesheet" type="text/css" href="http://127.0.0.1:5000/static/style.css">
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<link rel="shortcut icon" href="caminhodoarquivo/favicon.ico" />
-
-		<title>Player {{nome}}</title>
+		<link rel="shortcut icon" href="{{p_photo}}" />
+		<title>Player {{player_name}} | The Football Facts</title>
 	</head>
 	<body style="background-color: #f9f9f9; font-family: roboto;">
 
 		<!-- Menu superior -->
-		<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+		<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-blue border-bottom box-shadow">
     		<h5 class="my-0 mr-md-auto font-weight-normal">The Football Facts</h5>
 		     <nav class="my-2 my-md-0 mr-md-3">
 		     	<a class="p-2 text-dark" href="#">Clubes</a>
@@ -32,13 +32,15 @@
 			<div class="row">
 				<div class="col-md-2"></div>
 				<div class="col-2 caixa-imagem">
-					<img src="{{club_emblem}}" style="width: 170px;">
+					<img src="{{p_photo}}" style="width: 170px;">
 				</div>
 				<div class="col-4">
 					<h1>{{player_name}}</h1>
 					<p>Posição: {{player_position}}</p>
+					<p>Club Atual: {{club_atual}}</p>
 				</div>
 				<div class="col-4">
+					<p>Perna Principal: {{foot}}</p>
 					<p>Idade: {{player_age}}</p>
 					<p>Cidade/País: {{player_nacionality}}</p>
 				</div>				
@@ -64,8 +66,8 @@
 			 	  			<img src="/static/icon/assistence.png" style="height: 100%; margin-top: 10%">
 				  		</div>							
 					  <div class="card-body">
-					    <h3 class="card-title">Assistencias </h3>
-					    <h4 class="card-text">{{player_assistence}}</h4>
+					    <h3 class="card-title">Tempo Jogado </h3>
+					    <h4 class="card-text">{{player_time_played}}</h4>
 					  </div>
 					</div>					
 				</div>
@@ -92,65 +94,97 @@
 					</div>					
 				</div>					
 			</div>
+			<div style="border: 1px solid #f9f9f9; margin-top: 5%; margin-bottom: 2%;"></div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="cabecalhos cabecalho-jogador">
+			      		<h2>Gols na Carreira</h2>
+			      	</div>
+					<!-- Don't forget the "|safe"! -->
+					<div class="list-group-item" style="padding: 20px; background-color: #fff">
+						<div id="chart">
+						   <embed type="image/svg+xml" src= {{graph_data|safe}} style="max-height: 500px; " />
+						</div>
+					</div>			
+				</div>
+				<div class="col-sm">
+					<div class="cabecalhos cabecalho-jogador">
+			      		<h2>Posição de Atuação</h2>
+			      	</div>	
+			      	<div class="list-group-item" style="padding: 20px; background-color: #fff; text-align: center;">				
+			      		<img src="/static/position/posicao-{{player_position}}.png" style="width: 73%">
+			      	</div>
+				</div>
+			</div>
 <div style="margin-top: 2%; margin-bottom: 2%;"></div>					
           <div style="border: 1px solid #F8F8F8"></div>
 			<div class="row" style="text-align: center">
 		    	<div class="col-sm">
-			      	<h2>TOP Scout</h2>
+		    		<div class="cabecalhos cabecalho-jogador">
+			      		<h2>SCOUTS DESSE ANO</h2>
+			      	</div>
 			     	<ul class="list-group">
 						<li class="list-group-item d-flex justify-content-between align-items-center">
-					    Cras justo odio
-					    <span class="badge badge-primary badge-pill">14</span>
+					    Gols no Ano
+					    <span class="badge badge-primary badge-pill">{{player_goal}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Dapibus ac facilisis in
-					    <span class="badge badge-primary badge-pill">2</span>
+					    Amarelo no Ano
+					    <span class="badge badge-primary badge-pill">{{player_yellow_card}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Morbi leo risus
-					    <span class="badge badge-primary badge-pill">1</span>
+					   Vermelho no Ano
+					    <span class="badge badge-primary badge-pill">{{player_red_card}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Dapibus ac facilisis in
-					    <span class="badge badge-primary badge-pill">2</span>
+					    Titular no Ano
+					    <span class="badge badge-primary badge-pill">{{player_titular_year}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Morbi leo risus
-					    <span class="badge badge-primary badge-pill">1</span>
+					    Tempo jogado no Ano
+					    <span class="badge badge-primary badge-pill">{{player_time_played}}</span>
 					  </li>				 
 					</ul>
 		   		</div>
 		    	<div class="col-sm">
+		    		<div class="cabecalhos cabecalho-jogador">
+			      		<h2>SCOUTS DA CARREIRA</h2>	    		
+			      	</div>
 			     	<ul class="list-group">
 						<li class="list-group-item d-flex justify-content-between align-items-center">
-					    Cras justo odio
-					    <span class="badge badge-primary badge-pill">14</span>
+					    Gols na Carreira
+					    <span class="badge badge-primary badge-pill">{{player_goal_career}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Dapibus ac facilisis in
-					    <span class="badge badge-primary badge-pill">2</span>
+					    Amarelo na Carreira
+					    <span class="badge badge-primary badge-pill">{{player_yellow_card_career}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Morbi leo risus
-					    <span class="badge badge-primary badge-pill">1</span>
+					   Vermelho na Carreira
+					    <span class="badge badge-primary badge-pill">{{player_red_card_career}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Dapibus ac facilisis in
-					    <span class="badge badge-primary badge-pill">2</span>
+					    Titular na Carreira
+					    <span class="badge badge-primary badge-pill">{{player_titular_year_career}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
-					    Morbi leo risus
-					    <span class="badge badge-primary badge-pill">1</span>
+					    Tempo jogado na Carreira
+					    <span class="badge badge-primary badge-pill">{{player_time_played_career}}</span>
 					  </li>				 
 					</ul>
 		   		</div>
 		    <div class="col-sm">
+		    	<div class="cabecalhos cabecalho-jogador">
+			    	<h2>ÚLTIMAS EQUIPES QUE ATUOU</h2>	    		
+			    </div>		    	
 		      	<ul class="list-group">
-				  <li class="list-group-item">Cras justo odio</li>
-				  <li class="list-group-item">Dapibus ac facilisis in</li>
-				  <li class="list-group-item">Morbi leo risus</li>
-				  <li class="list-group-item">Porta ac consectetur ac</li>
-				  <li class="list-group-item">Vestibulum at eros</li>
+		      	{% for club_played in club_played %}
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					{{ club_played.club }}
+					<span class="badge badge-primary badge-pill">{{ club_played.year }}</span>
+				</li>
+				{% endfor %}
+
 				</ul>
 		    	</div>
 		  </div>

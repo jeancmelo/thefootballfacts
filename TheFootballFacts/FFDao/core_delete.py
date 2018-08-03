@@ -17,8 +17,6 @@ def limparBanco():
         
     for row in a.execute():
         retorno.append(row)
-        
-    
     
     for i, val in enumerate(retorno):
         if len(retorno[i][5]) < 4:
@@ -33,6 +31,9 @@ def limparBanco():
     
     for d in deletar:
         a = delete(stats_table).where(stats_table.c.id == d)
-        #result = conn.execute(a)
+        result = conn.execute(a)
+        print("deletado:", d )
 
 
+if __name__ == '__main__':
+    limparBanco()
