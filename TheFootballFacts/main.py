@@ -109,7 +109,9 @@ def html_club(club_name):
                            more_violent         = core.CLub_Most_Violent(club_name),
                            goal_done            = core.Club_goals(club_name),
                            yellow_cards         = core.Club_yellow_card(club_name),
-                           red_cards            = core.Club_red_card(club_name)
+                           red_cards            = core.Club_red_card(club_name),
+                           player_per_poisition = core.Club_get_number_per_position(club_name),
+                           all_players          = core.Club_players(club_name)
                            ), 200
 
 @app.route("/player/all-players")

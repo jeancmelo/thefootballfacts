@@ -42,8 +42,7 @@ def select_players():
     for row in a.execute():
         retorno.append(row)
         
-    print(retorno)
-        
+       
     return retorno   
 
 def select_club_by_name(c_name):
@@ -312,27 +311,36 @@ def Club_Best_Goals(c_club):
     a = select([stats_table.c.s_name, stats_table.c.s_gols]).where(
                 and_(
                     stats_table.c.s_club == c_club.capitalize(),
-                    stats_table.c.s_year == "2018"
+                    stats_table.c.s_year == "2018",
                 ) )
     for row in a.execute():
         retorno.append(row)
 
     player = []
     gols = []
+    position = []
     data = {}
-
+    
     #LISTA DE CLUBES QUE JA ATUOU
     i  = 0
     for i, val in enumerate(retorno):
          player.append(retorno[i][0])
          gols.append(retorno[i][1])
+         a = select([players_table.c.p_position]).where(
+             and_(
+                    players_table.c.p_name == retorno[i][0],
+                    players_table.c.p_club == c_club.capitalize()
+                ) )
+         for row in a.execute():
+             position.append(row[0])
+         
     
     #TRANSFORMA EM JSON     
-    data = [{"player": c, "goals": y} for c, y in zip(player, gols)]        
-   
+    data = [{"player": c, "goals": y, "position": p} for c, y, p in zip(player, gols, position)]        
+    
    #FAZ A CLASSIFICAO
     mysorted = sorted(data, key=lambda x : x['goals'], reverse=True)
-   
+
     return mysorted[0:5]
 
 #RETORNA ARTILHHEIROS DO TIME
@@ -350,16 +358,25 @@ def Club_Most_Played(c_club):
 
     player = []
     gols = []
+    position = []
     data = {}
 
     #LISTA DE CLUBES QUE JA ATUOU
     i  = 0
     for i, val in enumerate(retorno):
-         player.append(retorno[i][0])
-         gols.append(retorno[i][1])
+        player.append(retorno[i][0])
+        gols.append(retorno[i][1])
+        a = select([players_table.c.p_position]).where(
+             and_(
+                    players_table.c.p_name == retorno[i][0],
+                    players_table.c.p_club == c_club.capitalize()
+                ) )
+           
+        for row in a.execute():
+             position.append(row[0])
     
     #TRANSFORMA EM JSON     
-    data = [{"player": c, "goals": y} for c, y in zip(player, gols)]        
+    data = [{"player": c, "goals": y, "position": p} for c, y, p in zip(player, gols, position)]  
    
    #FAZ A CLASSIFICAO
     mysorted = sorted(data, key=lambda x : x['goals'], reverse=True)
@@ -381,16 +398,24 @@ def CLub_Most_Violent(c_club):
 
     player = []
     gols = []
+    position = []
     data = {}
 
     #LISTA DE CLUBES QUE JA ATUOU
     i  = 0
     for i, val in enumerate(retorno):
-         player.append(retorno[i][0])
-         gols.append(retorno[i][1]+retorno[i][2])
+        player.append(retorno[i][0])
+        gols.append(retorno[i][1]+retorno[i][2])
+        a = select([players_table.c.p_position]).where(
+             and_(
+                    players_table.c.p_name == retorno[i][0],
+                    players_table.c.p_club == c_club.capitalize()
+                ) )
+        for row in a.execute():
+             position.append(row[0])         
     
     #TRANSFORMA EM JSON     
-    data = [{"player": c, "goals": y} for c, y in zip(player, gols)]        
+    data = [{"player": c, "goals": y, "position": p} for c, y, p in zip(player, gols, position)]    
    
    #FAZ A CLASSIFICAO
     mysorted = sorted(data, key=lambda x : x['goals'], reverse=True)
@@ -454,6 +479,74 @@ def Club_red_card(c_club):
                 
     return valor_retorno
 
+#RETORNA Nº DE JOGADORES POR POSICAO
+def Club_get_number_per_position(c_club):
+    
+    goleiros   = 0
+    defensores = 0 
+    meias      = 0
+    atacantes  = 0
+    
+    retorno   = []
+    
+    valor_retorno = 0
+    
+    a = select([players_table.c.p_position]).where(
+                and_(
+                    players_table.c.p_club == c_club.capitalize(),
+                ) )
+    for row in a.execute():
+        retorno.append(row)
+
+    for i, val in enumerate(retorno):
+        if retorno[i][0] == "Goalkeeper":
+             goleiros = goleiros + 1
+        elif retorno[i][0] == "Defender":
+            defensores = defensores + 1
+        elif retorno[i][0] == "Midfielder":   
+            meias = meias + 1
+        elif retorno[i][0] == "Attacker":  
+            atacantes = atacantes + 1
+            
+    #TRANSFORMA EM JSON     
+    data = [{"goleiros": goleiros, "defensores": defensores, "meias": meias, "atacantes": atacantes}]
+           
+    return data
+
+#RETORNA OS JOGADORES DO TIME
+def Club_players(c_club):
+    
+    retorno = []
+    
+    a = select([stats_table.c.s_name]).where(
+                and_(
+                    stats_table.c.s_club == c_club.capitalize(),
+                    stats_table.c.s_year == "2018",
+                    stats_table.c.s_champ == "Brasileirão Série A"
+                ) )
+    for row in a.execute():
+        retorno.append(row)
+
+    player   = []
+    position = []
+    data = {}
+
+    #LISTA DE CLUBES QUE JA ATUOU
+    i  = 0
+    for i, val in enumerate(retorno):
+        player.append(retorno[i][0])
+        a = select([players_table.c.p_position]).where(
+             and_(
+                    players_table.c.p_name == retorno[i][0],
+                    players_table.c.p_club == c_club.capitalize()
+                ) )        
+        for row in a.execute():
+             position.append(row[0])         
+    
+    #TRANSFORMA EM JSON     
+    data = [{"player": c, "position": p} for c, p in zip(player, position)]   
+        
+    return(data)
 
 if __name__ == '__main__':
     print(selec_stats_by_name("Réver"))   
