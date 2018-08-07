@@ -13,6 +13,9 @@ from FFDao.core import players_table, stats_table, club_table
 from numpy import integer
 from _operator import contains
 import json
+from FFutils import UtilPlayer
+from audioop import reverse
+
 
 
 def select_player_by_name(p_name):
@@ -548,9 +551,82 @@ def Club_players(c_club):
         
     return(data)
 
+def Best_Score_Players(c_club):
+
+    retorno = []
+    player  = []
+    score   = []
+    
+    up = UtilPlayer
+    
+    a = select([players_table.c.p_name, players_table.c.p_position]).where(
+                and_(
+                    players_table.c.p_club == c_club.capitalize(),
+                ) )
+    for row in a.execute():
+        retorno.append(row)
+
+    print(retorno[1][1])   
+    for i, val in enumerate(retorno):
+        if retorno[i][1] == "Goalkeeper":
+             score.append(up.score_player_keeper(retorno[i][0], c_club))
+        elif retorno[i][1] == "Defender":
+             score.append(up.score_player_defender(retorno[i][0], c_club))
+        elif retorno[i][1] == "Midfielder":   
+             score.append(up.score_player_midfielder(retorno[i][0], c_club))
+        elif retorno[i][1] == "Attacker":  
+             score.append(up.score_player_forward(retorno[i][0], c_club))
+        player.append(retorno[i][0])
+    
+    #TRANSFORMA EM JSON     
+    data = [{"player": c, "score": s} for c, s in zip(player, score)]   
+
+   #FAZ A CLASSIFICAO
+    #mysorted = sorted(data, key=lambda x : x['score'], reverse=True)
+   
+    return data[0:5]        
+        
+
+def Wrots_Score_Players(c_club):
+
+    retorno = []
+    player  = []
+    score   = []
+    
+    up = UtilPlayer
+    
+    a = select([players_table.c.p_name, players_table.c.p_position]).where(
+                and_(
+                    players_table.c.p_club == c_club.capitalize(),
+                ) )
+    for row in a.execute():
+        retorno.append(row)
+
+    print(retorno[1][1])   
+    for i, val in enumerate(retorno):
+        if retorno[i][1] == "Goalkeeper":
+             score.append(up.score_player_keeper(retorno[i][0], c_club))
+        elif retorno[i][1] == "Defender":
+             score.append(up.score_player_defender(retorno[i][0], c_club))
+        elif retorno[i][1] == "Midfielder":   
+             score.append(up.score_player_midfielder(retorno[i][0], c_club))
+        elif retorno[i][1] == "Attacker":  
+             score.append(up.score_player_forward(retorno[i][0], c_club))
+        player.append(retorno[i][0])
+    
+    #TRANSFORMA EM JSON     
+    data = [{"player": c, "score":s} for c, s in zip(player, score)]   
+
+   #FAZ A CLASSIFICAO
+   # mysorted = sorted(data, key=lambda x : x['score'], reverse=True)
+    #mysorted.sort(reverse=True)
+       
+    return data[0:5]        
+
+        
 if __name__ == '__main__':
     print(selec_stats_by_name("Réver"))   
     
-    
+
 
         

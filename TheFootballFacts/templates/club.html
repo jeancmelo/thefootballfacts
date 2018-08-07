@@ -211,10 +211,10 @@
 			    	<h2>TOP Score</h2>		    	
 			    </div>
 		      	<ul class="list-group">
-		     		{% for best_players in best_players %}
+		     		{% for top_scores in top_scores %}
 				  	<li class="list-group-item d-flex justify-content-between align-items-center">
-				  		{{ best_players }}
-				  		<span class="badge badge-primary badge-pill">10</span>
+				  		{{ top_scores.player }}
+				  		<span class="badge badge-primary badge-pill">{{ top_scores.score }}</span>
 				  	</li>
 					{% endfor %}
 				</ul>
@@ -224,10 +224,10 @@
 			    	<h2>Piores Score</h2>		    	
 			    </div>
 		      	<ul class="list-group">
-		     		{% for worst_players in worst_players %}
+		     		{% for wrost_scores in wrost_scores %}
 				  	<li class="list-group-item d-flex justify-content-between align-items-center">
-				  		{{ worst_players }}
-				  		<span class="badge badge-primary badge-pill">10</span>				  		
+				  		{{ wrost_scores.player }}
+				  		<span class="badge badge-primary badge-pill">{{ wrost_scores.score }}</</span>				  		
 				  	</li>
 					{% endfor %}
 				</ul>

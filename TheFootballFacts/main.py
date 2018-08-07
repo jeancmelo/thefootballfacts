@@ -13,19 +13,17 @@ import pygal
 
 from FFClass.Club import Club
 from FFClass.Player import Player
-from FFDao import core, core_insert, core_select
+from FFDao import core, core_insert, core_select_club
 from FFDao.Dao import Dao
-from FFDao.core_select import Player_Goals_Year, Player_Yellow_Cards, \
+from FFDao.core_select_club import Player_Goals_Year, Player_Yellow_Cards, \
     Player_Red_Cards, Player_Time_Played, Player_Titular_Games, \
     Player_Evolution_Goals_Year, Player_Club_Played, Player_Goals_Year_Career,\
     Player_Yellow_Cards_Career, Player_Red_Cards_Career,\
     Player_Time_Played_Career, Player_Titular_Games_Career
-from FFutils.UtilClub import UtilClub
-from FFutils.UtilPlayer import UtilPlayer
 
 
 bd = Dao
-core = core_select
+core = core_select_club
 
 #FLASK IMPORT
 app = Flask(__name__)
@@ -111,7 +109,9 @@ def html_club(club_name):
                            yellow_cards         = core.Club_yellow_card(club_name),
                            red_cards            = core.Club_red_card(club_name),
                            player_per_poisition = core.Club_get_number_per_position(club_name),
-                           all_players          = core.Club_players(club_name)
+                           all_players          = core.Club_players(club_name),
+                           top_scores           = core.Best_Score_Players(club_name),
+                           wrost_scores         = core.Wrots_Score_Players(club_name)
                            ), 200
 
 @app.route("/player/all-players")
