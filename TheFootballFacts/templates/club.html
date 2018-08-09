@@ -12,8 +12,11 @@
 		<link rel="stylesheet" type="text/css" href="http://127.0.0.1:5000/static/style.css">
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<link rel="shortcut icon" href="{{club_emblem}}" />
-
+    	<script src="//static/js/jquery.bootpag.min.js"></script>
 		<title>Clube {{club_name}} | The Football Facts</title>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
 	</head>
 	<body style="background-color: #f9f9f9; font-family: roboto;">
 
@@ -167,7 +170,7 @@
 			    {% for player_per_poisition in player_per_poisition %}
 	   			<div class="card" style="width: 24%; text-align: center; float: left;  margin-top: 15px; margin-right: 10px;     height: 180px;">
 					<div style="text-align: center;">
-						<img src="/static/position/posicao-goalkepper.png" style="height: 40px; margin-top: 10%">
+						<img src="/static/position/position-goalkepper.png" style="height: 40px; margin-top: 10%">
 					</div>							
 			  		<div class="card-body">
 				   		<h3 class="card-title">Goleiros</h3>
@@ -176,7 +179,7 @@
 				</div>	
 	   			<div class="card" style="width: 24%; text-align: center; float: left;  margin-top: 15px; margin-right: 10px;     height: 180px;">
 					<div style="text-align: center;">
-						<img src="/static/position/posicao-defender.png" style="height: 40px; margin-top: 10%">
+						<img src="/static/position/position-defender.png" style="height: 40px; margin-top: 10%">
 					</div>							
 			  		<div class="card-body">
 				   		<h3 class="card-title">Defensores</h3>
@@ -185,7 +188,7 @@
 				</div>	
 	   			<div class="card" style="width: 24%; text-align: center; float: left;  margin-top: 15px; margin-right: 10px;     height: 180px;">
 					<div style="text-align: center;">
-						<img src="/static/position/posicao-midfield.png" style="height: 40px; margin-top: 10%">
+						<img src="/static/position/position-midfield.png" style="height: 40px; margin-top: 10%">
 					</div>							
 			  		<div class="card-body">
 				   		<h3 class="card-title">Meias</h3>
@@ -194,7 +197,7 @@
 				</div>	
 	   			<div class="card" style="width: 24%; text-align: center; float: left;  margin-top: 15px; margin-right: 10px;     height: 180px;">
 					<div style="text-align: center;">
-						<img src="/static/position/posicao-Attacker.png" style="height: 40px; margin-top: 10%">
+						<img src="/static/position/position-Attacker.png" style="height: 40px; margin-top: 10%">
 					</div>							
 			  		<div class="card-body">
 				   		<h3 class="card-title">Atacantes</h3>
@@ -310,23 +313,38 @@
 		    	<div class="cabecalhos">
 			    	<h2>PRÓXIMOS JOGOS/Probabilidade de Ganho</h2>		    	
 			    </div>
-		      	<ul class="list-group">
-				  <li class="list-group-item">Cras justo odio</li>
-				  <li class="list-group-item">Dapibus ac facilisis in</li>
-				  <li class="list-group-item">Morbi leo risus</li>
-				  <li class="list-group-item">Porta ac consectetur ac</li>
-				  <li class="list-group-item">Vestibulum at eros</li>
-				</ul>
+		    		<div>
+				     	<ul class="list-group">
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+						    Vitórias Dentro
+						    <span class="badge badge-primary badge-pill">{{club_n_win_in}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						     Vitórias Fora
+						    <span class="badge badge-primary badge-pill">{{club_n_win_out}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						    Derrotas Dentro
+						    <span class="badge badge-primary badge-pill">{{club_n_defeat_in}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						    Derrotas Fora
+						    <span class="badge badge-primary badge-pill">{{club_n_defeat_out}}</span>
+						  </li>
+						</ul>
+					</div>
 		    </div>
 		    <div class="col-sm">
 		    	<div class="cabecalhos">
 			    	<h2>Score Por Area</h2>		    	
 			    </div>
-			    <div style="height: 270px; background-color: #FFF; border: 1px solid #f7f3f3;" >
-				    <div id="canvas-holder" style="width: 90%; margin-left: 5%">	
-						<canvas id="bar-chart" width="800" height="450"></canvas>
-					</div>
-				</div>
+					<!-- Don't forget the "|safe"! -->
+					<div class="list-group-item" style="padding: 20px; background-color: #fff">
+						<div id="chart">
+						   <embed type="image/svg+xml" src= {{graph_data|safe}} style="max-height: 500px; " />
+						</div>
+					</div>			
+
 		    </div>		    
 		  </div>	
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>				  
@@ -335,25 +353,52 @@
 		    	<div class="cabecalhos">
 			    	<h2>Histórico de Confrontos Dentro</h2>		    	
 			    </div>
-		      	<ul class="list-group">
-				  <li class="list-group-item">Cras justo odio</li>
-				  <li class="list-group-item">Dapibus ac facilisis in</li>
-				  <li class="list-group-item">Morbi leo risus</li>
-				  <li class="list-group-item">Porta ac consectetur ac</li>
-				  <li class="list-group-item">Vestibulum at eros</li>
-				</ul>
+		    		<div>
+				     	<ul class="list-group">
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+						    Vitórias Dentro
+						    <span class="badge badge-primary badge-pill">{{club_n_win_in}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						     Vitórias Fora
+						    <span class="badge badge-primary badge-pill">{{club_n_win_out}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						    Derrotas Dentro
+						    <span class="badge badge-primary badge-pill">{{club_n_defeat_in}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						    Derrotas Fora
+						    <span class="badge badge-primary badge-pill">{{club_n_defeat_out}}</span>
+						  </li>
+						</ul>
+					</div>
+
 		    </div>
 		    <div class="col-sm">
 		    	<div class="cabecalhos">
 			    	<h2>Histórico de Confrontos Fora</h2>		    	
 			    </div>
-		      	<ul class="list-group">
-				  <li class="list-group-item">Cras justo odio</li>
-				  <li class="list-group-item">Dapibus ac facilisis in</li>
-				  <li class="list-group-item">Morbi leo risus</li>
-				  <li class="list-group-item">Porta ac consectetur ac</li>
-				  <li class="list-group-item">Vestibulum at eros</li>
-				</ul>
+		    		<div>
+				     	<ul class="list-group">
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+						    Vitórias Dentro
+						    <span class="badge badge-primary badge-pill">{{club_n_win_in}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						     Vitórias Fora
+						    <span class="badge badge-primary badge-pill">{{club_n_win_out}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						    Derrotas Dentro
+						    <span class="badge badge-primary badge-pill">{{club_n_defeat_in}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						    Derrotas Fora
+						    <span class="badge badge-primary badge-pill">{{club_n_defeat_out}}</span>
+						  </li>
+						</ul>
+					</div>
 		    </div>		    
 		  </div>		
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>			
@@ -361,7 +406,9 @@
 		    <div class="col-sm">
 		    	<div class="cabecalhos">
 			    	<h2>JOGADORES DO ELENCO</h2>		    	
-			    </div>	
+			    </div>
+				<div id="dynamic_content">
+				    
 		     		{% for all_players in all_players %}
 				  	<li class="list-group-item player-name">
 					  		<div style="width: 20%;  height: 100%; float: left">
@@ -375,7 +422,9 @@
 							</div>
 												
 				  	</li>
-					{% endfor %}			      	  
+					{% endfor %}
+					</div>
+					<div id="show_paginator"></div>			      	  
 			 </div>
 		</div>
 		</div>
@@ -423,7 +472,7 @@
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>

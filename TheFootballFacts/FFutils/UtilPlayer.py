@@ -48,8 +48,8 @@ def score_player_keeper(player, c_club):
 	score = score - (amarelo*3)
 	score = score - (seg_amarelo*1)
 
+		
 	return score
-
 	
 #DEFINIR SCORE DO ZAGUEIRO
 def score_player_defender(player, c_club):
@@ -91,6 +91,7 @@ def score_player_defender(player, c_club):
 	score = score - (amarelo*3)
 	score = score - (seg_amarelo*1)
 
+		
 	return score
 
 #DEFINIR SCORE DO MEIA
@@ -109,12 +110,12 @@ def score_player_midfielder(player, c_club):
 		c_player.append(row)
     
 	gols         = c_player[0][6]
-	jogos         = c_player[0][5]
+	jogos        = c_player[0][5]
 	penaulti     = c_player[0][7]
 	titular	     = c_player[0][12]
 	min_jogados  = c_player[0][11]	
 	
-	amarelo     = c_player[0][8]
+	amarelo      = c_player[0][8]
 	seg_amarelo	 = c_player[0][9]
 	vermelho     = c_player[0][10]
 	
@@ -132,6 +133,9 @@ def score_player_midfielder(player, c_club):
 	score = score - (vermelho*5)
 	score = score - (amarelo*3)
 	score = score - (seg_amarelo*1)
+	
+		
+	return score
 	
 
 #DEFINIR SCORE DO ATACANTE
@@ -174,8 +178,8 @@ def score_player_forward(player, c_club):
 	score = score - (amarelo*3)
 	score = score - (seg_amarelo*1)
 
+		
 	return score
-
 
 
 

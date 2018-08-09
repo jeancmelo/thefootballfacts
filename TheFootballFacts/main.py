@@ -13,7 +13,7 @@ import pygal
 
 from FFClass.Club import Club
 from FFClass.Player import Player
-from FFDao import core, core_insert, core_select_club
+from FFDao import core, core_insert, core_select_club, core_select_champ
 from FFDao.Dao import Dao
 from FFDao.core_select_club import Player_Goals_Year, Player_Yellow_Cards, \
     Player_Red_Cards, Player_Time_Played, Player_Titular_Games, \
@@ -24,6 +24,7 @@ from FFDao.core_select_club import Player_Goals_Year, Player_Yellow_Cards, \
 
 bd = Dao
 core = core_select_club
+champ = core_select_champ
 
 #FLASK IMPORT
 app = Flask(__name__)
@@ -84,6 +85,15 @@ def html_club(club_name):
     #RECONSTRUINDO O OBJETO
     c = core.select_club_by_name(club_name)
    
+    data = core.Scores_per_area(club_name)
+    line_chart = pygal.HorizontalBar()
+    line_chart.title = 'Score por Area'
+    line_chart.add('Goleiro', data[0])
+    line_chart.add('Defensor', data[1])
+    line_chart.add('Meio', data[2])
+    line_chart.add('Atacante', data[3])
+    graph_data = line_chart.render_data_uri()
+   
     
     #RENDERIZAR A PAGINA COM AS INFORMACOES
     return render_template("club.html", 
@@ -111,7 +121,38 @@ def html_club(club_name):
                            player_per_poisition = core.Club_get_number_per_position(club_name),
                            all_players          = core.Club_players(club_name),
                            top_scores           = core.Best_Score_Players(club_name),
-                           wrost_scores         = core.Wrots_Score_Players(club_name)
+                           wrost_scores         = core.Wrots_Score_Players(club_name), 
+                           graph_data           = graph_data
+                           ), 200
+
+@app.route("/championship/<championship_name>")
+def html_championship(championship_name):
+    
+    c = champ.select_club_by_champ(championship_name)
+    
+    ages = champ.champ_age_data()
+    box_plot = pygal.Box()
+    box_plot.title = 'Idade dos Jogadores'
+    box_plot.add('Idade', ages)
+    age_graph = box_plot.render_data_uri()
+    
+    cor_age = champ.champ_corralation_age_matched_played()
+    xy_chart = pygal.XY(stroke=False)
+    xy_chart.title = 'Correlation'
+    xy_chart.add('A', cor_age)
+    cor_age_match_played = xy_chart.render_data_uri()    
+
+    
+    #RENDERIZAR A PAGINA COM AS INFORMACOES
+    return render_template("championship.html", 
+                           championship_name            = championship_name,
+                           champ_clubs                  = c,
+                           goal_done                    = champ.champ_goals(championship_name),
+                           yellow_cards                 = champ.champ_yellow_card(championship_name),
+                           red_cards                    = champ.champ_red_card(championship_name),
+                           age_graph                    = age_graph,
+                           cor_age_match_played         = cor_age_match_played
+                           
                            ), 200
 
 @app.route("/player/all-players")

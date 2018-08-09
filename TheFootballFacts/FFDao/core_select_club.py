@@ -565,8 +565,7 @@ def Best_Score_Players(c_club):
                 ) )
     for row in a.execute():
         retorno.append(row)
-
-    print(retorno[1][1])   
+        
     for i, val in enumerate(retorno):
         if retorno[i][1] == "Goalkeeper":
              score.append(up.score_player_keeper(retorno[i][0], c_club))
@@ -582,9 +581,9 @@ def Best_Score_Players(c_club):
     data = [{"player": c, "score": s} for c, s in zip(player, score)]   
 
    #FAZ A CLASSIFICAO
-    #mysorted = sorted(data, key=lambda x : x['score'], reverse=True)
+    mysorted = sorted(data, key=lambda x : x['score'], reverse=True)
    
-    return data[0:5]        
+    return mysorted[0:5]        
         
 
 def Wrots_Score_Players(c_club):
@@ -602,7 +601,6 @@ def Wrots_Score_Players(c_club):
     for row in a.execute():
         retorno.append(row)
 
-    print(retorno[1][1])   
     for i, val in enumerate(retorno):
         if retorno[i][1] == "Goalkeeper":
              score.append(up.score_player_keeper(retorno[i][0], c_club))
@@ -618,11 +616,49 @@ def Wrots_Score_Players(c_club):
     data = [{"player": c, "score":s} for c, s in zip(player, score)]   
 
    #FAZ A CLASSIFICAO
-   # mysorted = sorted(data, key=lambda x : x['score'], reverse=True)
+    mysorted = sorted(data, key=lambda x : x['score'], reverse=False)
     #mysorted.sort(reverse=True)
        
-    return data[0:5]        
+    return mysorted[0:5]        
 
+
+def Scores_per_area(c_club):
+
+    retorno = []
+    player  = []
+    goalkeepr   = 0
+    defensor    = 0
+    midle       = 0
+    attacant    = 0
+    data = []
+    
+    up = UtilPlayer
+    
+    a = select([players_table.c.p_name, players_table.c.p_position]).where(
+                and_(
+                    players_table.c.p_club == c_club.capitalize(),
+                ) )
+    for row in a.execute():
+        retorno.append(row)
+
+    for i, val in enumerate(retorno):
+        if retorno[i][1] == "Goalkeeper":
+             goalkeepr = goalkeepr + up.score_player_keeper(retorno[i][0], c_club)
+        elif retorno[i][1] == "Defender":
+             defensor = defensor + up.score_player_defender(retorno[i][0], c_club)
+        elif retorno[i][1] == "Midfielder":   
+             midle = midle + up.score_player_midfielder(retorno[i][0], c_club)
+        elif retorno[i][1] == "Attacker":  
+             attacant = attacant + up.score_player_forward(retorno[i][0], c_club)
+
+    data.append(goalkeepr)
+    data.append(defensor)
+    data.append(midle)
+    data.append(attacant)
+    
+       
+    return data        
+    
         
 if __name__ == '__main__':
     print(selec_stats_by_name("Réver"))   
