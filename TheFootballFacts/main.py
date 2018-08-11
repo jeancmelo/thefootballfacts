@@ -136,12 +136,39 @@ def html_championship(championship_name):
     box_plot.add('Idade', ages)
     age_graph = box_plot.render_data_uri()
     
+    goals = champ.champ_goals_data()
+    box_goals = pygal.Box()
+    box_goals.title = 'Idade dos Jogadores'
+    box_goals.add('Idade', goals)
+    goals_box = box_goals.render_data_uri()
+    
+    titular = champ.champ_titular_data()
+    box_titular = pygal.Box()
+    box_titular.title = 'Idade dos Jogadores'
+    box_titular.add('Idade', titular)
+    titular_box = box_titular.render_data_uri()    
+    
+    
+    cor_age = champ.champ_corralation_age_goals()
+    xy_chart = pygal.XY(stroke=False)
+    xy_chart.title = 'Idade vs Goals'
+    xy_chart.add('2018', cor_age)
+    cor_age_goals = xy_chart.render_data_uri()        
+    
     cor_age = champ.champ_corralation_age_matched_played()
     xy_chart = pygal.XY(stroke=False)
-    xy_chart.title = 'Correlation'
-    xy_chart.add('A', cor_age)
+    xy_chart.title = 'Idades vs Partidas Jogadas'
+    xy_chart.add('2018', cor_age)
     cor_age_match_played = xy_chart.render_data_uri()    
 
+    win_per_club = champ.champ_in_out_victory()
+    win_clubs = win_per_club.render_data_uri()    
+    
+    position = champ.champ_player_per_position()
+    position_player = position.render_data_uri()
+    
+    position_club = champ.champ_player_per_position_club()
+    position_player_club = position_club.render_data_uri()
     
     #RENDERIZAR A PAGINA COM AS INFORMACOES
     return render_template("championship.html", 
@@ -151,8 +178,16 @@ def html_championship(championship_name):
                            yellow_cards                 = champ.champ_yellow_card(championship_name),
                            red_cards                    = champ.champ_red_card(championship_name),
                            age_graph                    = age_graph,
-                           cor_age_match_played         = cor_age_match_played
-                           
+                           cor_age_match_played         = cor_age_match_played,
+                           cor_age_goals                = cor_age_goals,
+                           more_violent                 = champ.champ_most_violent(),
+                           best_goals                   = champ.champ_best_goals(),
+                           more_played                  = champ.champ_most_played(),
+                           win_clubs                    = win_clubs,
+                           position_player              = position_player,
+                           position_player_club         = position_player_club,
+                           goals_box                    = goals_box,
+                           titular_box                  = titular_box                           
                            ), 200
 
 @app.route("/player/all-players")
