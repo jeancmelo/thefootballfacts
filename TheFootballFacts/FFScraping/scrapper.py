@@ -106,6 +106,79 @@ def scrapperClub():
 		#bd.add_club("", club_name, club_n_win, club_n_defeat, club_n_tie, club_emblem, club_country, club_n_win_in, club_n_defeat_in, club_n_tie_in)
 		print("Adicionado ", club_name, " Vitorias: ", club_n_win, " Derrotas: ",  club_n_defeat, " Empates: ", club_n_tie, " Emblema: ",club_emblem, " Pais: ",club_country, "Vitoria Dentro :",  club_n_win_in)
 
+def scrapperJogos():
+	
+		url = "https://www.academiadasapostasbrasil.com/stats/competition/brasil-stats/26/15366/45710/0/"
+		url2 = ""
+		rodada  = 38;
+		home    = []
+		result  = []
+		away    = []
+		date    = []
+		rodada_final = []
+		i       = 0
+		
+		while rodada < 39:
+			sleep(randint(3,10))
+			clubs   = []
+			horario = []
+			
+			if rodada <= 9:
+				url2 = url + "0" + str(rodada)
+			else:
+				url2 = url + str(rodada)
+			
+			r = requests.get(url2)
+			soup =  BeautifulSoup(r.text, 'lxml')
+			jogos =  soup.find_all('tr', class_='even')
+			
+			
+			for j in jogos:
+				clubs.append(j.find_all('a'))		
+
+			for j in jogos:
+				horario.append(j.find_all('td', class_='nowrap'))
+				
+			
+			while i <= 4:
+				aux = horario[i][0].text.replace("\n        ", "")
+				date.append(aux[0:19])
+				home.append(clubs[i][0].text)
+				aux = clubs[i][1].text.replace("\n        ", "")
+				result.append(aux[0:3])
+				away.append(clubs[i][2].text)
+				rodada_final.append(rodada)
+				i = i + 1
+
+
+			#REFAZ PARA AS LINHAS FALTANTES
+			clubs   = []
+			horario = []
+			
+			jogos2 =  soup.find_all('tr', class_='odd')
+			for j in jogos2:
+				clubs.append(j.find_all('a'))		
+
+			for j in jogos:
+				horario.append(j.find_all('td', class_='nowrap'))
+				
+			i = 0
+			while i <= 4:
+				aux = horario[i][0].text.replace("\n        ", "")
+				date.append(aux[0:19])
+				home.append(clubs[i][0].text)
+				aux = clubs[i][1].text.replace("\n        ", "")
+				result.append(aux[0:3])
+				away.append(clubs[i][2].text)
+				rodada_final.append(rodada)
+				i = i + 1
+			print("Rodada " + str(rodada) + " Cadastrado")
+			rodada =  rodada + 1
+
+		for i, val in enumerate(date):
+			core.insert_ChampGames(home[i], away[i], result[i], date[i], rodada_final[i])
+
+
 
 def scrapperPlayersStats():
 		requisicoes = 0
@@ -123,7 +196,7 @@ def scrapperPlayersStats():
 			url = aux + j
 			print("COMECANDO...")
 			
-			sleep(randint(10,30))
+			sleep(randint(3,10))
 			
 			requisicoes += 1
 			print(requisicoes)
@@ -170,7 +243,7 @@ def scrapperPlayersStats():
 			
 			print(url_player)
 			for url in url_player:
-				sleep(randint(8,15))
+				sleep(randint(2,7))
 				print("URL JOGADOR:" + url)
 				#PEGA DADOS DE JOGO DO JOGADORES:
 				r = requests.get(url)
@@ -229,7 +302,8 @@ def scrapperPlayersStats():
 				position = soup.find_all('img', class_='player_pos_img')
 				p_position = position[0].get('title')
 				
-				p_photo = "/static/photo/default.png"
+				photo = soup.find_all('img')
+				p_photo = photo[3].get('src')
 				
 
 				if p_position != "coach":
@@ -244,6 +318,7 @@ def scrapperPlayersStats():
 
 if __name__ == '__main__':
     #scrapperPlayers()
-    scrapperClub()
-    scrapperPlayersStats()
+    #scrapperClub()
+    #scrapperPlayersStats()
+    #scrapperJogos()
 	#search("Jose Henrique")

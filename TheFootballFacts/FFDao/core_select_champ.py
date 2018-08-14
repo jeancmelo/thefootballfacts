@@ -7,7 +7,7 @@ Created on 8 de ago de 2018
 '''
 from sqlalchemy import select, and_
 
-from FFDao.core import players_table, stats_table, club_table
+from FFDao.core import players_table, stats_table, club_table, champ_table
 from numpy import integer
 from _operator import contains
 import json
@@ -57,6 +57,21 @@ def champ_goals(c_champ):
     for i, val in enumerate(retorno):
          valor_retorno = valor_retorno + retorno[i][0]
                 
+    return valor_retorno
+
+#RETORNA NÚMERO DE GOLS DO CLUB
+def champ_data():
+    
+    retorno = []
+    valor_retorno = 0
+    
+    a = select([champ_table])
+    
+    for row in a.execute():
+        retorno.append(row)
+
+    print(retorno)
+
     return valor_retorno
 
 #RETORNA NÚMERO DE GOLS DO CLUB
@@ -439,4 +454,5 @@ def champ_player_per_position_club():
     
     return radar_chart
 
-
+if __name__ == '__main__':
+    champ_data()   

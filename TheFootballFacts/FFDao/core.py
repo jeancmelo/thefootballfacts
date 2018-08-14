@@ -8,7 +8,7 @@ from sqlalchemy import (create_engine, MetaData, Column,
                         Table, Integer, String, DateTime, ForeignKey)
 
 
-my_engine = create_engine(r'sqlite:///C:\Users\jeanm\Desktop\banco\thefootball_teste.db')
+my_engine = create_engine(r'sqlite:///C:\Users\jeanm\Desktop\banco\thefootballfacts.db')
 
 
 metadata = MetaData(bind=my_engine)
@@ -66,6 +66,19 @@ club_table = Table('club', metadata,
                     Column('c_n_win_in', Integer),
                     Column('c_n_defeat_in', Integer),
                     Column('c_n_tie_in', Integer),
+                    Column('criado_em', DateTime, default=datetime.now),
+                    Column('atualizado_em',
+                           DateTime,
+                           default=datetime.now,
+                           onupdate=datetime.now))
+
+champ_table = Table('champ', metadata,
+                    Column('id', Integer, primary_key=True),
+                    Column('c_home', String(200), index=True),
+                    Column('c_away', String(50)),
+                    Column('c_result', String),
+                    Column('c_date', String),
+                    Column('c_rodada', Integer),
                     Column('criado_em', DateTime, default=datetime.now),
                     Column('atualizado_em',
                            DateTime,

@@ -5,7 +5,7 @@ Created on 24 de jul de 2018
 @author: jeanm
 '''
 from FFDao import core
-from FFDao.core import my_engine, players_table, stats_table, club_table
+from FFDao.core import my_engine, players_table, stats_table, club_table, champ_table
 
 def insert_Player(p_name, p_name_completed, p_age, p_photo, p_nationality,p_position, p_club, p_city, p_heigth, p_foot, p_weight):
 
@@ -27,6 +27,21 @@ def insert_Player(p_name, p_name_completed, p_age, p_photo, p_nationality,p_posi
                                 )
     
     conn.execute(new_player)
+    
+def insert_ChampGames(c_home, c_away, c_result, c_date, c_rodada):
+
+    conn = my_engine.connect()
+
+    c_table = champ_table.insert()
+    
+    new_player = c_table.values(c_home            = c_home,
+                                c_away            = c_away,
+                                c_result          = c_result,
+                                c_date            = c_date,
+                                c_rodada          = c_rodada
+                                )
+    
+    conn.execute(new_player)    
 
 def insert_Stats(s_name, s_name_completed, s_champ, s_club, s_year, s_matches_played, s_gols, s_assistence, s_yellow_card, s_red_card, s_sec_yellow_card, 
                   s_min_played, s_titular, s_substituido):
