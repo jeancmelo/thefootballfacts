@@ -13,7 +13,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<link rel="shortcut icon" href="{{club_emblem}}" />
     	<script src="//static/js/jquery.bootpag.min.js"></script>
-		<title>Clube {{club_name}} | The Football Facts</title>
+		<title>Estatísticas e Informações do {{club_name}} | The Football Facts</title>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
@@ -39,7 +39,7 @@
 				</div>
 				<div class="col-4">
 					<h1>{{club_name}}</h1>
-					<p>Data Fundação: {{club_fundation_Date}}</p>
+					<p>Melhor FOrmaçao: {{best_formation}}</p>
 					<p>Cidade/País: {{club_country}}</p>
 				</div>
 				<div class="col-4">
@@ -97,70 +97,36 @@
 			</div>
 <div style="margin-top: 2%; margin-bottom: 2%;"></div>			
 			<div class="row">
-		    <div class="col-sm">
+				<div class="col-sm">
+					<div class="cabecalhos">
+			      		<h2>Formação Ideal: {{best_formation}}</h2>
+			      	</div>	
+			      	<div class="list-group-item" style="padding: 20px; background-color: #fff; text-align: center;">				
+			      		<img src="/static/position/posicao-defender.png" style="width: 73%">
+			      	</div>
+				</div>
+				<div class="col-sm">
 		    	<div class="cabecalhos">
-			    	<h2>Artilheiros do Time</h2>		    	
+			    	<h2>Jogadores da Formação</h2>		    	
 			    </div>
 		      	<ul class="list-group">
-		     		{% for best_score in best_score %}
+		     		{% for player_formation in player_formation %}
 				  	<li class="list-group-item player-name">
 					  		<div style="width: 20%;  height: 100%; float: left">
-					  			<img src="/static/icon/player.png" style="height: 40px;">
+					  			<img src="{{ player_formation.photo }}" style="height: 40px;">
 					  		</div>
 					  		<div style="width: 65%;  float: left">
 						  		<h3>
-						  			{{ best_score.player }}
+						  			{{ player_formation.player }}
 								</h3>
-								<span>{{ best_score.position }}</span>
+								<span>{{ player_formation.position }}</span>
 							</div>
 							<span class="badge badge-primary badge-pill" style="width: 15%;">{{ best_score.goals }}</span>							
 				  	</li>
 					{% endfor %}
 				</ul>
-		    </div>				
-			<div class="col-sm">
-		    	<div class="cabecalhos">
-			    	<h2>Mais Jogaram</h2>		    	
-			    </div>
-		      	<ul class="list-group">
-		     		{% for more_played in more_played %}
-				  	<li class="list-group-item player-name">
-					  		<div style="width: 20%; height: 100%; float: left">
-					  			<img src="/static/icon/player.png" style="height: 40px;">
-					  		</div>
-					  		<div style="width: 65%; float: left">
-						  		<h3>
-						  			{{ more_played.player }}
-								</h3>
-								<span>{{ more_played.position }}</span>
-							</div>
-						<span class="badge badge-primary badge-pill" style="width: 15%;">{{ more_played.goals }}</span>							
-				  	</li>
-					{% endfor %}
-				</ul>
-		   	</div>
-		    	<div class="col-sm">
-		    		<div class="cabecalhos">
-				    	<h2>Mais Cartões</h2>		    		
-				    </div>
-			      	<ul class="list-group">
-			     		{% for more_violent in more_violent %}
-					  	<li class="list-group-item player-name">
-					  		<div style="width: 20%; height: 100%; float: left">
-					  			<img src="/static/icon/player.png" style="height: 40px;">
-					  		</div>
-					  		<div style="width: 65%; float: left">
-						  		<h3>
-						  			{{ more_violent.player }}
-								</h3>
-								<span>{{ more_violent.position }}</span>
-							</div>
-							<span class="badge badge-primary badge-pill" style="width: 15%;">{{ more_violent.goals }}</span>
-					  	</li>
-						{% endfor %}
-					</ul>
-		   		</div>		   	
-		  </div>
+			</div>								
+		</div>
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>			
 		  <div class="row">
 		    <div class="col-sm">
@@ -207,6 +173,73 @@
 				{% endfor %}												
 		  	</div>
 		  </div>
+
+<div style="margin-top: 2%; margin-bottom: 2%;"></div>			
+			<div class="row">
+		    <div class="col-sm">
+		    	<div class="cabecalhos">
+			    	<h2>Artilheiros do Time</h2>		    	
+			    </div>
+		      	<ul class="list-group">
+		     		{% for best_score in best_score %}
+				  	<li class="list-group-item player-name">
+					  		<div style="width: 20%;  height: 100%; float: left">
+					  			<img src="{{ best_score.photo }}" style="height: 40px;">
+					  		</div>
+					  		<div style="width: 65%;  float: left">
+						  		<h3>
+						  			{{ best_score.player }}
+								</h3>
+								<span>{{ best_score.position }}</span>
+							</div>
+							<span class="badge badge-primary badge-pill" style="width: 15%;">{{ best_score.goals }}</span>							
+				  	</li>
+					{% endfor %}
+				</ul>
+		    </div>				
+			<div class="col-sm">
+		    	<div class="cabecalhos">
+			    	<h2>Mais Jogaram</h2>		    	
+			    </div>
+		      	<ul class="list-group">
+		     		{% for more_played in more_played %}
+				  	<li class="list-group-item player-name">
+					  		<div style="width: 20%; height: 100%; float: left">
+					  			<img src="{{ more_played.photo }}" style="height: 40px;">
+					  		</div>
+					  		<div style="width: 65%; float: left">
+						  		<h3>
+						  			{{ more_played.player }}
+								</h3>
+								<span>{{ more_played.position }}</span>
+							</div>
+						<span class="badge badge-primary badge-pill" style="width: 15%;">{{ more_played.goals }}</span>							
+				  	</li>
+					{% endfor %}
+				</ul>
+		   	</div>
+		    	<div class="col-sm">
+		    		<div class="cabecalhos">
+				    	<h2>Mais Cartões</h2>		    		
+				    </div>
+			      	<ul class="list-group">
+			     		{% for more_violent in more_violent %}
+					  	<li class="list-group-item player-name">
+					  		<div style="width: 20%; height: 100%; float: left">
+					  			<img src="{{ more_violent.photo }}" style="height: 40px;">
+					  		</div>
+					  		<div style="width: 65%; float: left">
+						  		<h3>
+						  			{{ more_violent.player }}
+								</h3>
+								<span>{{ more_violent.position }}</span>
+							</div>
+							<span class="badge badge-primary badge-pill" style="width: 15%;">{{ more_violent.goals }}</span>
+					  	</li>
+						{% endfor %}
+					</ul>
+		   		</div>		   	
+		  </div>
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>			  
 		  <div class="row">
 		    <div class="col-sm">
@@ -224,16 +257,14 @@
 		    </div>
 		    <div class="col-sm">
 		    	<div class="cabecalhos">
-			    	<h2>Piores Score</h2>		    	
+			    	<h2>Score Por Area</h2>		    	
 			    </div>
-		      	<ul class="list-group">
-		     		{% for wrost_scores in wrost_scores %}
-				  	<li class="list-group-item d-flex justify-content-between align-items-center">
-				  		{{ wrost_scores.player }}
-				  		<span class="badge badge-primary badge-pill">{{ wrost_scores.score }}</</span>				  		
-				  	</li>
-					{% endfor %}
-				</ul>
+					<!-- Don't forget the "|safe"! -->
+					<div class="list-group-item" style="padding: 20px; background-color: #fff">
+						<div id="chart">
+						   <embed type="image/svg+xml" src= {{graph_data|safe}} style="max-height: 500px; " />
+						</div>
+					</div>
 		    </div>		    
 		  </div>
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>					  
@@ -335,73 +366,32 @@
 					</div>
 		    </div>
 		    <div class="col-sm">
-		    	<div class="cabecalhos">
-			    	<h2>Score Por Area</h2>		    	
+				<div class="cabecalhos">
+			    	<h2>Histórico de Confrontos</h2>		    	
 			    </div>
-					<!-- Don't forget the "|safe"! -->
-					<div class="list-group-item" style="padding: 20px; background-color: #fff">
-						<div id="chart">
-						   <embed type="image/svg+xml" src= {{graph_data|safe}} style="max-height: 500px; " />
-						</div>
-					</div>			
-
+		    		<div>
+				     	<ul class="list-group">
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+						    Vitórias Dentro
+						    <span class="badge badge-primary badge-pill">{{club_n_win_in}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						     Vitórias Fora
+						    <span class="badge badge-primary badge-pill">{{club_n_win_out}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						    Derrotas Dentro
+						    <span class="badge badge-primary badge-pill">{{club_n_defeat_in}}</span>
+						  </li>
+						  <li class="list-group-item d-flex justify-content-between align-items-center">
+						    Derrotas Fora
+						    <span class="badge badge-primary badge-pill">{{club_n_defeat_out}}</span>
+						  </li>
+						</ul>
+					</div>
 		    </div>		    
 		  </div>	
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>				  
-		  <div class="row">
-		    <div class="col-sm">
-		    	<div class="cabecalhos">
-			    	<h2>Histórico de Confrontos Dentro</h2>		    	
-			    </div>
-		    		<div>
-				     	<ul class="list-group">
-							<li class="list-group-item d-flex justify-content-between align-items-center">
-						    Vitórias Dentro
-						    <span class="badge badge-primary badge-pill">{{club_n_win_in}}</span>
-						  </li>
-						  <li class="list-group-item d-flex justify-content-between align-items-center">
-						     Vitórias Fora
-						    <span class="badge badge-primary badge-pill">{{club_n_win_out}}</span>
-						  </li>
-						  <li class="list-group-item d-flex justify-content-between align-items-center">
-						    Derrotas Dentro
-						    <span class="badge badge-primary badge-pill">{{club_n_defeat_in}}</span>
-						  </li>
-						  <li class="list-group-item d-flex justify-content-between align-items-center">
-						    Derrotas Fora
-						    <span class="badge badge-primary badge-pill">{{club_n_defeat_out}}</span>
-						  </li>
-						</ul>
-					</div>
-
-		    </div>
-		    <div class="col-sm">
-		    	<div class="cabecalhos">
-			    	<h2>Histórico de Confrontos Fora</h2>		    	
-			    </div>
-		    		<div>
-				     	<ul class="list-group">
-							<li class="list-group-item d-flex justify-content-between align-items-center">
-						    Vitórias Dentro
-						    <span class="badge badge-primary badge-pill">{{club_n_win_in}}</span>
-						  </li>
-						  <li class="list-group-item d-flex justify-content-between align-items-center">
-						     Vitórias Fora
-						    <span class="badge badge-primary badge-pill">{{club_n_win_out}}</span>
-						  </li>
-						  <li class="list-group-item d-flex justify-content-between align-items-center">
-						    Derrotas Dentro
-						    <span class="badge badge-primary badge-pill">{{club_n_defeat_in}}</span>
-						  </li>
-						  <li class="list-group-item d-flex justify-content-between align-items-center">
-						    Derrotas Fora
-						    <span class="badge badge-primary badge-pill">{{club_n_defeat_out}}</span>
-						  </li>
-						</ul>
-					</div>
-		    </div>		    
-		  </div>		
-<div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>			
 		  <div class="row">
 		    <div class="col-sm">
 		    	<div class="cabecalhos">
@@ -412,7 +402,7 @@
 		     		{% for all_players in all_players %}
 				  	<li class="list-group-item player-name">
 					  		<div style="width: 20%;  height: 100%; float: left">
-					  			<img src="/static/icon/player.png" style="height: 40px;">
+					  			<img src="{{ all_players.photo }}" style="height: 40px;">
 					  		</div>
 					  		<div style="width: 65%;  float: left">
 						  		<h3>

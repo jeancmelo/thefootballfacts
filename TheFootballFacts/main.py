@@ -84,6 +84,7 @@ def html_club(club_name):
     
     #RECONSTRUINDO O OBJETO
     c = core.select_club_by_name(club_name)
+    
    
     data = core.Scores_per_area(club_name)
     line_chart = pygal.HorizontalBar()
@@ -94,6 +95,7 @@ def html_club(club_name):
     line_chart.add('Atacante', data[3])
     graph_data = line_chart.render_data_uri()
    
+    best_form = core.club_best_formation(club_name)
     
     #RENDERIZAR A PAGINA COM AS INFORMACOES
     return render_template("club.html", 
@@ -122,7 +124,10 @@ def html_club(club_name):
                            all_players          = core.Club_players(club_name),
                            top_scores           = core.Best_Score_Players(club_name),
                            wrost_scores         = core.Wrots_Score_Players(club_name), 
-                           graph_data           = graph_data
+                           graph_data           = graph_data,
+                           best_formation       = best_form[0],
+                           player_formation     = best_form[1],
+                           disputed_matches     = c[0][4] + c[0][5] + c[0][6] 
                            ), 200
 
 @app.route("/championship/<championship_name>")
@@ -136,11 +141,11 @@ def html_championship(championship_name):
     box_plot.add('Idade', ages)
     age_graph = box_plot.render_data_uri()
     
-    goals = champ.champ_goals_data()
-    box_goals = pygal.Box()
-    box_goals.title = 'Idade dos Jogadores'
-    box_goals.add('Idade', goals)
-    goals_box = box_goals.render_data_uri()
+    #goals = champ.champ_goals_data()
+    #box_goals = pygal.Box()
+    #box_goals.title = 'Idade dos Jogadores'
+    #box_goals.add('Idade', goals)
+    #goals_box = box_goals.render_data_uri()
     
     titular = champ.champ_titular_data()
     box_titular = pygal.Box()
@@ -167,8 +172,8 @@ def html_championship(championship_name):
     position = champ.champ_player_per_position()
     position_player = position.render_data_uri()
     
-    position_club = champ.champ_player_per_position_club()
-    position_player_club = position_club.render_data_uri()
+    #position_club = champ.champ_player_per_position_club()
+    #position_player_club = position_club.render_data_uri()
     
     #RENDERIZAR A PAGINA COM AS INFORMACOES
     return render_template("championship.html", 
@@ -185,8 +190,8 @@ def html_championship(championship_name):
                            more_played                  = champ.champ_most_played(),
                            win_clubs                    = win_clubs,
                            position_player              = position_player,
-                           position_player_club         = position_player_club,
-                           goals_box                    = goals_box,
+                           position_player_club         = 0,
+                           goals_box                    = 0,
                            titular_box                  = titular_box                           
                            ), 200
 

@@ -13,7 +13,7 @@ from FFDao.core import players_table, stats_table, club_table
 from numpy import integer
 from _operator import contains
 import json
-from FFutils import UtilPlayer
+from FFutils import UtilPlayer, UtilArea
 from audioop import reverse
 
 
@@ -283,7 +283,6 @@ def Player_Yellow_Cards_Career(p_name):
         if retorno[i][0].find("/") != -1:
             valor_retorno = valor_retorno + retorno[i][0]
         else:
-            print(retorno[i][0])
             pass
             
     return valor_retorno
@@ -322,6 +321,7 @@ def Club_Best_Goals(c_club):
     player = []
     gols = []
     position = []
+    photo    = []
     data = {}
     
     #LISTA DE CLUBES QUE JA ATUOU
@@ -329,17 +329,18 @@ def Club_Best_Goals(c_club):
     for i, val in enumerate(retorno):
          player.append(retorno[i][0])
          gols.append(retorno[i][1])
-         a = select([players_table.c.p_position]).where(
+         a = select([players_table.c.p_position, players_table.c.p_photo]).where(
              and_(
                     players_table.c.p_name == retorno[i][0],
                     players_table.c.p_club == c_club.capitalize()
                 ) )
          for row in a.execute():
              position.append(row[0])
+             photo.append(row[1])
          
     
     #TRANSFORMA EM JSON     
-    data = [{"player": c, "goals": y, "position": p} for c, y, p in zip(player, gols, position)]        
+    data = [{"player": c, "goals": y, "position": p, "photo": f} for c, y, p, f in zip(player, gols, position, photo)]        
     
    #FAZ A CLASSIFICAO
     mysorted = sorted(data, key=lambda x : x['goals'], reverse=True)
@@ -362,6 +363,7 @@ def Club_Most_Played(c_club):
     player = []
     gols = []
     position = []
+    photo    = []
     data = {}
 
     #LISTA DE CLUBES QUE JA ATUOU
@@ -369,7 +371,7 @@ def Club_Most_Played(c_club):
     for i, val in enumerate(retorno):
         player.append(retorno[i][0])
         gols.append(retorno[i][1])
-        a = select([players_table.c.p_position]).where(
+        a = select([players_table.c.p_position, players_table.c.p_photo]).where(
              and_(
                     players_table.c.p_name == retorno[i][0],
                     players_table.c.p_club == c_club.capitalize()
@@ -377,9 +379,10 @@ def Club_Most_Played(c_club):
            
         for row in a.execute():
              position.append(row[0])
+             photo.append(row[1])
     
     #TRANSFORMA EM JSON     
-    data = [{"player": c, "goals": y, "position": p} for c, y, p in zip(player, gols, position)]  
+    data = [{"player": c, "goals": y, "position": p, "photo": f} for c, y, p, f in zip(player, gols, position, photo)]  
    
    #FAZ A CLASSIFICAO
     mysorted = sorted(data, key=lambda x : x['goals'], reverse=True)
@@ -402,6 +405,7 @@ def CLub_Most_Violent(c_club):
     player = []
     gols = []
     position = []
+    photo    = []
     data = {}
 
     #LISTA DE CLUBES QUE JA ATUOU
@@ -409,16 +413,17 @@ def CLub_Most_Violent(c_club):
     for i, val in enumerate(retorno):
         player.append(retorno[i][0])
         gols.append(retorno[i][1]+retorno[i][2])
-        a = select([players_table.c.p_position]).where(
+        a = select([players_table.c.p_position, players_table.c.p_photo]).where(
              and_(
                     players_table.c.p_name == retorno[i][0],
                     players_table.c.p_club == c_club.capitalize()
                 ) )
         for row in a.execute():
              position.append(row[0])         
+             photo.append(row[1])
     
     #TRANSFORMA EM JSON     
-    data = [{"player": c, "goals": y, "position": p} for c, y, p in zip(player, gols, position)]    
+    data = [{"player": c, "goals": y, "position": p, "photo": f} for c, y, p, f in zip(player, gols, position, photo)]    
    
    #FAZ A CLASSIFICAO
     mysorted = sorted(data, key=lambda x : x['goals'], reverse=True)
@@ -531,6 +536,7 @@ def Club_players(c_club):
         retorno.append(row)
 
     player   = []
+    photo    = []
     position = []
     data = {}
 
@@ -538,16 +544,17 @@ def Club_players(c_club):
     i  = 0
     for i, val in enumerate(retorno):
         player.append(retorno[i][0])
-        a = select([players_table.c.p_position]).where(
+        a = select([players_table.c.p_position, players_table.c.p_photo]).where(
              and_(
                     players_table.c.p_name == retorno[i][0],
                     players_table.c.p_club == c_club.capitalize()
                 ) )        
         for row in a.execute():
-             position.append(row[0])         
+             position.append(row[0])
+             photo.append(row[1])         
     
     #TRANSFORMA EM JSON     
-    data = [{"player": c, "position": p} for c, p in zip(player, position)]   
+    data = [{"player": c, "position": p, "photo" : f} for c, p, f in zip(player, position, photo)]   
         
     return(data)
 
@@ -583,7 +590,7 @@ def Best_Score_Players(c_club):
    #FAZ A CLASSIFICAO
     mysorted = sorted(data, key=lambda x : x['score'], reverse=True)
    
-    return mysorted[0:5]        
+    return mysorted[0:6]        
         
 
 def Wrots_Score_Players(c_club):
@@ -658,10 +665,92 @@ def Scores_per_area(c_club):
     
        
     return data        
+
+def club_best_formation(c_club):
+
+    retorno = []
+    
+    goalkeeper = []
+    defender   = []
+    midfielder = []
+    forward    = []
+    
+    goalkeeper_name = []
+    defender_name   = []
+    midfielder_name = []
+    forward_name    = []
+    
+    goalkeeper_position = []
+    defender_position   = []
+    midfielder_position = []
+    forward_position    = []
+    
+    goalkeeper_photo = []
+    defender_photo  = []
+    midfielder_photo = []
+    forward_photo    = []    
+
+
+    up = UtilPlayer
+    
+    a = select([players_table.c.p_name, players_table.c.p_position, players_table.c.p_photo]).where(
+                and_(
+                    players_table.c.p_club == c_club.capitalize(),
+                ) )
+    for row in a.execute():
+        retorno.append(row)
+        
+    for i, val in enumerate(retorno):
+        if retorno[i][1] == "Goalkeeper":
+             goalkeeper.append(up.score_player_keeper(retorno[i][0], c_club))
+             goalkeeper_name.append(retorno[i][0])
+             goalkeeper_position.append(retorno[i][1])
+             goalkeeper_photo.append(retorno[i][2])
+        elif retorno[i][1] == "Defender":
+             defender.append(up.score_player_defender(retorno[i][0], c_club))
+             defender_name.append(retorno[i][0])
+             defender_position.append(retorno[i][1])
+             defender_photo.append(retorno[i][2])
+        elif retorno[i][1] == "Midfielder":   
+             midfielder.append(up.score_player_midfielder(retorno[i][0], c_club))
+             midfielder_name.append(retorno[i][0])
+             midfielder_position.append(retorno[i][1])
+             midfielder_photo.append(retorno[i][2])             
+        elif retorno[i][1] == "Attacker":  
+             forward.append(up.score_player_forward(retorno[i][0], c_club))
+             forward_name.append(retorno[i][0])
+             forward_position.append(retorno[i][1])
+             forward_photo.append(retorno[i][2])
+    
+    
+    #TRANSFORMA EM JSON     
+    goalkeeper_data = [{"player": c, "score":s, "position": p, "photo": f} for c, s, p, f in zip(goalkeeper_name, goalkeeper, goalkeeper_position, goalkeeper_photo)]
+    
+    #TRANSFORMA EM JSON     
+    defender_data = [{"player": c, "score":s, "position": p, "photo": f} for c, s, p, f in zip(defender_name, defender, defender_position, defender_photo)]   
+    
+    #TRANSFORMA EM JSON     
+    midfielder_data = [{"player": c, "score":s, "position": p, "photo": f} for c, s, p, f in zip(midfielder_name, midfielder, midfielder_position, midfielder_photo)]   
+    
+    #TRANSFORMA EM JSON     
+    forward_data = [{"player": c, "score":s, "position": p, "photo": f} for c, s, p, f in zip(forward_name, forward, forward_position, forward_photo)]                  
+    
+    #FAZ A CLASSIFICAO
+    goalkeeper_data = sorted(goalkeeper_data, key=lambda x : x['score'], reverse=True)
+    defender_data   = sorted(defender_data, key=lambda x : x['score'], reverse=True)
+    midfielder_data = sorted(midfielder_data, key=lambda x : x['score'], reverse=True)
+    forward_data    = sorted(forward_data, key=lambda x : x['score'], reverse=True)            
+    
+    #ABRE A CHAMADA PARA FUNÇÃO QUE FAZ A ESCOLHE DA MELHOR FORMAÇÃO
+    ua = UtilArea
+    
+    best_form = ua.best_formation_test(goalkeeper_data, defender_data, midfielder_data, forward_data)
+
+    return best_form
     
         
 if __name__ == '__main__':
-    print(selec_stats_by_name("Réver"))   
+    club_best_formation("flamengo")   
     
 
 

@@ -22,7 +22,6 @@ def score_player_keeper(player, c_club):
 	for row in a.execute():
 		c_player.append(row)
     
-	print(c_player)
 	gols         = c_player[0][6]
 	#jogos         = c_player[0][5]
 	penaulti     = c_player[0][7]

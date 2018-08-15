@@ -110,7 +110,7 @@ def scrapperJogos():
 	
 		url = "https://www.academiadasapostasbrasil.com/stats/competition/brasil-stats/26/15366/45710/0/"
 		url2 = ""
-		rodada  = 38;
+		rodada  = 1;
 		home    = []
 		result  = []
 		away    = []
@@ -310,15 +310,18 @@ def scrapperPlayersStats():
 					core.insert_Player(p_name, p_info[1], p_info[13], p_photo, p_info[11], p_position, p_stats[1], p_info[5], p_info[7], p_info[9], p_info[15])
 					i = 0
 					while i < len(p_stats) -14:
-						core.insert_Stats(p_name, p_info[1], p_stats[i+2], p_stats[i+1], p_stats[i], p_stats[i+4], p_stats[i+9], 0, p_stats[i+11], p_stats[i+13], p_stats[i+12], 
-									  p_stats[i+3], p_stats[i+5], p_stats[i+8])
-						print(" - Jogador " + p_name + " adicionado dados da sua passagem pelo:" + p_stats[i+1])
-						i = i+14
+						try:
+							core.insert_Stats(p_name, p_info[1], p_stats[i+2], p_stats[i+1], p_stats[i], p_stats[i+4], p_stats[i+9], 0, p_stats[i+11], p_stats[i+13], p_stats[i+12], 
+										  p_stats[i+3], p_stats[i+5], p_stats[i+8])
+							print(" - Jogador " + p_name + " adicionado dados da sua passagem pelo:" + p_stats[i+1])
+							i = i+14
+						except:
+							sleep(randint(15,30))
+							print("Erro de banco, vai tentar de novo - Sleep...")
 
 
 if __name__ == '__main__':
-    #scrapperPlayers()
-    #scrapperClub()
-    #scrapperPlayersStats()
-    #scrapperJogos()
-	#search("Jose Henrique")
+   	scrapperJogos()
+   	scrapperClub()
+   	scrapperPlayersStats()
+

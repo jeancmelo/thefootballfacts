@@ -6,5 +6,6 @@ encoding//FFDao/core_select_champ.py=utf-8
 encoding//FFDao/core_select_club.py=utf-8
 encoding//FFDao/core_select_player.py=utf-8
 encoding//FFScraping/scrapper.py=utf-8
+encoding//FFutils/UtilArea.py=utf-8
 encoding//FFutils/UtilPlayer.py=utf-8
 encoding/main.py=utf-8

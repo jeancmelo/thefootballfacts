@@ -143,9 +143,9 @@ def champ_goals_data():
         retorno.append(row)
         
     for i, val in enumerate(retorno):
-        idades.append(retorno[i][0])
+        idades.append(retorno)
    
-    idades = list(map(int, idades))          
+    print(idades)          
 
     return idades
 
