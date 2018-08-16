@@ -95,6 +95,7 @@ def html_club(club_name):
     line_chart.add('Atacante', data[3])
     graph_data = line_chart.render_data_uri()
    
+   #Pega a melhor formacao
     best_form = core.club_best_formation(club_name)
     
     #RENDERIZAR A PAGINA COM AS INFORMACOES

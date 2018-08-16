@@ -726,6 +726,7 @@ def club_best_formation(c_club):
     #TRANSFORMA EM JSON     
     goalkeeper_data = [{"player": c, "score":s, "position": p, "photo": f} for c, s, p, f in zip(goalkeeper_name, goalkeeper, goalkeeper_position, goalkeeper_photo)]
     
+    #adicao
     #TRANSFORMA EM JSON     
     defender_data = [{"player": c, "score":s, "position": p, "photo": f} for c, s, p, f in zip(defender_name, defender, defender_position, defender_photo)]   
     

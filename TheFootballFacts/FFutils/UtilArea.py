@@ -62,6 +62,7 @@ def best_formation_test(goalkeeper_data, defender_data, midfielder_data, forward
 	for i, val in enumerate(defender_data[0:defensor]):
 		players.append(defender_data[i]['player'])
 		posiiton.append(defender_data[i]['position'])
+		
 		photo.append(defender_data[i]['photo'])		
 	
 	for i, val in enumerate(midfielder_data[0:meio]):
