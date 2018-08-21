@@ -10,15 +10,11 @@ import json
 
 def best_formation_test(goalkeeper_data, defender_data, midfielder_data, forward_data):
 	
-	possible_formations = ('4-4-2', '3-5-2', '4-3-3', '5-3-2', '4-5-1', '5-2-3')
+	possible_formations = ('3-4-3', '3-5-2', '3-6-1', '4-3-3', '4-4-2', '4-5-1', '5-2-3', '5-3-2', '5-4-1')
 	score_formations    = []
-	players_formation   = []
 	retorno = []
 	
 	for i in possible_formations:
-		#score_formation(goalkeeper_data, defender_data, midfielder_data, forward_data,i)
-		print("Testando Formação: " + i)
-		
 		area = i.split('-')
 		
 		defensor = int(area[0])

@@ -7,9 +7,9 @@ Created on 24 de jul de 2018
 '''
 import re
 
-from sqlalchemy import select, and_
+from sqlalchemy import select, and_, or_
 
-from FFDao.core import players_table, stats_table, club_table
+from FFDao.core import players_table, stats_table, club_table, champ_table
 from numpy import integer
 from _operator import contains
 import json
@@ -749,9 +749,74 @@ def club_best_formation(c_club):
 
     return best_form
     
+def club_last_games(c_club):
+
+    retorno    = []
+    home   = []
+    away   = []
+    placar = []
+    data   = []
+    
+    a = select([champ_table]).where(
+                or_(
+                    champ_table.c.c_home == c_club.capitalize(),
+                    champ_table.c.c_away == c_club.capitalize(),
+                ) )
+    
+    
+    for row in a.execute():
+        retorno.append(row)
+        
+    for i, val in enumerate(retorno):
+        if retorno[i][3] != " vs":
+            home.append(retorno[i][1])
+            away.append(retorno[i][2])
+            placar.append(retorno[i][3])
+            data.append(retorno[i][4])
+            #last_games.append(retorno[i]) 
+            
+    
+    #TRANSFORMA EM JSON     
+    last_games = [{"data": c, "home":s, "placar": p, "away": f} for c, s, p, f in zip(data, home, placar, away)]                  
+    
+    return last_games[0:5]
+    
+
+def club_next_games(c_club):
+
+    retorno    = []
+    home   = []
+    away   = []
+    placar = []
+    data   = []
+    
+    a = select([champ_table]).where(
+                or_(
+                    champ_table.c.c_home == c_club.capitalize(),
+                    champ_table.c.c_away == c_club.capitalize(),
+                ) )
+    
+    
+    for row in a.execute():
+        retorno.append(row)
+        
+    for i, val in enumerate(retorno):
+        if retorno[i][3] == " vs":
+            home.append(retorno[i][1])
+            away.append(retorno[i][2])
+            placar.append(retorno[i][3])
+            data.append(retorno[i][4])
+            #last_games.append(retorno[i]) 
+            
+    
+    #TRANSFORMA EM JSON     
+    next_games = [{"data": c, "home":s, "placar": p, "away": f} for c, s, p, f in zip(data, home, placar, away)]                  
+    
+    return next_games[0:5]    
+    
         
 if __name__ == '__main__':
-    club_best_formation("flamengo")   
+    club_last_games("flamengo")   
     
 
 

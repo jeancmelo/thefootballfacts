@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 from flask import Flask
 from flask import render_template
 import pygal
+from pygal.style import Style
 
 from FFClass.Club import Club
 from FFClass.Player import Player
@@ -84,11 +85,28 @@ def html_club(club_name):
     
     #RECONSTRUINDO O OBJETO
     c = core.select_club_by_name(club_name)
+
+    #CUSTOMIZAÇÃO DA COR DO GRÁFICO DE SCORE POR ÁREA
+    custom_style = Style(
+    background='transparent',
+    plot_background='#FFF',
+    foreground='#676767',
+    value_font_size = 20.0,
+    label_font_size=20.0,
+    legend_font_size=20.0,
+    major_label_font_size=20.0,
+    guide_stroke_dasharray='#fbfbfb',
+    major_guide_stroke_dasharray='#fbfbfb',
+    foreground_strong='#676767',
+    foreground_subtle='#676767',
+    opacity='.8',
+    opacity_hover='.9',
+    transition='200ms ease-in',
+    colors=('#25CC14', '#45993D', '#C9FF00', '#8940FF'))    
     
-   
+
     data = core.Scores_per_area(club_name)
-    line_chart = pygal.HorizontalBar()
-    line_chart.title = 'Score por Area'
+    line_chart = pygal.HorizontalBar(style=custom_style)
     line_chart.add('Goleiro', data[0])
     line_chart.add('Defensor', data[1])
     line_chart.add('Meio', data[2])
@@ -128,7 +146,9 @@ def html_club(club_name):
                            graph_data           = graph_data,
                            best_formation       = best_form[0],
                            player_formation     = best_form[1],
-                           disputed_matches     = c[0][4] + c[0][5] + c[0][6] 
+                           disputed_matches     = c[0][4] + c[0][5] + c[0][6],
+                           club_last_games      = core.club_last_games(club_name),
+                           club_next_games      = core.club_next_games(club_name) 
                            ), 200
 
 @app.route("/championship/<championship_name>")

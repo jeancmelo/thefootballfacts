@@ -8,14 +8,28 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.com/libraries/Chart.js">
+		<link rel="stylesheet" type="text/css" href="/static/css/styles-pagination.css">
+
 
 		<link rel="stylesheet" type="text/css" href="http://127.0.0.1:5000/static/style.css">
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<link rel="shortcut icon" href="{{club_emblem}}" />
-    	<script src="//static/js/jquery.bootpag.min.js"></script>
-		<title>Estatísticas e Informações do {{club_name}} | The Football Facts</title>
+    
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    	<!--Scripts da paginação -->
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+		<script src="/static/js/jquery.quick.pagination.min.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$("ul.pagination1").quickPagination({pageSize:"6"})
+			$("ul.pagination2").quickPagination({pageSize:"6"});
+
+		});
+		</script>
+
+
+		
+		<title>Estatísticas e Informações do {{club_name}} | The Football Facts</title>
 
 	</head>
 	<body style="background-color: #f9f9f9; font-family: roboto;">
@@ -31,24 +45,37 @@
 		     </nav>
     	</div>
 
-		<div class="container-fluid" style="background-color: #fff; padding: 50px; border-bottom: 4px solid #efefef; height: 200px;">
+		<div class="container-fluid" style="background-color: #fff; padding: 30px; border-bottom: 4px solid #efefef; height: 235px; background-image: url('/static/utils/primeiro-teste.png');">
 			<div class="row">
 				<div class="col-md-2"></div>
-				<div class="col-2 caixa-imagem">
-					<img src="{{club_emblem}}" style="width: 170px;">
+				<div class="col-2" style="text-align: center">
+					<img src="{{club_emblem}}">
 				</div>
-				<div class="col-4">
+				<div class="col-3">
 					<h1>{{club_name}}</h1>
-					<p>Melhor FOrmaçao: {{best_formation}}</p>
-					<p>Cidade/País: {{club_country}}</p>
+					<span style="padding: 2px;"><img src="/static/utils/facebook.png" style="height: 12%;"></span>
+					<span style="padding: 2px;"><img src="/static/utils/instagram.png" style="height: 12%;"></span>
+					<span style="padding: 2px;"><img src="/static/utils/twitter.png" style="height: 12%;"></span>
+
 				</div>
-				<div class="col-4">
-					<p>#28</p>
-				</div>				
+				<div class="col-3">
+					<p class="line-divider"><span class="bold-title">Site Oficial:</span> http://www.sitedotime.com.br</p>
+					<p class="line-divider"><span class="bold-title">Fundação:</span> 10/10/1909</p>
+					<p class="line-divider"><span class="bold-title">Principal Título:</span> Brasileirão de 2008</p>
+					<p class="line-divider last-divider"><span class="bold-title">Cidade/País: </span> {{club_country}}</p>
+
+			</div>				
 			</div>
 		</div>
-			<div style="border: 1px solid #f9f9f9; margin-top: 5%; margin-bottom: 2%;"></div>
+			<div style="border: 1px solid #f9f9f9; margin-top: 3%; "></div>
 			<div class="container">
+			<div class="row">
+				<div class="col-sm" style="text-align: center">
+					<img src="/static/utils/banner-720x90.png">
+				</div>
+			</div>
+			<div style="border: 1px solid #f9f9f9; margin-top: 3%; margin-bottom: 2%;"></div>
+
 			<div class="row">
 				<div class="col-sm-3" >
 					<div class="card" style="width: 17rem; text-align: center;">
@@ -102,15 +129,17 @@
 			      		<h2>Formação Ideal: {{best_formation}}</h2>
 			      	</div>	
 			      	<div class="list-group-item" style="padding: 20px; background-color: #fff; text-align: center;">				
-			      		<img src="/static/position/posicao-defender.png" style="width: 73%">
+			      		<img src="/static/tatic/{{best_formation}}.jpg" style="width: 77%">
 			      	</div>
 				</div>
 				<div class="col-sm">
 		    	<div class="cabecalhos">
 			    	<h2>Jogadores da Formação</h2>		    	
 			    </div>
-		      	<ul class="list-group">
-		     		{% for player_formation in player_formation %}
+			    <div style="height: 100px">
+			    <ul class="list-group pagination1">
+		     		
+		      		{% for player_formation in player_formation %}
 				  	<li class="list-group-item player-name">
 					  		<div style="width: 20%;  height: 100%; float: left">
 					  			<img src="{{ player_formation.photo }}" style="height: 40px;">
@@ -124,7 +153,9 @@
 							<span class="badge badge-primary badge-pill" style="width: 15%;">{{ best_score.goals }}</span>							
 				  	</li>
 					{% endfor %}
+					
 				</ul>
+				</div>
 			</div>								
 		</div>
 <div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>			
@@ -342,26 +373,18 @@
 		  <div class="row">
 		    <div class="col-sm">
 		    	<div class="cabecalhos">
-			    	<h2>PRÓXIMOS JOGOS/Probabilidade de Ganho</h2>		    	
+			    	<h2>PRÓXIMOS JOGOS</h2>		    	
 			    </div>
 		    		<div>
 				     	<ul class="list-group">
-							<li class="list-group-item d-flex justify-content-between align-items-center">
-						    Vitórias Dentro
-						    <span class="badge badge-primary badge-pill">{{club_n_win_in}}</span>
-						  </li>
-						  <li class="list-group-item d-flex justify-content-between align-items-center">
-						     Vitórias Fora
-						    <span class="badge badge-primary badge-pill">{{club_n_win_out}}</span>
-						  </li>
-						  <li class="list-group-item d-flex justify-content-between align-items-center">
-						    Derrotas Dentro
-						    <span class="badge badge-primary badge-pill">{{club_n_defeat_in}}</span>
-						  </li>
-						  <li class="list-group-item d-flex justify-content-between align-items-center">
-						    Derrotas Fora
-						    <span class="badge badge-primary badge-pill">{{club_n_defeat_out}}</span>
-						  </li>
+				     		{% for club_next_games in club_next_games %}
+						  	<li class="list-group-item d-flex justify-content-between align-items-center">
+						  		<div style="width: 30%; text-align: center;">{{ club_next_games.data }}</div>
+						  		<div style="width: 30%; text-align: center;">{{ club_next_games.home }}</div>
+						  		<div style="width: 10%; text-align: center;">{{ club_next_games.placar }}</div>
+						  		<div style="width: 30%; text-align: center;">{{ club_next_games.away }}</div>						  		
+						  	</li>
+							{% endfor %}
 						</ul>
 					</div>
 		    </div>
@@ -371,22 +394,14 @@
 			    </div>
 		    		<div>
 				     	<ul class="list-group">
-							<li class="list-group-item d-flex justify-content-between align-items-center">
-						    Vitórias Dentro
-						    <span class="badge badge-primary badge-pill">{{club_n_win_in}}</span>
-						  </li>
-						  <li class="list-group-item d-flex justify-content-between align-items-center">
-						     Vitórias Fora
-						    <span class="badge badge-primary badge-pill">{{club_n_win_out}}</span>
-						  </li>
-						  <li class="list-group-item d-flex justify-content-between align-items-center">
-						    Derrotas Dentro
-						    <span class="badge badge-primary badge-pill">{{club_n_defeat_in}}</span>
-						  </li>
-						  <li class="list-group-item d-flex justify-content-between align-items-center">
-						    Derrotas Fora
-						    <span class="badge badge-primary badge-pill">{{club_n_defeat_out}}</span>
-						  </li>
+				     		{% for club_last_games in club_last_games %}
+						  	<li class="list-group-item d-flex justify-content-between align-items-center">
+							  		<div style="width: 30%; text-align: center;">{{ club_last_games.data }}</div>
+							  		<div style="width: 30%; text-align: center;">{{ club_last_games.home }}</div>
+							  		<div style="width: 10%; text-align: center;">{{ club_last_games.placar }}</div>
+							  		<div style="width: 30%; text-align: center;">{{ club_last_games.away }}</div>						  		
+						  	</li>
+							{% endfor %}
 						</ul>
 					</div>
 		    </div>		    
@@ -397,11 +412,10 @@
 		    	<div class="cabecalhos">
 			    	<h2>JOGADORES DO ELENCO</h2>		    	
 			    </div>
-				<div id="dynamic_content">
-				    
+				    <ul class="pagination2">
 		     		{% for all_players in all_players %}
 				  	<li class="list-group-item player-name">
-					  		<div style="width: 20%;  height: 100%; float: left">
+					  		<div style="width: 10%;  height: 100%; float: left">
 					  			<img src="{{ all_players.photo }}" style="height: 40px;">
 					  		</div>
 					  		<div style="width: 65%;  float: left">
@@ -413,8 +427,7 @@
 												
 				  	</li>
 					{% endfor %}
-					</div>
-					<div id="show_paginator"></div>			      	  
+					</ul>
 			 </div>
 		</div>
 		</div>

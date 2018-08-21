@@ -1,0 +1,42 @@
+ul {
+	clear: both;
+   -webkit-padding-start: 0px !important;
+
+}
+
+
+ul.simplePagerNav li{
+    display:block;
+    float: left;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-family: roboto;
+	font-size:14px;
+}
+ul.simplePagerNav{
+    float: right;
+}
+ul.simplePagerNav li a{
+    color: #333;
+    text-decoration: none;
+}
+
+li.currentPage {
+	background: red;
+    background: #5ea052;	
+}
+
+ul.simplePagerNav li.currentPage a {
+	color: #fff;	
+
+}
+
+table.pageme {
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}  
+
+table.pageme td {
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
