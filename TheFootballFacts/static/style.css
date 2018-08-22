@@ -10,6 +10,12 @@
     border-bottom: 5px solid #3c6984 !important;
     color: #FFF !important;
 }
+.bg-yellow{
+    background-color: #a09e52 !important;
+    margin-bottom: 0px !important;
+    border-bottom: 5px solid #84823c !important;
+    color: #FFF !important;
+}
 .list-group-item{
 	border-left: 0px !important;
     border-right: 0px !important;
@@ -20,6 +26,9 @@
     border: 4px solid #efefef;
     padding: 10px;
     height: 100%;
+}
+.badge-primary-champ{
+    color: #a09e52 !important;
 }
 
 .player-name{
@@ -35,6 +44,9 @@
 }
 .cabecalho-jogador{
     background-color: #5283a0;    
+}
+.cabecalho-campeonato{
+    background-color: #a09e52 !important;    
 }
 .line-divider{
     border-bottom: 1px solid #e0dede;

@@ -23,7 +23,7 @@ ul.simplePagerNav li a{
 
 li.currentPage {
 	background: red;
-    background: #5ea052;	
+    background: #a2a2a2;	
 }
 
 ul.simplePagerNav li.currentPage a {

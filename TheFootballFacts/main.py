@@ -155,34 +155,50 @@ def html_club(club_name):
 def html_championship(championship_name):
     
     c = champ.select_club_by_champ(championship_name)
+
+    #CUSTOMIZAÇÃO DA COR DO GRÁFICO DE SCORE POR ÁREA
+    custom_style = Style(
+    background='transparent',
+    plot_background='#FFF',
+    foreground='#676767',
+    value_font_size = 20.0,
+    label_font_size=20.0,
+    legend_font_size=20.0,
+    major_label_font_size=20.0,
+    guide_stroke_dasharray='#fbfbfb',
+    major_guide_stroke_dasharray='#fbfbfb',
+    foreground_strong='#676767',
+    foreground_subtle='#676767',
+    opacity='.8',
+    opacity_hover='.9',
+    transition='200ms ease-in',
+    colors=('#A09E52', '#78774C', '#68661B', '#4D6219', '#657148', '#82974D', '#7C3F67', '#5D3B51'))    
+    
+
     
     ages = champ.champ_age_data()
-    box_plot = pygal.Box()
+    box_plot = pygal.Box(style=custom_style)
     box_plot.title = 'Idade dos Jogadores'
     box_plot.add('Idade', ages)
     age_graph = box_plot.render_data_uri()
     
-    #goals = champ.champ_goals_data()
-    #box_goals = pygal.Box()
-    #box_goals.title = 'Idade dos Jogadores'
-    #box_goals.add('Idade', goals)
-    #goals_box = box_goals.render_data_uri()
+    goals = champ.win_and_defeat()
+    goals_box = goals.render_data_uri()
     
     titular = champ.champ_titular_data()
-    box_titular = pygal.Box()
+    box_titular = pygal.Box(style=custom_style)
     box_titular.title = 'Idade dos Jogadores'
     box_titular.add('Idade', titular)
     titular_box = box_titular.render_data_uri()    
     
-    
     cor_age = champ.champ_corralation_age_goals()
-    xy_chart = pygal.XY(stroke=False)
+    xy_chart = pygal.XY(stroke=False, style=custom_style)
     xy_chart.title = 'Idade vs Goals'
     xy_chart.add('2018', cor_age)
     cor_age_goals = xy_chart.render_data_uri()        
     
     cor_age = champ.champ_corralation_age_matched_played()
-    xy_chart = pygal.XY(stroke=False)
+    xy_chart = pygal.XY(stroke=False, style=custom_style)
     xy_chart.title = 'Idades vs Partidas Jogadas'
     xy_chart.add('2018', cor_age)
     cor_age_match_played = xy_chart.render_data_uri()    
@@ -211,8 +227,7 @@ def html_championship(championship_name):
                            more_played                  = champ.champ_most_played(),
                            win_clubs                    = win_clubs,
                            position_player              = position_player,
-                           position_player_club         = 0,
-                           goals_box                    = 0,
+                           goals_box                    = goals_box,
                            titular_box                  = titular_box                           
                            ), 200
 

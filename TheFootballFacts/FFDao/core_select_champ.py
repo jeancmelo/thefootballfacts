@@ -6,6 +6,7 @@ Created on 8 de ago de 2018
 @author: jeanm
 '''
 from sqlalchemy import select, and_
+from pygal.style import Style
 
 from FFDao.core import players_table, stats_table, club_table, champ_table
 from numpy import integer
@@ -149,6 +150,45 @@ def champ_goals_data():
 
     return idades
 
+def win_and_defeat():
+
+    #CUSTOMIZAÇÃO DA COR DO GRÁFICO DE SCORE POR ÁREA
+    custom_style = Style(
+    background='transparent',
+    plot_background='#FFF',
+    foreground='#676767',
+    value_font_size = 20.0,
+    label_font_size=20.0,
+    legend_font_size=20.0,
+    major_label_font_size=20.0,
+    guide_stroke_dasharray='#fbfbfb',
+    major_guide_stroke_dasharray='#fbfbfb',
+    foreground_strong='#676767',
+    foreground_subtle='#676767',
+    opacity='.8',
+    opacity_hover='.9',
+    transition='200ms ease-in',
+    colors=('#A09E52', '#78774C', '#68661B', '#4D6219', '#657148', '#82974D', '#7C3F67', '#5D3B51'))    
+
+    win     = 0
+    defeat  = 0
+    tie     = 0
+    score   = []
+    
+    a = select([club_table.c.c_n_win, club_table.c.c_n_defeat, club_table.c.c_n_tie])
+    
+    for row in a.execute():
+        win = win + row[0]
+        defeat =  defeat + row[1]
+        tie = tie + row[2]
+    
+    pie_chart = pygal.Pie(style=custom_style)
+    pie_chart.add('Vitórias', win)
+    pie_chart.add('Derrotas', defeat)
+    pie_chart.add('Empates', tie)
+    
+    return pie_chart
+
 #RETORNA NÚMERO DE GOLS DO CLUB
 def champ_titular_data():
     
@@ -248,6 +288,7 @@ def champ_most_violent():
     position = []
     data = {}
     club = []
+    photo = []
 
     #LISTA DE CLUBES QUE JA ATUOU
     i  = 0
@@ -255,15 +296,16 @@ def champ_most_violent():
         player.append(retorno[i][0])
         gols.append(retorno[i][1]+retorno[i][2])
         club.append(retorno[i][3])
-        a = select([players_table.c.p_position]).where(
+        a = select([players_table.c.p_position, players_table.c.p_photo]).where(
              and_(
                     players_table.c.p_name == retorno[i][0],
                 ) )
         for row in a.execute():
-             position.append(row[0])         
+             position.append(row[0])
+             photo.append(row[1])         
     
     #TRANSFORMA EM JSON     
-    data = [{"player": c, "goals": y, "position": p, "club": m} for c, y, p, m in zip(player, gols, position, club)]    
+    data = [{"player": c, "goals": y, "position": p, "club": m, "photo": f} for c, y, p, m, f in zip(player, gols, position, club, photo)]    
    
    #FAZ A CLASSIFICAO
     mysorted = sorted(data, key=lambda x : x['goals'], reverse=True)
@@ -283,11 +325,13 @@ def champ_best_goals():
     for row in a.execute():
         retorno.append(row)
 
+
     player = []
     gols = []
     position = []
     data = {}
     club = []
+    photo = []
     
     #LISTA DE CLUBES QUE JA ATUOU
     i  = 0
@@ -295,16 +339,16 @@ def champ_best_goals():
          player.append(retorno[i][0])
          gols.append(retorno[i][1])
          club.append(retorno[i][2])
-         a = select([players_table.c.p_position]).where(
+         a = select([players_table.c.p_position, players_table.c.p_photo]).where(
              and_(
                     players_table.c.p_name == retorno[i][0],
                 ) )
          for row in a.execute():
              position.append(row[0])
-         
+             photo.append(row[1])
     
     #TRANSFORMA EM JSON     
-    data = [{"player": c, "goals": y, "position": p, "club": m} for c, y, p, m in zip(player, gols, position, club)]        
+    data = [{"player": c, "goals": y, "position": p, "club": m, "photo": f} for c, y, p, m, f in zip(player, gols, position, club, photo)]        
     
    #FAZ A CLASSIFICAO
     mysorted = sorted(data, key=lambda x : x['goals'], reverse=True)
@@ -329,6 +373,7 @@ def champ_most_played():
     position = []
     data = {}
     club = []
+    photo = []
 
     #LISTA DE CLUBES QUE JA ATUOU
     i  = 0
@@ -336,16 +381,17 @@ def champ_most_played():
         player.append(retorno[i][0])
         gols.append(retorno[i][1])
         club.append(retorno[i][2])
-        a = select([players_table.c.p_position]).where(
+        a = select([players_table.c.p_position, players_table.c.p_photo]).where(
              and_(
                     players_table.c.p_name == retorno[i][0],
                 ) )
            
         for row in a.execute():
              position.append(row[0])
+             photo.append(row[1])
     
     #TRANSFORMA EM JSON     
-    data = [{"player": c, "goals": y, "position": p, "club": m} for c, y, p, m in zip(player, gols, position, club)]        
+    data = [{"player": c, "goals": y, "position": p, "club": m, "photo": f} for c, y, p, m, f in zip(player, gols, position, club, photo)]        
    
    #FAZ A CLASSIFICAO
     mysorted = sorted(data, key=lambda x : x['goals'], reverse=True)
@@ -356,6 +402,23 @@ def champ_most_played():
 #RETORNA ARTILHHEIROS DO TIME
 def champ_in_out_victory():
     
+    #CUSTOMIZAÇÃO DA COR DO GRÁFICO DE SCORE POR ÁREA
+    custom_style = Style(
+    background='transparent',
+    plot_background='#FFF',
+    foreground='#676767',
+    value_font_size = 20.0,
+    label_font_size=20.0,
+    legend_font_size=20.0,
+    major_label_font_size=20.0,
+    guide_stroke_dasharray='#fbfbfb',
+    major_guide_stroke_dasharray='#fbfbfb',
+    foreground_strong='#676767',
+    foreground_subtle='#676767',
+    opacity='.8',
+    opacity_hover='.9',
+    transition='200ms ease-in')    
+    
     retorno = []
 
     a = select([club_table.c.c_n_win, club_table.c.c_name])
@@ -363,8 +426,7 @@ def champ_in_out_victory():
     for row in a.execute():
         retorno.append(row)
 
-    line_chart = pygal.HorizontalBar()
-    line_chart.title = 'Goals Por Time'
+    line_chart = pygal.HorizontalBar(style=custom_style)
     
     print(retorno)
     #LISTA DE CLUBES QUE JA ATUOU
@@ -379,6 +441,25 @@ def champ_in_out_victory():
 
 #RETORNA ARTILHHEIROS DO TIME
 def champ_player_per_position():
+
+
+    #CUSTOMIZAÇÃO DA COR DO GRÁFICO DE SCORE POR ÁREA
+    custom_style = Style(
+    background='transparent',
+    plot_background='#FFF',
+    foreground='#676767',
+    value_font_size = 20.0,
+    label_font_size=20.0,
+    legend_font_size=20.0,
+    major_label_font_size=20.0,
+    guide_stroke_dasharray='#fbfbfb',
+    major_guide_stroke_dasharray='#fbfbfb',
+    foreground_strong='#676767',
+    foreground_subtle='#676767',
+    opacity='.8',
+    opacity_hover='.9',
+    transition='200ms ease-in',
+        colors=('#A09E52', '#78774C', '#68661B', '#4D6219', '#657148', '#82974D', '#7C3F67', '#5D3B51'))    
     
     retorno = []
     goleiros   = 0
@@ -401,8 +482,7 @@ def champ_player_per_position():
         elif retorno[i][0] == "Attacker":  
             atacantes = atacantes + 1
             
-    radar_chart = pygal.Radar()
-    radar_chart.title = 'V8 benchmark results'
+    radar_chart = pygal.Radar(style=custom_style)
     radar_chart.x_labels = ['Goalkeeper', 'Defender', 'Midfielder', 'Attacker']
     radar_chart.add('Brasileirão 2018', [goleiros, defensores, meias, atacantes])
     
