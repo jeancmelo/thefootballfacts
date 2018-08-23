@@ -30,6 +30,10 @@
 .badge-primary-champ{
     color: #a09e52 !important;
 }
+.badge-primary-player{
+    color: #5283a0  !important;
+
+}
 
 .player-name{
 	height: 80px;
@@ -41,12 +45,15 @@
     border: 1px solid #dedede;
     border-bottom: 0px;
     height: 50px;
+    border-bottom: 2px solid #46843c !important;
 }
 .cabecalho-jogador{
-    background-color: #5283a0;    
+    background-color: #5283a0 !important;
+    border-bottom: 2px solid #3c6984 !important;
 }
 .cabecalho-campeonato{
     background-color: #a09e52 !important;    
+    border-bottom: 2px solid #84823c !important;
 }
 .line-divider{
     border-bottom: 1px solid #e0dede;

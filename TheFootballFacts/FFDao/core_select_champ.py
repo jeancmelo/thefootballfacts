@@ -71,8 +71,6 @@ def champ_data():
     for row in a.execute():
         retorno.append(row)
 
-    print(retorno)
-
     return valor_retorno
 
 #RETORNA NÚMERO DE GOLS DO CLUB
@@ -381,9 +379,9 @@ def champ_most_played():
         player.append(retorno[i][0])
         gols.append(retorno[i][1])
         club.append(retorno[i][2])
-        a = select([players_table.c.p_position, players_table.c.p_photo]).where(
+        a = select([stats_table.c.s_matches_played, stats_table.c.s_gols]).where(
              and_(
-                    players_table.c.p_name == retorno[i][0],
+                    stats_table.c.p_name == retorno[i][0],
                 ) )
            
         for row in a.execute():

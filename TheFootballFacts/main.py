@@ -14,18 +14,21 @@ from pygal.style import Style
 
 from FFClass.Club import Club
 from FFClass.Player import Player
-from FFDao import core, core_insert, core_select_club, core_select_champ
+from FFDao import core, core_insert, core_select_club, core_select_champ,\
+    core_select_player
 from FFDao.Dao import Dao
 from FFDao.core_select_club import Player_Goals_Year, Player_Yellow_Cards, \
     Player_Red_Cards, Player_Time_Played, Player_Titular_Games, \
     Player_Evolution_Goals_Year, Player_Club_Played, Player_Goals_Year_Career,\
     Player_Yellow_Cards_Career, Player_Red_Cards_Career,\
     Player_Time_Played_Career, Player_Titular_Games_Career
+from click.termui import style
 
 
 bd = Dao
 core = core_select_club
 champ = core_select_champ
+player_select = core_select_player
 
 #FLASK IMPORT
 app = Flask(__name__)
@@ -44,19 +47,21 @@ def html_player(player_name):
     club_played = Player_Club_Played(player_name)
        
 
-    #GR�FICO DE DESEMPENHO DE GOLS
-    years = []
-    data  = []
-    for i, val in enumerate(pe):
-        years.append(pe[i][1])
-        data.append(pe[i][0])
+    player_radar = player_select.player_network_skills(player_name)
+    radar_player = player_radar.render_data_uri()
     
+    data_graph  = player_select.player_goals_per_year(player_name)
+    graph_data = data_graph.render_data_uri()
     
-    date_chart = pygal.Line(x_label_rotation=20)
-    date_chart.x_labels = years
-    date_chart.add('Gols', data)
-    graph_data = date_chart.render_data_uri()
+    chart_pie = player_select.player_titular_vs_non(player_name)
+    pie_chart = chart_pie.render_data_uri()
   
+    chart_line = player_select.player_time_per_year(player_name)
+    line_chart = chart_line.render_data_uri()
+    
+    chart_xy   = player_select.player_cor_age_vs_time_played(player_name)
+    xy_chart   = chart_xy.render_data_uri()
+    
     return render_template("player.html",
                             player_name           = p[0][1],
                             player_age            = p[0][3],
@@ -77,6 +82,10 @@ def html_player(player_name):
                             player_titular_year_career = Player_Titular_Games_Career(player_name),                            
                             graph_data                 = graph_data,
                             club_played                = club_played,
+                            radar_player               = radar_player,
+                            pie_chart                  = pie_chart,
+                            line_chart                 = line_chart,
+                            xy_chart                   = xy_chart,
                             score_player               = 10                            
                             )
     
