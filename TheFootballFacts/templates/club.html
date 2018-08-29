@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% for club_stats in club_stats %}
+
 <html lang="pt-BR">
 	<head>
 		<!-- Required meta tags -->
@@ -13,7 +15,7 @@
 
 		<link rel="stylesheet" type="text/css" href="http://127.0.0.1:5000/static/style.css">
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		<link rel="shortcut icon" href="{{club_emblem}}" />
+		<link rel="shortcut icon" href="{{club_stats.club_emblem}}" />
     
 
     	<!--Scripts da paginação -->
@@ -28,9 +30,7 @@
 		});
 		</script>
 
-
-		
-		<title>Estatísticas e Informações do {{club_name}} | The Football Facts</title>
+		<title>Estatísticas e Informações do {{club_stats.club_name}} | The Football Facts</title>
 
 	</head>
 	<body style="background-color: #f9f9f9; font-family: roboto;">
@@ -50,10 +50,10 @@
 			<div class="row">
 				<div class="col-md-2"></div>
 				<div class="col-2" style="text-align: center">
-					<img src="{{club_emblem}}">
+					<img src="{{club_stats.club_emblem}}">
 				</div>
 				<div class="col-3">
-					<h1>{{club_name}}</h1>
+					<h1>{{club_stats.club_name}}</h1>
 					<span style="padding: 2px;"><img src="/static/utils/facebook.png" style="height: 12%;"></span>
 					<span style="padding: 2px;"><img src="/static/utils/instagram.png" style="height: 12%;"></span>
 					<span style="padding: 2px;"><img src="/static/utils/twitter.png" style="height: 12%;"></span>
@@ -63,7 +63,7 @@
 					<p class="line-divider"><span class="bold-title">Site Oficial:</span> http://www.sitedotime.com.br</p>
 					<p class="line-divider"><span class="bold-title">Fundação:</span> 10/10/1909</p>
 					<p class="line-divider"><span class="bold-title">Principal Título:</span> Brasileirão de 2008</p>
-					<p class="line-divider last-divider"><span class="bold-title">Cidade/País: </span> {{club_country}}</p>
+					<p class="line-divider last-divider"><span class="bold-title">Cidade/País: </span> {{club_stats.club_country}}</p>
 
 				</div>				
 			</div>
@@ -96,7 +96,7 @@
 				  		</div>							
 					  <div class="card-body">
 					    <h3 class="card-title">Partidas Disputadas no Ano </h3>
-					    <h4 class="card-text">{{disputed_matches}}</h4>
+					    <h4 class="card-text">{{club_stats.disputed_matches}}</h4>
 					  </div>
 					</div>					
 				</div>
@@ -322,7 +322,7 @@
 				  			</div>							
 					  		<div class="card-body">
 					    		<h3 class="card-title">Rate Vitórias</h3>
-					    		<h4 class="card-text">{{rate_win}}</h4>
+					    		<h4 class="card-text">{{club_stats.rate_win}}</h4>
 					  		</div>
 						</div>	
 
@@ -333,7 +333,7 @@
 				  			</div>							
 					  		<div class="card-body">
 					    		<h3 class="card-title">Rate Derrotas</h3>
-					    		<h4 class="card-text">{{rate_defeat}}</h4>
+					    		<h4 class="card-text">{{club_stats.rate_defeat}}</h4>
 					  		</div>
 						</div>	
 
@@ -344,7 +344,7 @@
 				  			</div>							
 					  		<div class="card-body">
 					    		<h3 class="card-title">Rate Empates</h3>
-					    		<h4 class="card-text">{{rate_tie}}</h4>
+					    		<h4 class="card-text">{{club_stats.rate_tie}}</h4>
 					  		</div>
 						</div>	
 
@@ -352,19 +352,19 @@
 				     	<ul class="list-group">
 							<li class="list-group-item d-flex justify-content-between align-items-center">
 						    Vitórias Dentro
-						    <span class="badge badge-primary badge-pill">{{club_n_win_in}}</span>
+						    <span class="badge badge-primary badge-pill">{{club_stats.club_n_win_in}}</span>
 						  </li>
 						  <li class="list-group-item d-flex justify-content-between align-items-center">
 						     Vitórias Fora
-						    <span class="badge badge-primary badge-pill">{{club_n_win_out}}</span>
+						    <span class="badge badge-primary badge-pill">{{club_stats.club_n_win_out}}</span>
 						  </li>
 						  <li class="list-group-item d-flex justify-content-between align-items-center">
 						    Derrotas Dentro
-						    <span class="badge badge-primary badge-pill">{{club_n_defeat_in}}</span>
+						    <span class="badge badge-primary badge-pill">{{club_stats.club_n_defeat_in}}</span>
 						  </li>
 						  <li class="list-group-item d-flex justify-content-between align-items-center">
 						    Derrotas Fora
-						    <span class="badge badge-primary badge-pill">{{club_n_defeat_out}}</span>
+						    <span class="badge badge-primary badge-pill">{{club_stats.club_n_defeat_out}}</span>
 						  </li>
 						</ul>
 					</div>
@@ -473,7 +473,7 @@
 				</div>
 			</div>
 		</div>		
-    
+   {% endfor %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
@@ -488,7 +488,7 @@
 		      datasets: [{
 		        label: "Partidas (Unitario)",
 		        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
-		        data: [{{club_n_win}},{{club_n_defeat}},{{club_n_tie}}]
+		        data: [{{club_stats.club_n_win}},{{club_stats.club_n_defeat}},{{club_stats.club_n_tie}}]
 		      }]
 		    },
 		    options: {

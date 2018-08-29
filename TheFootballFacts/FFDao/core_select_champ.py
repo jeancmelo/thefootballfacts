@@ -381,7 +381,7 @@ def champ_most_played():
         club.append(retorno[i][2])
         a = select([stats_table.c.s_matches_played, stats_table.c.s_gols]).where(
              and_(
-                    stats_table.c.p_name == retorno[i][0],
+                    stats_table.c.s_name == retorno[i][0],
                 ) )
            
         for row in a.execute():

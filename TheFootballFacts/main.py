@@ -23,6 +23,7 @@ from FFDao.core_select_club import Player_Goals_Year, Player_Yellow_Cards, \
     Player_Yellow_Cards_Career, Player_Red_Cards_Career,\
     Player_Time_Played_Career, Player_Titular_Games_Career
 from click.termui import style
+from builtins import str
 
 
 bd = Dao
@@ -62,39 +63,39 @@ def html_player(player_name):
     chart_xy   = player_select.player_cor_age_vs_time_played(player_name)
     xy_chart   = chart_xy.render_data_uri()
     
-    return render_template("player.html",
-                            player_name           = p[0][1],
-                            player_age            = p[0][3],
-                            p_photo               = p[0][4],
-                            player_nacionality    = p[0][9],
-                            player_position       = p[0][10],
-                            foot                  = p[0][7],
-                            club_atual            = p[0][4],
-                            player_goal                = Player_Goals_Year(player_name, "2018"),
-                            player_yellow_card         = Player_Yellow_Cards(player_name, "2018"),
-                            player_red_card            = Player_Red_Cards(player_name, "2018"),
-                            player_time_played         = Player_Time_Played(player_name, "2018"),
-                            player_titular_year        = Player_Titular_Games(player_name, "2018"),
-                            player_goal_career         = Player_Goals_Year_Career(player_name),
-                            player_yellow_card_career  = Player_Yellow_Cards(player_name, "2018"),
-                            player_red_card_career     = Player_Red_Cards(player_name, "2018"),
-                            player_time_played_career  = Player_Time_Played_Career(player_name),
-                            player_titular_year_career = Player_Titular_Games_Career(player_name),                            
-                            graph_data                 = graph_data,
-                            club_played                = club_played,
-                            radar_player               = radar_player,
-                            pie_chart                  = pie_chart,
-                            line_chart                 = line_chart,
-                            xy_chart                   = xy_chart,
-                            score_player               = 10                            
-                            )
+    try:
+        return render_template("player.html",
+                                player_name           = p[0][1],
+                                player_age            = p[0][3],
+                                p_photo               = p[0][4],
+                                player_nacionality    = p[0][9],
+                                player_position       = p[0][10],
+                                foot                  = p[0][7],
+                                club_atual            = p[0][4],
+                                player_goal                = Player_Goals_Year(player_name, "2018"),
+                                player_yellow_card         = Player_Yellow_Cards(player_name, "2018"),
+                                player_red_card            = Player_Red_Cards(player_name, "2018"),
+                                player_time_played         = Player_Time_Played(player_name, "2018"),
+                                player_titular_year        = Player_Titular_Games(player_name, "2018"),
+                                player_goal_career         = Player_Goals_Year_Career(player_name),
+                                player_yellow_card_career  = Player_Yellow_Cards(player_name, "2018"),
+                                player_red_card_career     = Player_Red_Cards(player_name, "2018"),
+                                player_time_played_career  = Player_Time_Played_Career(player_name),
+                                player_titular_year_career = Player_Titular_Games_Career(player_name),                            
+                                graph_data                 = graph_data,
+                                club_played                = club_played,
+                                radar_player               = radar_player,
+                                pie_chart                  = pie_chart,
+                                line_chart                 = line_chart,
+                                xy_chart                   = xy_chart,
+                                score_player               = 10                            
+                                )
+    except Exception as e:
+        return render_template("404.html"), 404
     
 @app.route("/club/<club_name>")
 def html_club(club_name):
     
-    #RECONSTRUINDO O OBJETO
-    c = core.select_club_by_name(club_name)
-
     #CUSTOMIZAÇÃO DA COR DO GRÁFICO DE SCORE POR ÁREA
     custom_style = Style(
     background='transparent',
@@ -125,41 +126,30 @@ def html_club(club_name):
    #Pega a melhor formacao
     best_form = core.club_best_formation(club_name)
     
-    #RENDERIZAR A PAGINA COM AS INFORMACOES
-    return render_template("club.html", 
-                           club_name            = c[0][1],
-                           club_fundation_Date  = c[0][2],
-                           club_country         = "Brasil",
-                           club_emblem          = c[0][3],
-                           club_n_win           = c[0][4],
-                           club_n_defeat        = c[0][5],
-                           club_n_tie           = c[0][6],
-                           club_n_win_in        = c[0][7],
-                           club_n_win_out       = (c[0][7] - c[0][4])*-1,
-                           club_n_defeat_in     = c[0][8],
-                           club_n_defeat_out    = (c[0][8] - c[0][5])*-1,
-                           club_n_tie_in        = c[0][9],
-                           rate_win             = c[0][7]/(c[0][7] - c[0][4])*-1,
-                           rate_defeat          = c[0][8]/(c[0][8] - c[0][5])*-1,
-                           rate_tie             = c[0][9]/(c[0][9] - c[0][6])*-1,
-                           best_score           = core.Club_Best_Goals(club_name),
-                           more_played          = core.Club_Most_Played(club_name),
-                           more_violent         = core.CLub_Most_Violent(club_name),
-                           goal_done            = core.Club_goals(club_name),
-                           yellow_cards         = core.Club_yellow_card(club_name),
-                           red_cards            = core.Club_red_card(club_name),
-                           player_per_poisition = core.Club_get_number_per_position(club_name),
-                           all_players          = core.Club_players(club_name),
-                           top_scores           = core.Best_Score_Players(club_name),
-                           wrost_scores         = core.Wrots_Score_Players(club_name), 
-                           graph_data           = graph_data,
-                           best_formation       = best_form[0],
-                           player_formation     = best_form[1],
-                           disputed_matches     = c[0][4] + c[0][5] + c[0][6],
-                           club_last_games      = core.club_last_games(club_name),
-                           club_next_games      = core.club_next_games(club_name) 
-                           ), 200
-
+    try:
+        #RENDERIZAR A PAGINA COM AS INFORMACOES
+        return render_template("club.html", 
+                               club_stats           = core.select_club_by_name(club_name),
+                               best_score           = core.Club_Best_Goals(club_name),
+                               more_played          = core.Club_Most_Played(club_name),
+                               more_violent         = core.CLub_Most_Violent(club_name),
+                               goal_done            = core.Club_goals(club_name),
+                               yellow_cards         = core.Club_yellow_card(club_name),
+                               red_cards            = core.Club_red_card(club_name),
+                               player_per_poisition = core.Club_get_number_per_position(club_name),
+                               all_players          = core.Club_players(club_name),
+                               top_scores           = core.Best_Score_Players(club_name),
+                               wrost_scores         = core.Wrots_Score_Players(club_name), 
+                               graph_data           = graph_data,
+                               best_formation       = best_form[0],
+                               player_formation     = best_form[1],
+                               club_last_games      = core.club_last_games(club_name),
+                               club_next_games      = core.club_next_games(club_name) 
+                               ), 200
+    except Exception as e:
+        return render_template("404.html"), 404
+    
+    
 @app.route("/championship/<championship_name>")
 def html_championship(championship_name):
     
@@ -221,32 +211,32 @@ def html_championship(championship_name):
     #position_club = champ.champ_player_per_position_club()
     #position_player_club = position_club.render_data_uri()
     
-    #RENDERIZAR A PAGINA COM AS INFORMACOES
-    return render_template("championship.html", 
-                           championship_name            = championship_name,
-                           champ_clubs                  = c,
-                           goal_done                    = champ.champ_goals(championship_name),
-                           yellow_cards                 = champ.champ_yellow_card(championship_name),
-                           red_cards                    = champ.champ_red_card(championship_name),
-                           age_graph                    = age_graph,
-                           cor_age_match_played         = cor_age_match_played,
-                           cor_age_goals                = cor_age_goals,
-                           more_violent                 = champ.champ_most_violent(),
-                           best_goals                   = champ.champ_best_goals(),
-                           more_played                  = champ.champ_most_played(),
-                           win_clubs                    = win_clubs,
-                           position_player              = position_player,
-                           goals_box                    = goals_box,
-                           titular_box                  = titular_box                           
+    try:
+        #RENDERIZAR A PAGINA COM AS INFORMACOES
+        return render_template("championship.html", 
+                               championship_name            = championship_name,
+                               champ_clubs                  = c,
+                               goal_done                    = champ.champ_goals(championship_name),
+                               yellow_cards                 = champ.champ_yellow_card(championship_name),
+                               red_cards                    = champ.champ_red_card(championship_name),
+                               age_graph                    = age_graph,
+                               cor_age_match_played         = cor_age_match_played,
+                               cor_age_goals                = cor_age_goals,
+                               more_violent                 = champ.champ_most_violent(),
+                               best_goals                   = champ.champ_best_goals(),
+                               more_played                  = champ.champ_most_played(),
+                               win_clubs                    = win_clubs,
+                               position_player              = position_player,
+                               goals_box                    = goals_box,
+                               titular_box                  = titular_box                           
                            ), 200
+    except Exception as e:
+        return render_template("404.html"), 404                       
 
-@app.route("/player/all-players")
-def html_all_players():
-    
-    p = core.select_players()
-    
-    return render_template("all-players.html", player = p)
-    
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 404
     
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)

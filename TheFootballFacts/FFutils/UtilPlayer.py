@@ -10,7 +10,17 @@ from FFDao.core import players_table, stats_table, club_table
 #DEFINIR SCORE DO GOLEIRO
 def score_player_keeper(player, c_club):
 	
+	gols         = 0
+	penaulti     = 0
+	titular	     = 0
+	min_jogados  = 0
+	
+	amarelo      = 0
+	seg_amarelo	 = 0
+	vermelho     = 0
+				
 	c_player = []
+	
 	a = select([stats_table]).where(
                 and_(
 					stats_table.c.s_name == player,
@@ -21,18 +31,19 @@ def score_player_keeper(player, c_club):
 	
 	for row in a.execute():
 		c_player.append(row)
-    
-	gols         = c_player[0][6]
-	#jogos         = c_player[0][5]
-	penaulti     = c_player[0][7]
-	titular	     = c_player[0][12]
-	min_jogados  = c_player[0][11]	
-	
-	amarelo     = c_player[0][8]
-	seg_amarelo	 = c_player[0][9]
-	vermelho     = c_player[0][10]
+		try:
+			gols         = c_player[0][6]
+			#jogos         = c_player[0][5]
+			penaulti     = c_player[0][7]
+			titular	     = c_player[0][12]
+			min_jogados  = c_player[0][11]	
+			
+			amarelo     = c_player[0][8]
+			seg_amarelo	 = c_player[0][9]
+			vermelho     = c_player[0][10]
+		except:
+			print("Jogador sem Dados")
 
-	    
 	score = 0
 	
 	#ETAPA DE AGREGAÇAO
@@ -53,6 +64,15 @@ def score_player_keeper(player, c_club):
 #DEFINIR SCORE DO ZAGUEIRO
 def score_player_defender(player, c_club):
 	
+	gols         = 0
+	penaulti     = 0
+	titular	     = 0
+	min_jogados  = 0
+	
+	amarelo      = 0
+	seg_amarelo	 = 0
+	vermelho     = 0
+		
 	c_player = []
 	a = select([stats_table]).where(
                 and_(
@@ -64,16 +84,20 @@ def score_player_defender(player, c_club):
 	
 	for row in a.execute():
 		c_player.append(row)
-    
-	gols         = c_player[0][6]
-	jogos         = c_player[0][5]
-	penaulti     = c_player[0][7]
-	titular	     = c_player[0][12]
-	min_jogados  = c_player[0][11]	
-	
-	amarelo     = c_player[0][8]
-	seg_amarelo	 = c_player[0][9]
-	vermelho     = c_player[0][10]
+
+		try:
+			gols         = c_player[0][6]
+			jogos        = c_player[0][5]
+			penaulti     = c_player[0][7]
+			titular	     = c_player[0][12]
+			min_jogados  = c_player[0][11]	
+			
+			amarelo      = c_player[0][8]
+			seg_amarelo	 = c_player[0][9]
+			vermelho     = c_player[0][10]
+		except:
+			print("Jogador sem Dados")
+
 	
 	    
 	score = 0
@@ -95,7 +119,16 @@ def score_player_defender(player, c_club):
 
 #DEFINIR SCORE DO MEIA
 def score_player_midfielder(player, c_club):
+
+	gols         = 0
+	penaulti     = 0
+	titular	     = 0
+	min_jogados  = 0
 	
+	amarelo      = 0
+	seg_amarelo	 = 0
+	vermelho     = 0
+		
 	c_player = []
 	a = select([stats_table]).where(
                 and_(
@@ -107,18 +140,21 @@ def score_player_midfielder(player, c_club):
 	
 	for row in a.execute():
 		c_player.append(row)
-    
-	gols         = c_player[0][6]
-	jogos        = c_player[0][5]
-	penaulti     = c_player[0][7]
-	titular	     = c_player[0][12]
-	min_jogados  = c_player[0][11]	
-	
-	amarelo      = c_player[0][8]
-	seg_amarelo	 = c_player[0][9]
-	vermelho     = c_player[0][10]
-	
-	    
+		
+		try:
+			gols         = c_player[0][6]
+			jogos        = c_player[0][5]
+			penaulti     = c_player[0][7]
+			titular	     = c_player[0][12]
+			min_jogados  = c_player[0][11]	
+			
+			amarelo      = c_player[0][8]
+			seg_amarelo	 = c_player[0][9]
+			vermelho     = c_player[0][10]
+		except:
+			print("Jogador sem Dados")
+			
+			
 	score = 0
 	
 	#ETAPA DE AGREGAÇAO
@@ -139,7 +175,16 @@ def score_player_midfielder(player, c_club):
 
 #DEFINIR SCORE DO ATACANTE
 def score_player_forward(player, c_club):
+
+	gols         = 0
+	penaulti     = 0
+	titular	     = 0
+	min_jogados  = 0
 	
+	amarelo      = 0
+	seg_amarelo	 = 0
+	vermelho     = 0
+		
 	c_player = []
 	a = select([stats_table]).where(
                 and_(
@@ -151,16 +196,21 @@ def score_player_forward(player, c_club):
 	
 	for row in a.execute():
 		c_player.append(row)
-    
-	gols         = c_player[0][6]
-	jogos         = c_player[0][5]
-	penaulti     = c_player[0][7]
-	titular	     = c_player[0][12]
-	min_jogados  = c_player[0][11]	
+
+		try:
+			gols         = c_player[0][6]
+			jogos         = c_player[0][5]
+			penaulti     = c_player[0][7]
+			titular	     = c_player[0][12]
+			min_jogados  = c_player[0][11]	
+			
+			amarelo     = c_player[0][8]
+			seg_amarelo	 = c_player[0][9]
+			vermelho     = c_player[0][10]
+		except:
+			print("Jogador sem Dados")
+					
 	
-	amarelo     = c_player[0][8]
-	seg_amarelo	 = c_player[0][9]
-	vermelho     = c_player[0][10]
 	
 	    
 	score = 0

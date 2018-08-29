@@ -143,10 +143,13 @@ def player_goals_per_year(p_name):
     ano_final  = int(mysorted[0]['ano'])
         
     mysorted = sorted(mysorted, key=lambda x : x['ano'], reverse=False)
-    ano_comeco = int(mysorted[0]['ano'])
+    
+    if len(mysorted[0]['ano']) < 3:
+        ano_comeco = int(mysorted[0]['ano'])
+    else:
+        aux = mysorted[0]['ano']
+        ano_comeco = int(aux[0:4])
 
-
-    #print(mysorted)
     while ano_comeco < ano_final:
         aux = 0
         for i, val in enumerate(mysorted):
@@ -236,7 +239,12 @@ def player_time_per_year(p_name):
     ano_final  = int(mysorted[0]['ano'])
         
     mysorted = sorted(mysorted, key=lambda x : x['ano'], reverse=False)
-    ano_comeco = int(mysorted[0]['ano'])
+    
+    if len(mysorted[0]['ano']) < 3:
+        ano_comeco = int(mysorted[0]['ano'])
+    else:
+        aux = mysorted[0]['ano']
+        ano_comeco = int(aux[0:4])
 
 
     #print(mysorted)
@@ -306,7 +314,12 @@ def player_cor_age_vs_time_played(p_name):
     ano_final  = int(mysorted[0]['ano'])
         
     mysorted = sorted(mysorted, key=lambda x : x['ano'], reverse=False)
-    ano_comeco = int(mysorted[0]['ano'])
+    
+    if len(mysorted[0]['ano']) < 3:
+        ano_comeco = int(mysorted[0]['ano'])
+    else:
+        aux = mysorted[0]['ano']
+        ano_comeco = int(aux[0:4])
 
 
     #print(mysorted)
@@ -335,6 +348,20 @@ def player_cor_age_vs_time_played(p_name):
 
     return xy_chart
 
+def testeData(club):
+    
+    retorno = []
+    
+    a = select([players_table]).where(
+             and_(
+                    players_table.c.p_name == "Cassiano",
+    ) )
+           
+    for row in a.execute():
+        retorno.append(row)
+        
+    print(retorno)
+            
 
 if __name__ == '__main__':
-    player_cor_age_vs_time_played('Réver')
+    testeData('Bahia')

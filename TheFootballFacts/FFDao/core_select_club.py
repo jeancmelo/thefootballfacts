@@ -49,12 +49,36 @@ def select_players():
     return retorno   
 
 def select_club_by_name(c_name):
-    retorno = []
+    
+    retorno           = []
+    club_n_win_out    = 0
+    club_n_defeat_out = 0
+    rate_win          = 0
+    rate_defeat       = 0
+    rate_tie          = 0
+    disputed_matches  = 0
+    
     a = select([club_table]).where(club_table.c.c_name == c_name)
     for row in a.execute():
         retorno.append(row)
-        
-    return retorno       
+
+    try:
+        club_n_win_out       = (retorno[0][7] - retorno[0][4])*-1
+        club_n_defeat_out    = (retorno[0][8] - retorno[0][5])*-1
+        rate_win             = round(retorno[0][7]/(retorno[0][7] - retorno[0][4])*-1, 2)
+        rate_defeat          = round(retorno[0][8]/(retorno[0][8] - retorno[0][5])*-1, 2)
+        rate_tie             = round(retorno[0][9]/(retorno[0][9] - retorno[0][6])*-1, 2)    
+        disputed_matches     = retorno[0][4] + retorno[0][5] + retorno[0][6]
+    except:
+        pass
+
+    #TRANSFORMA EM JSON     
+    data = [{"club_name": retorno[0][1], "club_country": "Brasil", "club_fundation_Date": retorno[0][2],"club_emblem": retorno[0][3],"club_n_win": retorno[0][4],
+             "club_n_defeat": retorno[0][5], "club_n_tie": retorno[0][6], "club_n_win_in": retorno[0][7],"club_n_defeat_in": retorno[0][8],
+             "club_n_tie_in": retorno[0][9],"club_n_win_out": club_n_win_out, "club_n_defeat_out": club_n_defeat_out, "rate_win": rate_win, "rate_defeat": rate_defeat, 
+             "rate_tie": rate_tie, "disputed_matches": disputed_matches}]
+    
+    return data       
 
 def select_top_players(c_name):
     retorno = []
@@ -816,7 +840,7 @@ def club_next_games(c_club):
     
         
 if __name__ == '__main__':
-    club_last_games("flamengo")   
+    select_club_by_name("bahia")   
     
 
 
