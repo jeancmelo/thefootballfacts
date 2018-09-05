@@ -346,7 +346,7 @@ def champ_best_goals():
              photo.append(row[1])
     
     #TRANSFORMA EM JSON     
-    data = [{"player": c, "goals": y, "position": p, "club": m, "photo": f} for c, y, p, m, f in zip(player, gols, position, club, photo)]        
+    data = [{"player": c, "goals": y, "position": p, "club": m, "photo": f} for c, y, p, m, f in zip(player, gols, position, club, photo)]
     
    #FAZ A CLASSIFICAO
     mysorted = sorted(data, key=lambda x : x['goals'], reverse=True)

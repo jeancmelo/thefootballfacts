@@ -24,7 +24,7 @@
 		<script src="/static/js/jquery.quick.pagination.min.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function() {
-			$("ul.pagination1").quickPagination({pageSize:"6"})
+			$("ul.pagination1").quickPagination({pageSize:"7"})
 			$("ul.pagination2").quickPagination({pageSize:"6"});
 
 		});
@@ -46,7 +46,7 @@
 		     </nav>
     	</div>
 
-		<div class="container-fluid" style="background-color: #fff; padding: 30px; border-bottom: 4px solid #efefef; height: 235px; background-image: url('/static/utils/primeiro-teste.png');">
+		<div class="container-fluid" style="background-color: #fff; padding: 30px; border-bottom: 4px solid #efefef; height: 235px; ">
 			<div class="row">
 				<div class="col-md-2"></div>
 				<div class="col-2" style="text-align: center">
@@ -68,20 +68,20 @@
 				</div>				
 			</div>
 		</div>
-<div style="border: 1px solid #f9f9f9; margin-top: 3%; "></div>
+			<div class="divisor" "></div>
 			<div class="container">
 			<div class="row">
 				<div class="col-sm" style="text-align: center">
 					<img src="/static/utils/banner-720x90.png">
 				</div>
 			</div>
-<div style="border: 1px solid #f9f9f9; margin-top: 3%; margin-bottom: 2%;"></div>
+			<div class="divisor" "></div>
 
 			<div class="row">
 				<div class="col-sm-3" >
 					<div class="card" style="width: 17rem; text-align: center;">
 						<div style="text-align: center;">
-			 	  			<img src="/static/icon/goal.png" style="height: 100%; margin-top: 10%">
+			 	  			<img src="/static/icon/goal.png" style="height: 50px; margin-top: 10%">
 				  		</div>			
 					  <div class="card-body">
 					    <h3 class="card-title">Gols Marcados</h3>
@@ -92,7 +92,7 @@
 				<div class="col-sm-3">
 					<div class="card" style="width: 17rem; text-align: center;">
 						<div style="text-align: center;">
-			 	  			<img src="/static/icon/assistence.png" style="height: 100%; margin-top: 10%">
+			 	  			<img src="/static/icon/assistence.png" style="height: 50px; margin-top: 10%">
 				  		</div>							
 					  <div class="card-body">
 					    <h3 class="card-title">Partidas Disputadas no Ano </h3>
@@ -103,7 +103,7 @@
 				<div class="col-sm-3">
 					<div class="card" style="width: 17rem; text-align: center;">
 						<div style="text-align: center;">
-			 	  			<img src="/static/icon/yellow-card.png" style="height: 100%; margin-top: 10%">
+			 	  			<img src="/static/icon/yellow-card.png" style="height: 50px; margin-top: 10%">
 				  		</div>							
 					  <div class="card-body">
 					    <h3 class="card-title">Cartões Amarelos</h3>
@@ -114,7 +114,7 @@
 				<div class="col-sm-3">
 					<div class="card" style="width: 17rem; text-align: center;">
 						<div style="text-align: center;">
-			 	  			<img src="/static/icon/red-card.png" style="height: 100%; margin-top: 10%">
+			 	  			<img src="/static/icon/red-card.png" style="height: 50px; margin-top: 10%">
 				  		</div>							
 					  <div class="card-body">
 					    <h3 class="card-title">Cartões Vermelhos</h3>
@@ -123,7 +123,7 @@
 					</div>					
 				</div>					
 			</div>
-<div style="margin-top: 2%; margin-bottom: 2%;"></div>			
+			<div class="divisor" "></div>
 			<div class="row">
 				<div class="col-sm">
 					<div class="cabecalhos">
@@ -141,6 +141,7 @@
 			    <ul class="list-group pagination1">
 		     		
 		      		{% for player_formation in player_formation %}
+		      		<a href="/player/{{player_formation.player}}">
 				  	<li class="list-group-item player-name">
 					  		<div style="width: 20%;  height: 100%; float: left">
 					  			<img src="{{ player_formation.photo }}" style="height: 40px;">
@@ -153,20 +154,21 @@
 							</div>
 							<span class="badge badge-primary badge-pill" style="width: 15%;">{{ best_score.goals }}</span>							
 				  	</li>
+				  	</a>
 					{% endfor %}
 					
 				</ul>
 				</div>
 			</div>								
 		</div>
-<div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>			
+			<div class="divisor" "></div>
 		  <div class="row">
 		    <div class="col-sm">
 		    	<div class="cabecalhos">
 			    	<h2>Nº DE JOGADORES POR POSIÇÃO</h2>		    	
 			    </div>	
 			    {% for player_per_poisition in player_per_poisition %}
-	   			<div class="card" style="width: 24%; text-align: center; float: left;  margin-top: 15px; margin-right: 10px;     height: 180px;">
+	   			<div class="card" style="width: 25%; text-align: center; float: left;  height: 180px; border-top: 0px;">
 					<div style="text-align: center;">
 						<img src="/static/position/position-goalkepper.png" style="height: 40px; margin-top: 10%">
 					</div>							
@@ -175,7 +177,7 @@
 						<h4 class="card-text">{{player_per_poisition.goleiros}}</h4>
 					</div>
 				</div>	
-	   			<div class="card" style="width: 24%; text-align: center; float: left;  margin-top: 15px; margin-right: 10px;     height: 180px;">
+	   			<div class="card" style="width: 25%; text-align: center; float: left;  height: 180px; border-top: 0px;">
 					<div style="text-align: center;">
 						<img src="/static/position/position-defender.png" style="height: 40px; margin-top: 10%">
 					</div>							
@@ -184,7 +186,7 @@
 						<h4 class="card-text">{{player_per_poisition.defensores}}</h4>
 					</div>
 				</div>	
-	   			<div class="card" style="width: 24%; text-align: center; float: left;  margin-top: 15px; margin-right: 10px;     height: 180px;">
+	   			<div class="card" style="width: 25%; text-align: center; float: left;  height: 180px; border-top: 0px;">
 					<div style="text-align: center;">
 						<img src="/static/position/position-midfield.png" style="height: 40px; margin-top: 10%">
 					</div>							
@@ -193,7 +195,7 @@
 						<h4 class="card-text">{{player_per_poisition.meias}}</h4>
 					</div>
 				</div>	
-	   			<div class="card" style="width: 24%; text-align: center; float: left;  margin-top: 15px; margin-right: 10px;     height: 180px;">
+	   			<div class="card" style="width: 25%; text-align: center; float: left;  height: 180px; border-top: 0px;">
 					<div style="text-align: center;">
 						<img src="/static/position/position-Attacker.png" style="height: 40px; margin-top: 10%">
 					</div>							
@@ -206,7 +208,7 @@
 		  	</div>
 		  </div>
 
-<div style="margin-top: 2%; margin-bottom: 2%;"></div>			
+			<div class="divisor" "></div>
 			<div class="row">
 		    <div class="col-sm">
 		    	<div class="cabecalhos">
@@ -214,6 +216,7 @@
 			    </div>
 		      	<ul class="list-group">
 		     		{% for best_score in best_score %}
+					<a href="/player/{{ best_score.player }}">
 				  	<li class="list-group-item player-name">
 					  		<div style="width: 20%;  height: 100%; float: left">
 					  			<img src="{{ best_score.photo }}" style="height: 40px;">
@@ -226,6 +229,7 @@
 							</div>
 							<span class="badge badge-primary badge-pill" style="width: 15%;">{{ best_score.goals }}</span>							
 				  	</li>
+				    </a>
 					{% endfor %}
 				</ul>
 		    </div>				
@@ -235,6 +239,7 @@
 			    </div>
 		      	<ul class="list-group">
 		     		{% for more_played in more_played %}
+		     		<a href="/player/{{ more_played.player }}">
 				  	<li class="list-group-item player-name">
 					  		<div style="width: 20%; height: 100%; float: left">
 					  			<img src="{{ more_played.photo }}" style="height: 40px;">
@@ -247,6 +252,7 @@
 							</div>
 						<span class="badge badge-primary badge-pill" style="width: 15%;">{{ more_played.goals }}</span>							
 				  	</li>
+				  	</a>
 					{% endfor %}
 				</ul>
 		   	</div>
@@ -256,6 +262,7 @@
 				    </div>
 			      	<ul class="list-group">
 			     		{% for more_violent in more_violent %}
+		     		<a href="/player/{{ more_violent.player }}">			      		
 					  	<li class="list-group-item player-name">
 					  		<div style="width: 20%; height: 100%; float: left">
 					  			<img src="{{ more_violent.photo }}" style="height: 40px;">
@@ -268,11 +275,12 @@
 							</div>
 							<span class="badge badge-primary badge-pill" style="width: 15%;">{{ more_violent.goals }}</span>
 					  	</li>
+					    </a>
 						{% endfor %}
 					</ul>
 		   		</div>		   	
 		  </div>
-<div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>			  
+			<div class="divisor" "></div>
 		  <div class="row">
 		    <div class="col-sm">
 		    	<div class="cabecalhos">
@@ -280,10 +288,12 @@
 			    </div>
 		      	<ul class="list-group">
 		     		{% for top_scores in top_scores %}
+		     		<a href="/player/{{ top_scores.player }}">			      		
 				  	<li class="list-group-item d-flex justify-content-between align-items-center">
 				  		{{ top_scores.player }}
 				  		<span class="badge badge-primary badge-pill">{{ top_scores.score }}</span>
 				  	</li>
+				  	</a>
 					{% endfor %}
 				</ul>
 		    </div>
@@ -299,24 +309,26 @@
 					</div>
 		    </div>		    
 		  </div>
-<div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>					  
+			<div class="divisor" "></div>
 		  <div class="row">
 		    	<div class="col-sm" style="text-align: center">
 		    		<div class="cabecalhos">
 			      		<h2>Vitórias e Derrotas</h2>	
 			      	</div>
-			      	<div style="height: 478px; background-color: #FFF; border: 1px solid #f7f3f3;" >
-				      	<div id="canvas-holder" style="width: 62%;text-align: center;margin-left: 20%;">		      		
-					     	<canvas id="pie-chart" height="350"></canvas>	    		
-					    </div>
-				    </div>
+			      	
+					<!-- Don't forget the "|safe"! -->
+					<div class="list-group-item" style="padding: 20px; background-color: #fff">
+						<div id="chart">
+						   <embed type="image/svg+xml" src= {{chart_pie|safe}} style="max-height: 500px; " />
+						</div>
+					</div>
 		   		</div>
 		    	<div class="col-sm">
 		    		<div class="cabecalhos">
 			      		<h2> Dentro e Fora de Casa</h2>		    		
 			      	</div>
 
-		    			<div class="card" style="width: 32%; text-align: center; float: left;  margin-top: 15px; margin-right: 10px;     height: 180px;">
+		    			<div class="card" style="width: 33%; text-align: center; float: left; height: 180px;border-top: 0px">
 							<div style="text-align: center;">
 			 	  				<img src="/static/icon/victory.png" style="height: 40px; margin-top: 10%">
 				  			</div>							
@@ -327,7 +339,7 @@
 						</div>	
 
 
-		    			<div class="card" style="width: 32%; text-align: center; float: left;  margin-top: 15px; margin-right: 10px;     height: 180px;">
+		    			<div class="card" style="width: 33%; text-align: center; float: left; height: 180px;border-top: 0px">
 							<div style="text-align: center;">
 			 	  				<img src="/static/icon/defeat.png" style="height: 40px; margin-top: 10%">
 				  			</div>							
@@ -338,7 +350,7 @@
 						</div>	
 
 
-		    			<div class="card" style="width: 32%; text-align: center;     margin-bottom: 15px;     margin-top: 15px; margin-right: 10px;     height: 180px;">
+		    			<div class="card" style="width: 34%; text-align: center; height: 180px; border-top: 0px; margin-bottom: 34px; ">
 							<div style="text-align: center;">
 			 	  				<img src="/static/icon/tie.png" style="height: 40px; margin-top: 10%">
 				  			</div>							
@@ -370,7 +382,7 @@
 					</div>
 		   		</div>	    
 		  </div>		  
-<div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>					  
+			<div class="divisor" "></div>
 		  <div class="row">
 		    <div class="col-sm">
 		    	<div class="cabecalhos">
@@ -381,9 +393,9 @@
 				     		{% for club_next_games in club_next_games %}
 						  	<li class="list-group-item d-flex justify-content-between align-items-center">
 						  		<div style="width: 30%; text-align: center;">{{ club_next_games.data }}</div>
-						  		<div style="width: 30%; text-align: center;">{{ club_next_games.home }}</div>
+						  		<div style="width: 30%; text-align: center;"><a href="/club/{{ club_next_games.home }}">{{ club_next_games.home }}</a></div>
 						  		<div style="width: 10%; text-align: center;">{{ club_next_games.placar }}</div>
-						  		<div style="width: 30%; text-align: center;">{{ club_next_games.away }}</div>						  		
+						  		<div style="width: 30%; text-align: center;"><a href="/club/{{ club_next_games.away }}">{{ club_next_games.away }}</a></div>						  		
 						  	</li>
 							{% endfor %}
 						</ul>
@@ -397,17 +409,17 @@
 				     	<ul class="list-group">
 				     		{% for club_last_games in club_last_games %}
 						  	<li class="list-group-item d-flex justify-content-between align-items-center">
-							  		<div style="width: 30%; text-align: center;">{{ club_last_games.data }}</div>
-							  		<div style="width: 30%; text-align: center;">{{ club_last_games.home }}</div>
-							  		<div style="width: 10%; text-align: center;">{{ club_last_games.placar }}</div>
-							  		<div style="width: 30%; text-align: center;">{{ club_last_games.away }}</div>						  		
+						  		<div style="width: 30%; text-align: center;">{{ club_last_games.data }}</div>
+						  		<div style="width: 30%; text-align: center;"><a href="/club/{{ club_last_games.home }}">{{ club_last_games.home }}</a></div>
+						  		<div style="width: 10%; text-align: center;">{{ club_last_games.placar }}</div>
+						  		<div style="width: 30%; text-align: center;"><a href="/club/{{ club_last_games.away }}">{{ club_last_games.away }}</a></div>						  		
 						  	</li>
 							{% endfor %}
 						</ul>
 					</div>
 		    </div>		    
 		  </div>	
-<div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>				  
+			<div class="divisor" "></div>
 		  <div class="row">
 		    <div class="col-sm">
 		    	<div class="cabecalhos">
@@ -415,24 +427,26 @@
 			    </div>
 				    <ul class="pagination2">
 		     		{% for all_players in all_players %}
+		     		<a href="/player/{{ all_players.player}}">
 				  	<li class="list-group-item player-name">
 					  		<div style="width: 10%;  height: 100%; float: left">
 					  			<img src="{{ all_players.photo }}" style="height: 40px;">
 					  		</div>
 					  		<div style="width: 65%;  float: left">
 						  		<h3>
-						  			<a href="http://127.0.0.1:5000/player/{{ all_players.player }}">{{ all_players.player }}</a>
+						  			{{ all_players.player }}
 								</h3>
 								<span>{{ all_players.position }}</span>
 							</div>
 												
 				  	</li>
+				  	</a>
 					{% endfor %}
 					</ul>
 			 </div>
 		</div>
 		</div>
-<div style=" margin-top: 2%; margin-bottom: 2%;"></div>					
+			<div class="divisor" "></div>
 		<div class="container-fluid" style="background-color: #5ea052 ; padding: 50px; border-top: 4px solid #efefef;  height: 280px;">
 			<div class="row">
 				<div class="col-sm-2"></div>
@@ -466,7 +480,7 @@
 				</div>
 				<div class="col-sm-2"></div>
 			</div>
-<div style="border: 0.5px solid #a9a9a9; margin-top: 1%; margin-bottom: 1%;"></div>				
+			<div class="divisor" "></div>
 			<div class="row" style="text-align: center">
 				<div  style="width: 100%; color: #FFF">
 					The Football Facts - 2018

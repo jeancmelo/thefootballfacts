@@ -5,28 +5,17 @@ Created on 12 de jun de 2018
 @author: jeanm
 '''
 
-from datetime import datetime, timedelta
-
 from flask import Flask
 from flask import render_template
 import pygal
 from pygal.style import Style
 
-from FFClass.Club import Club
-from FFClass.Player import Player
-from FFDao import core, core_insert, core_select_club, core_select_champ,\
-    core_select_player
-from FFDao.Dao import Dao
+from FFDao import core_select_club, core_select_champ, core_select_player
 from FFDao.core_select_club import Player_Goals_Year, Player_Yellow_Cards, \
     Player_Red_Cards, Player_Time_Played, Player_Titular_Games, \
-    Player_Evolution_Goals_Year, Player_Club_Played, Player_Goals_Year_Career,\
-    Player_Yellow_Cards_Career, Player_Red_Cards_Career,\
+    Player_Club_Played, Player_Goals_Year_Career,\
     Player_Time_Played_Career, Player_Titular_Games_Career
-from click.termui import style
-from builtins import str
 
-
-bd = Dao
 core = core_select_club
 champ = core_select_champ
 player_select = core_select_player
@@ -41,12 +30,8 @@ def html_home():
 @app.route("/player/<player_name>")
 def html_player(player_name):
     
-    #RECONSTRUINDO O OBJETO
     p  = core.select_player_by_name(player_name)
-    ps = core.selec_stats_by_name(player_name) 
-    pe = Player_Evolution_Goals_Year(player_name);
     club_played = Player_Club_Played(player_name)
-       
 
     player_radar = player_select.player_network_skills(player_name)
     radar_player = player_radar.render_data_uri()
@@ -112,9 +97,8 @@ def html_club(club_name):
     opacity='.8',
     opacity_hover='.9',
     transition='200ms ease-in',
-    colors=('#25CC14', '#45993D', '#C9FF00', '#8940FF'))    
+    colors=('#5da052', '#8ed084', '#9fd098', '#25681b'))    
     
-
     data = core.Scores_per_area(club_name)
     line_chart = pygal.HorizontalBar(style=custom_style)
     line_chart.add('Goleiro', data[0])
@@ -123,11 +107,20 @@ def html_club(club_name):
     line_chart.add('Atacante', data[3])
     graph_data = line_chart.render_data_uri()
    
-   #Pega a melhor formacao
     best_form = core.club_best_formation(club_name)
+
+    club_stat = core.select_club_by_name(club_name)
+    vt = int(club_stat[0]['club_n_win'])
+    dr = int(club_stat[0]['club_n_defeat'])
+    en = int(club_stat[0]['club_n_tie'])
+    
+    pie_chart = pygal.Pie(style=custom_style)
+    pie_chart.add('Vitórias', vt)
+    pie_chart.add('Derrotas', dr)
+    pie_chart.add('Empates', en)
+    chart_pie = pie_chart.render_data_uri()
     
     try:
-        #RENDERIZAR A PAGINA COM AS INFORMACOES
         return render_template("club.html", 
                                club_stats           = core.select_club_by_name(club_name),
                                best_score           = core.Club_Best_Goals(club_name),
@@ -144,11 +137,12 @@ def html_club(club_name):
                                best_formation       = best_form[0],
                                player_formation     = best_form[1],
                                club_last_games      = core.club_last_games(club_name),
-                               club_next_games      = core.club_next_games(club_name) 
+                               club_next_games      = core.club_next_games(club_name),
+                               chart_pie            = chart_pie,
                                ), 200
     except Exception as e:
         return render_template("404.html"), 404
-    
+   
     
 @app.route("/championship/<championship_name>")
 def html_championship(championship_name):
@@ -174,7 +168,6 @@ def html_championship(championship_name):
     colors=('#A09E52', '#78774C', '#68661B', '#4D6219', '#657148', '#82974D', '#7C3F67', '#5D3B51'))    
     
 
-    
     ages = champ.champ_age_data()
     box_plot = pygal.Box(style=custom_style)
     box_plot.title = 'Idade dos Jogadores'
@@ -207,12 +200,8 @@ def html_championship(championship_name):
     
     position = champ.champ_player_per_position()
     position_player = position.render_data_uri()
-    
-    #position_club = champ.champ_player_per_position_club()
-    #position_player_club = position_club.render_data_uri()
-    
+
     try:
-        #RENDERIZAR A PAGINA COM AS INFORMACOES
         return render_template("championship.html", 
                                championship_name            = championship_name,
                                champ_clubs                  = c,

@@ -39,13 +39,11 @@
 	height: 80px;
 }
 .cabecalhos{
-    margin-bottom: 0px;
-    background-color: #5ea052;
-    color: #5d5d5d;
-    border: 1px solid #dedede;
+    background-color: #ffffff;
+    height: 60px;
+    border: 1px solid #ececec;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
     border-bottom: 0px;
-    height: 50px;
-    border-bottom: 2px solid #46843c !important;
 }
 .cabecalho-jogador{
     background-color: #5283a0 !important;
@@ -77,18 +75,19 @@ h3{
     font-weight: 800;
 }
 h1{
-    font-size: 50px;
+    font-size: 45px;
     text-transform: uppercase;
     font-weight: 800;
     color: #4e4e4e;
 }
 h2{
     margin-bottom: 0px;
-    padding-left: 10px;
-    color: #FFF;
-    padding-top: 11px;
-    font-size: 20px;
-    border-radius: 5px;
+    padding-left: 20px;
+    color: #000;
+    padding-top: 20px;
+    font-size: 17px;
+    font-weight: 600;
+    text-align: left;
 }
 h4{
     font-size: 30px;
@@ -96,15 +95,21 @@ h4{
     color: #5f5c5c;
 }
 .list-group-item{
-    margin-bottom: 5px;
-    border: 1px solid #f7f3f3;
-    border-radius: 5px;
-    line-height: 10px
+    border: 2px solid #ececec;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    border-top: 0px;
 }
 .badge-primary{
     background-color: #FFF;
-    color: #55a547;
-    font-size: 25px;
+color: #333333;
+    font-size: 18px;
+}
+.divisor{
+    margin-top: 3%;
+    margin-bottom: 3%;"
+}
+a{
+    color: #000000;    
 }
 
 /* Cosmetic only */

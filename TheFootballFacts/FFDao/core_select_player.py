@@ -4,27 +4,14 @@ Created on 6 de ago de 2018
 
 @author: jeanm
 '''
-import re
+import pygal
 
 from sqlalchemy import select, and_
-
-from FFDao.core import players_table, stats_table, club_table
-from numpy import integer
-from _operator import contains
-import json
-
-import pygal
+from FFDao.core import players_table, stats_table
 from pygal.style import Style
-from audioop import reverse
-from click.termui import style
 
-
-
-#REDE DE ÁREA DE SKILLS
-def player_network_skills(p_name):
-    
-        #CUSTOMIZAÇÃO DA COR DO GRÁFICO DE SCORE POR ÁREA
-    custom_style = Style(
+ #CUSTOMIZAÇÃO DA COR DO GRÁFICO DE SCORE POR ÁREA
+custom_style = Style(
     background='transparent',
     plot_background='#FFF',
     foreground='#676767',
@@ -34,12 +21,17 @@ def player_network_skills(p_name):
     major_label_font_size=20.0,
     guide_stroke_dasharray='#fbfbfb',
     major_guide_stroke_dasharray='#fbfbfb',
-    foreground_strong='#d0d0d0',
-    foreground_subtle='#d0d0d0',
+    foreground_strong='#676767',
+    foreground_subtle='#676767',
     opacity='.8',
     opacity_hover='.9',
     transition='200ms ease-in',
-    colors=('#5283a0', '#78774C', '#68661B', '#4D6219', '#657148', '#82974D', '#7C3F67', '#5D3B51'))    
+    colors=('#5283a0', '#84b3d0', '#98bbd0', '#1b4b68', '#25586b', '#313186', '#218359', '#BF8230'))    
+    
+#REDE DE ÁREA DE SKILLS
+def player_network_skills(p_name):
+    
+
 
     retorno       = []
     ataque        = 0
@@ -70,23 +62,7 @@ def player_network_skills(p_name):
 #GRÁFICO DE ROSCA PARA VEZES TITULAR VS JOGOS
 def player_titular_vs_non(p_name):
     
-    #CUSTOMIZAÇÃO DA COR DO GRÁFICO DE SCORE POR ÁREA
-    custom_style = Style(
-    background='transparent',
-    plot_background='#FFF',
-    foreground='#676767',
-    value_font_size = 20.0,
-    label_font_size=20.0,
-    legend_font_size=20.0,
-    major_label_font_size=20.0,
-    guide_stroke_dasharray='#fbfbfb',
-    major_guide_stroke_dasharray='#fbfbfb',
-    foreground_strong='#d0d0d0',
-    foreground_subtle='#d0d0d0',
-    opacity='.8',
-    opacity_hover='.9',
-    transition='200ms ease-in',
-    colors=('#5283a0', '#78774C', '#68661B', '#4D6219', '#657148', '#82974D', '#7C3F67', '#5D3B51'))    
+  
 
     retorno       = []
     substitutido       = []
@@ -162,25 +138,7 @@ def player_goals_per_year(p_name):
         f_goals.append(aux)   
         ano_comeco = ano_comeco + 1    
 
-
-    
-    #CUSTOMIZAÇÃO DA COR DO GRÁFICO DE SCORE POR ÁREA
-    custom_style = Style(
-    background='transparent',
-    plot_background='#FFF',
-    foreground='#676767',
-    value_font_size = 20.0,
-    label_font_size=20.0,
-    legend_font_size=20.0,
-    major_label_font_size=20.0,
-    guide_stroke_dasharray='#fbfbfb',
-    major_guide_stroke_dasharray='#fbfbfb',
-    foreground_strong='#d0d0d0',
-    foreground_subtle='#d0d0d0',
-    opacity='.8',
-    opacity_hover='.9',
-    transition='200ms ease-in',
-    colors=('#5283a0', '#78774C', '#68661B', '#4D6219', '#657148', '#82974D', '#7C3F67', '#5D3B51'))            
+     
     
     date_chart = pygal.Line(x_label_rotation=20, style=custom_style)
     date_chart.x_labels = f_year
@@ -191,23 +149,7 @@ def player_goals_per_year(p_name):
 #REDE DE ÁREA DE SKILLS
 def player_time_per_year(p_name):
 
-    #CUSTOMIZAÇÃO DA COR DO GRÁFICO DE SCORE POR ÁREA
-    custom_style = Style(
-    background='transparent',
-    plot_background='#FFF',
-    foreground='#676767',
-    value_font_size = 20.0,
-    label_font_size=20.0,
-    legend_font_size=20.0,
-    major_label_font_size=20.0,
-    guide_stroke_dasharray='#fbfbfb',
-    major_guide_stroke_dasharray='#fbfbfb',
-    foreground_strong='#d0d0d0',
-    foreground_subtle='#d0d0d0',
-    opacity='.8',
-    opacity_hover='.9',
-    transition='200ms ease-in',
-    colors=('#5283a0', '#78774C', '#68661B', '#4D6219', '#657148', '#82974D', '#7C3F67', '#5D3B51'))    
+
     
     
     
@@ -269,23 +211,6 @@ def player_time_per_year(p_name):
 #REDE DE ÁREA DE SKILLS
 def player_cor_age_vs_time_played(p_name):
 
-    #CUSTOMIZAÇÃO DA COR DO GRÁFICO DE SCORE POR ÁREA
-    custom_style = Style(
-    background='transparent',
-    plot_background='#FFF',
-    foreground='#676767',
-    value_font_size = 20.0,
-    label_font_size=20.0,
-    legend_font_size=20.0,
-    major_label_font_size=20.0,
-    guide_stroke_dasharray='#fbfbfb',
-    major_guide_stroke_dasharray='#fbfbfb',
-    foreground_strong='#d0d0d0',
-    foreground_subtle='#d0d0d0',
-    opacity='.8',
-    opacity_hover='.9',
-    transition='200ms ease-in',
-    colors=('#5283a0', '#78774C', '#68661B', '#4D6219', '#657148', '#82974D', '#7C3F67', '#5D3B51'))    
     
     #GR�FICO DE DESEMPENHO DE GOLS
     retorno = []

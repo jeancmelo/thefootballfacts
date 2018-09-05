@@ -53,13 +53,13 @@
 				</div>
 			</div>
 		</div>
-<div style="border: 1px solid #f9f9f9; margin-top: 2%; margin-bottom: 2%;"></div>
+		<div class="divisor"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3" >
 					<div class="card" style="width: 17rem; text-align: center;">
 						<div style="text-align: center;">
-			 	  			<img src="/static/icon/goal.png" style="height: 100%; margin-top: 10%">
+			 	  			<img src="/static/icon/goal.png" style="height: 50px; margin-top: 10%">
 				  		</div>			
 					  <div class="card-body">
 					    <h3 class="card-title">Gols Marcados</h3>
@@ -70,7 +70,7 @@
 				<div class="col-sm-3">
 					<div class="card" style="width: 17rem; text-align: center;">
 						<div style="text-align: center;">
-			 	  			<img src="/static/icon/assistence.png" style="height: 100%; margin-top: 10%">
+			 	  			<img src="/static/icon/assistence.png" style="height: 50px; margin-top: 10%">
 				  		</div>							
 					  <div class="card-body">
 					    <h3 class="card-title">Tempo Jogado </h3>
@@ -81,7 +81,7 @@
 				<div class="col-sm-3">
 					<div class="card" style="width: 17rem; text-align: center;">
 						<div style="text-align: center;">
-			 	  			<img src="/static/icon/yellow-card.png" style="height: 100%; margin-top: 10%">
+			 	  			<img src="/static/icon/yellow-card.png" style="height: 50px; margin-top: 10%">
 				  		</div>							
 					  <div class="card-body">
 					    <h3 class="card-title">Cartões Amarelos</h3>
@@ -92,7 +92,7 @@
 				<div class="col-sm-3">
 					<div class="card" style="width: 17rem; text-align: center;">
 						<div style="text-align: center;">
-			 	  			<img src="/static/icon/red-card.png" style="height: 100%; margin-top: 10%">
+			 	  			<img src="/static/icon/red-card.png" style="height: 50px; margin-top: 10%">
 				  		</div>							
 					  <div class="card-body">
 					    <h3 class="card-title">Cartões Vermelhos</h3>
@@ -101,10 +101,10 @@
 					</div>					
 				</div>					
 			</div>
-			<div style="border: 1px solid #f9f9f9; margin-top: 5%; margin-bottom: 2%;"></div>
+			<div class="divisor"></div>
 			<div class="row">
 				<div class="col-sm-6">
-					<div class="cabecalhos cabecalho-jogador">
+					<div class="cabecalhos ">
 			      		<h2>Gols na Carreira</h2>
 			      	</div>
 					<!-- Don't forget the "|safe"! -->
@@ -115,7 +115,7 @@
 					</div>			
 				</div>
 				<div class="col-sm">
-					<div class="cabecalhos cabecalho-jogador">
+					<div class="cabecalhos ">
 			      		<h2>Posição de Atuação</h2>
 			      	</div>	
 			      	<div class="list-group-item" style="padding: 20px; background-color: #fff; text-align: center;">				
@@ -123,82 +123,81 @@
 			      	</div>
 				</div>
 			</div>
-<div style="margin-top: 2%; margin-bottom: 2%;"></div>					
-          <div style="border: 1px solid #F8F8F8"></div>
+			<div class="divisor"></div>					
 			<div class="row" style="text-align: center">
 		    	<div class="col-sm">
-		    		<div class="cabecalhos cabecalho-jogador">
+		    		<div class="cabecalhos ">
 			      		<h2>SCOUTS DESSE ANO</h2>
 			      	</div>
 			     	<ul class="list-group">
 						<li class="list-group-item d-flex justify-content-between align-items-center">
 					    Gols no Ano
-					    <span class="badge badge-primary badge-primary-player badge-pill">{{player_goal}}</span>
+					    <span class="badge badge-primary  badge-pill">{{player_goal}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
 					    Amarelo no Ano
-					    <span class="badge badge-primary badge-primary-player badge-pill">{{player_yellow_card}}</span>
+					    <span class="badge badge-primary  badge-pill">{{player_yellow_card}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
 					   Vermelho no Ano
-					    <span class="badge badge-primary badge-primary-player badge-pill">{{player_red_card}}</span>
+					    <span class="badge badge-primary  badge-pill">{{player_red_card}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
 					    Titular no Ano
-					    <span class="badge badge-primary badge-primary-player badge-pill">{{player_titular_year}}</span>
+					    <span class="badge badge-primary  badge-pill">{{player_titular_year}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
 					    Tempo jogado no Ano
-					    <span class="badge badge-primary badge-primary-player badge-pill">{{player_time_played}}</span>
+					    <span class="badge badge-primary  badge-pill">{{player_time_played}}</span>
 					  </li>				 
 					</ul>
 		   		</div>
 		    	<div class="col-sm">
-		    		<div class="cabecalhos cabecalho-jogador">
+		    		<div class="cabecalhos ">
 			      		<h2>SCOUTS DA CARREIRA</h2>	    		
 			      	</div>
 			     	<ul class="list-group">
 						<li class="list-group-item d-flex justify-content-between align-items-center">
 					    Gols na Carreira
-					    <span class="badge badge-primary badge-primary-player badge-pill">{{player_goal_career}}</span>
+					    <span class="badge badge-primary  badge-pill">{{player_goal_career}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
 					    Amarelo na Carreira
-					    <span class="badge badge-primary badge-primary-player badge-pill">{{player_yellow_card_career}}</span>
+					    <span class="badge badge-primary  badge-pill">{{player_yellow_card_career}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
 					   Vermelho na Carreira
-					    <span class="badge badge-primary badge-primary-player badge-pill">{{player_red_card_career}}</span>
+					    <span class="badge badge-primary  badge-pill">{{player_red_card_career}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
 					    Titular na Carreira
-					    <span class="badge badge-primary badge-primary-player badge-pill">{{player_titular_year_career}}</span>
+					    <span class="badge badge-primary  badge-pill">{{player_titular_year_career}}</span>
 					  </li>
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
 					    Tempo jogado na Carreira
-					    <span class="badge badge-primary badge-primary-player badge-pill">{{player_time_played_career}}</span>
+					    <span class="badge badge-primary  badge-pill">{{player_time_played_career}}</span>
 					  </li>				 
 					</ul>
 		   		</div>
 		    <div class="col-sm">
-		    	<div class="cabecalhos cabecalho-jogador">
+		    	<div class="cabecalhos ">
 			    	<h2>ÚLTIMAS EQUIPES QUE ATUOU</h2>	    		
 			    </div>		    	
 		      	<ul class="list-group">
 		      	{% for club_played in club_played %}
 				<li class="list-group-item d-flex justify-content-between align-items-center">
 					{{ club_played.club }}
-					<span class="badge badge-primary badge-primary-player badge-pill">{{ club_played.year }}</span>
+					<span class="badge badge-primary  badge-pill">{{ club_played.year }}</span>
 				</li>
 				{% endfor %}
 
 				</ul>
 		    </div>
 		  </div>
-<div style="margin-top: 2%; margin-bottom: 2%;"></div>					
+<div class="divisor"></div>					
 		  <div class="row">
 		  	<div class="col-sm">
-				<div class="cabecalhos cabecalho-jogador">
+				<div class="cabecalhos ">
 			    	<h2>RADAR DE SKILLS</h2>	    		
 			    </div>
 				<!-- Don't forget the "|safe"! -->
@@ -209,7 +208,7 @@
 				</div>			  		    
 		    </div>
 		    <div class="col-sm">
-				<div class="cabecalhos cabecalho-jogador">
+				<div class="cabecalhos ">
 			    	<h2>TÍTULAR VS SUBSTITUÍDO</h2>	    		
 			    </div>
 				<!-- Don't forget the "|safe"! -->
@@ -220,10 +219,10 @@
 				</div>	
 		    </div>
 		  </div>
-<div style="margin-top: 2%; margin-bottom: 2%;"></div>					
+<div class="divisor"></div>					
 		  <div class="row">
 		  	<div class="col-sm">
-				<div class="cabecalhos cabecalho-jogador">
+				<div class="cabecalhos ">
 			    	<h2>TEMPO JOGADO POR ANO</h2>	    		
 			    </div>
 				<!-- Don't forget the "|safe"! -->
@@ -234,7 +233,7 @@
 				</div>			  		    
 		    </div>		
 		  	<div class="col-sm">
-				<div class="cabecalhos cabecalho-jogador">
+				<div class="cabecalhos ">
 			    	<h2>CORRELAÇÃO ANO VS TEMPO JOGADO</h2>	    		
 			    </div>
 				<!-- Don't forget the "|safe"! -->

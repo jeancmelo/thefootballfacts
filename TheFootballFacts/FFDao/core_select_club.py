@@ -80,7 +80,7 @@ def select_club_by_name(c_name):
     
     return data       
 
-def select_top_players(c_name):
+def select_top_players():
     retorno = []
     a = select([stats_table.c.s_matches_played, stats_table.c.s_name] ).where(
                 and_(
@@ -614,7 +614,7 @@ def Best_Score_Players(c_club):
    #FAZ A CLASSIFICAO
     mysorted = sorted(data, key=lambda x : x['score'], reverse=True)
    
-    return mysorted[0:6]        
+    return mysorted[0:8]        
         
 
 def Wrots_Score_Players(c_club):
@@ -840,7 +840,7 @@ def club_next_games(c_club):
     
         
 if __name__ == '__main__':
-    select_club_by_name("bahia")   
+    print(select_club_by_name("bahia"))   
     
 
 
