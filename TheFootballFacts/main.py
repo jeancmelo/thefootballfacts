@@ -25,7 +25,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def html_home():
-    return render_template("index.html")
+    
+    c = champ.select_club_by_champ("Brasileirão%20Série%20A")
+        
+    return render_template("index.html",
+                            champ_clubs           = c
+                           ), 200
 
 @app.route("/player/<player_name>")
 def html_player(player_name):
@@ -226,6 +231,9 @@ def html_championship(championship_name):
 def page_not_found(e):
     # note that we set the 404 status explicitly
     return render_template('404.html'), 404
+
+
+
     
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)

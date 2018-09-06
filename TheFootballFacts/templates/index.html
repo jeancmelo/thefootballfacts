@@ -1,136 +1,186 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-	<head>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>The Football Facts</title>
+
 		<!-- Required meta tags -->
     	<meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.com/libraries/Chart.js">
 
-		<title>The Football Facts</title>
-	</head>
-	<body>
+		<link rel="stylesheet" type="text/css" href="http://127.0.0.1:5000/static/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-		<!-- Menu superior -->
-		<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-    		<h5 class="my-0 mr-md-auto font-weight-normal">The Football Facts</h5>
-		     <nav class="my-2 my-md-0 mr-md-3">
-		     	<a class="p-2 text-dark" href="#">Clubes</a>
-		        <a class="p-2 text-dark" href="#">Jogadores</a>
-		        <a class="p-2 text-dark" href="#">Campeonatos</a>
-		        <a class="p-2 text-dark" href="#">Comprativo</a>
-		     </nav>
-    	</div>
+    <!-- Custom fonts for this template -->
+    <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
-		<div class="container">
+    <!-- Plugin CSS -->
+    <link href="/static/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
-		  <div class="row" style="text-align: center">
-		    <div class="col-sm">
-		      	<h2>Seus Favoritos</h2>
-		     	<ul class="list-group">
-					<li class="list-group-item d-flex justify-content-between align-items-center">
-				    Cras justo odio
-				    <span class="badge badge-primary badge-pill">14</span>
-				  </li>
-				  <li class="list-group-item d-flex justify-content-between align-items-center">
-				    Dapibus ac facilisis in
-				    <span class="badge badge-primary badge-pill">2</span>
-				  </li>
-				  <li class="list-group-item d-flex justify-content-between align-items-center">
-				    Morbi leo risus
-				    <span class="badge badge-primary badge-pill">1</span>
-				  </li>
-				  <li class="list-group-item d-flex justify-content-between align-items-center">
-				    Dapibus ac facilisis in
-				    <span class="badge badge-primary badge-pill">2</span>
-				  </li>
-				  <li class="list-group-item d-flex justify-content-between align-items-center">
-				    Morbi leo risus
-				    <span class="badge badge-primary badge-pill">1</span>
-				  </li>				 
-				</ul>
-		    </div>
-		    <div class="col-sm">
-		        <h2>TOP Scout Times</h2>
-		      	<ul class="list-group">
-				  <li class="list-group-item">Cras justo odio</li>
-				  <li class="list-group-item">Dapibus ac facilisis in</li>
-				  <li class="list-group-item">Morbi leo risus</li>
-				  <li class="list-group-item">Porta ac consectetur ac</li>
-				  <li class="list-group-item">Vestibulum at eros</li>
-				</ul>
-		    </div>
-		    <div class="col-sm">
-		        <h2>Próximo Jogos</h2>
-		      	<ul class="list-group">
-				  <li class="list-group-item">Cras justo odio</li>
-				  <li class="list-group-item">Dapibus ac facilisis in</li>
-				  <li class="list-group-item">Morbi leo risus</li>
-				  <li class="list-group-item">Porta ac consectetur ac</li>
-				  <li class="list-group-item">Vestibulum at eros</li>
-				</ul>
-		    	</div>
-		  </div>
-          <div style="border: 1px solid #F8F8F8"></div>
-		  	<h2>TOP GERAL DO {{CAMPEONATO}}</h2>
-		  <div class="row" style="text-align: center">
-		    <div class="col-sm">
-		      	<h2>Seus Favoritos</h2>
-		     	<ul class="list-group">
-					<li class="list-group-item d-flex justify-content-between align-items-center">
-				    Cras justo odio
-				    <span class="badge badge-primary badge-pill">14</span>
-				  </li>
-				  <li class="list-group-item d-flex justify-content-between align-items-center">
-				    Dapibus ac facilisis in
-				    <span class="badge badge-primary badge-pill">2</span>
-				  </li>
-				  <li class="list-group-item d-flex justify-content-between align-items-center">
-				    Morbi leo risus
-				    <span class="badge badge-primary badge-pill">1</span>
-				  </li>
-				  <li class="list-group-item d-flex justify-content-between align-items-center">
-				    Dapibus ac facilisis in
-				    <span class="badge badge-primary badge-pill">2</span>
-				  </li>
-				  <li class="list-group-item d-flex justify-content-between align-items-center">
-				    Morbi leo risus
-				    <span class="badge badge-primary badge-pill">1</span>
-				  </li>				 
-				</ul>
-		    </div>
-		    <div class="col-sm">
-		        <h2>TOP Scout Times</h2>
-		      	<ul class="list-group">
-				  <li class="list-group-item">Cras justo odio</li>
-				  <li class="list-group-item">Dapibus ac facilisis in</li>
-				  <li class="list-group-item">Morbi leo risus</li>
-				  <li class="list-group-item">Porta ac consectetur ac</li>
-				  <li class="list-group-item">Vestibulum at eros</li>
-				</ul>
-		    </div>
-		    <div class="col-sm">
-		        <h2>Próximo Jogos</h2>
-		      	<ul class="list-group">
-				  <li class="list-group-item">Cras justo odio</li>
-				  <li class="list-group-item">Dapibus ac facilisis in</li>
-				  <li class="list-group-item">Morbi leo risus</li>
-				  <li class="list-group-item">Porta ac consectetur ac</li>
-				  <li class="list-group-item">Vestibulum at eros</li>
-				</ul>
-		    	</div>
-		  </div>
+    <!-- Custom styles for this template -->
+    <link href="/static/css/creative.min.css" rel="stylesheet">
 
+  </head>
 
-		</div>
+  <body id="page-top">
 
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">The Football Facts</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+            	<a class="nav-link js-scroll-trigger" href="#portfolio">FAQ</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-    
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <header class="masthead text-center text-white d-flex">
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <h1 class="text-uppercase">
+              <strong style="    color: #f8f8f8;    -webkit-text-stroke-width: 2px;     -webkit-text-stroke-color: #636363;"> The Football Facts</strong>
+            </h1>
+            <hr>
+          </div>
+          <div class="col-lg-8 mx-auto">
+            <p class="text-faded mb-5">Plataforma de Estatísticas e Análise de Performance do Futebol para Auxilio na Tomada de Decisão</p>
+            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Saiba Mais</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="bg-primary" id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="section-heading text-white" style="text-align: center; font-size: 30px;">Quem é você?</h2>
+            <hr class="light my-4">
+            <p class="text-faded mb-4">A plataforma The Football Facts é indicado para diversos públicos, como Jogadores, Técnicos, Clubes, Entusiastas de Futebol e muito mais</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading" style="text-align: center; font-size: 30px;">Principais Soluções</h2>
+            <hr class="my-4">
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-diamond text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">Clubes</h3>
+              <p class="text-muted mb-0">Estatísticas de Performance do Clube em Campeonatos.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-paper-plane text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">Campeonatos</h3>
+              <p class="text-muted mb-0">Médias, Correlações e insights do campeonato.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-newspaper-o text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">Jogadores</h3>
+              <p class="text-muted mb-0">Performance do jogador no ano atual e também na sua carreira.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-heart text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">Escolha Tática</h3>
+              <p class="text-muted mb-0">Ánálise e Orientação no Melhor Esquema Tática por Equipe</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="p-0" id="portfolio" style="background-color: #f9f9f9;">
+	<div  style="height: 80px;"></div>
+      <div class="col-lg-12 text-center">
+	       <h2 class="section-heading" style="text-align: center; font-size: 30px;">Clubes</h2>
+	       <hr class="my-4">
+	   </div>
+	   	<div  style="height: 30px;"></div>
+
+      <div class="container-fluid p-0">
+        <div class="row no-gutters popup-gallery">
+        	{% for champ_clubs in champ_clubs %}
+          <div class="col-lg-2 col-sm-3" style="text-align: center; background-color: #fff; border: 1px solid #f1f1f1; padding: 20px">
+            <a class="portfolio-box" href="/club/{{champ_clubs.club_name}}">
+              <img class="img-fluid" src="{{champ_clubs.club_logo}}" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-category text-faded">
+                    Brasil
+                  </div>
+                  <div class="project-name">
+                    {{champ_clubs.club_name}}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-lg-12 text-center">
+      	<div style="height: 80px;"></div>
+	   </div>      
+    </section>
+   <section id="contact" style="background-color: #f05f40 ; padding: 50px; border-top: 4px solid #efefef;  height: 280px;">
+		<div >
+			<div class="row">
+			</div>		
+		<div style="border: 0.5px solid #a9a9a9; margin-top: 1%; margin-bottom: 1%;"></div>				
+			<div class="row" style="text-align: center">
+				<div  style="width: 100%; color: #FFF">
+					The Football Facts - 2018
+				</div>
+			</div>
+		</div>	
+    </section>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-	</body>
+
+    <!-- Plugin JavaScript -->
+    <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="static/vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="static/js/creative.min.js"></script>
+
+  </body>
+
 </html>
