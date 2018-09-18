@@ -157,7 +157,43 @@
       	<div style="height: 80px;"></div>
 	   </div>      
     </section>
-   <section id="contact" style="background-color: #f05f40 ; padding: 50px; border-top: 4px solid #efefef;  height: 280px;">
+    <section class="p-0" id="portfolio" style="background-color: #f9f9f9;">
+  <div  style="height: 80px;"></div>
+      <div class="col-lg-12 text-center">
+         <h2 class="section-heading" style="text-align: center; font-size: 30px;">Top Jogadores</h2>
+         <hr class="my-4">
+     </div>
+      <div  style="height: 30px;"></div>
+
+      <div class="container-fluid p-0">
+        <div class="row no-gutters popup-gallery">
+          {% for best_players in best_players %}
+          <div class="col-lg-3 col-sm-3" style="text-align: center; background-color: #fff; border: 1px solid #f1f1f1; padding: 20px">
+            <a class="portfolio-box" href="/player/{{best_players.player}}">
+              <img class="img-fluid" src="{{best_players.photo}}" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-category text-faded">
+                    Score: {{best_players.score}}
+                  </div>
+                  <div class="project-name">
+                    {{best_players.player}}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-lg-12" style="text-align: right;">
+        <div style="margin-top: 20px; margin-bottom: 20px;">
+          <a href="/player" style="padding: 10px;    background-color: #b9614e; color: #fff;"> Todos os Jogadores ></a>
+        </div>
+     </div>      
+    </section>    
+
+   <section id="contact" style="background-color: #b9614e ; padding: 50px; border-top: 4px solid #efefef;  height: 280px;">
 		<div >
 			<div class="row">
 			</div>		

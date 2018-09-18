@@ -15,6 +15,7 @@ import json
 from FFutils import UtilPlayer
 from audioop import reverse
 import pygal
+from turtledemo.minimal_hanoi import play
 
 def select_club_by_champ(c_champ):
     
@@ -525,12 +526,47 @@ def champ_player_per_position_club():
                 atacantes = atacantes + 1
                 
         radar_chart.add(retorno[i][0], [goleiros, defensores, meias, atacantes])
-       
-
-
-    
+          
     
     return radar_chart
+
+def Best_Score_Players(limite):
+
+    retorno = []
+    player  = []
+    score   = []
+    photo   = []
+    
+    up = UtilPlayer
+    
+    a = select([players_table.c.p_name, players_table.c.p_position, players_table.c.p_club, players_table.c.p_photo])
+    
+    for row in a.execute():
+        retorno.append(row)
+        
+    for i, val in enumerate(retorno):
+        if retorno[i][1] == "Goalkeeper":
+             score.append(up.score_player_keeper(retorno[i][0], retorno[i][2]))
+        elif retorno[i][1] == "Defender":
+             score.append(up.score_player_defender(retorno[i][0], retorno[i][2]))
+        elif retorno[i][1] == "Midfielder":   
+             score.append(up.score_player_midfielder(retorno[i][0], retorno[i][2]))
+        elif retorno[i][1] == "Attacker":  
+             score.append(up.score_player_forward(retorno[i][0], retorno[i][2]))
+        player.append(retorno[i][0])
+        photo.append(retorno[i][3])
+    
+
+    #TRANSFORMA EM JSON     
+    data = [{"player": c, "score": s, "photo": p} for c, s, p in zip(player, score, photo)]   
+
+   #FAZ A CLASSIFICAO
+    mysorted = sorted(data, key=lambda x : x['score'], reverse=True)
+
+    if limite == 0:
+        limite = len(player)
+   
+    return mysorted[0:limite]   
 
 if __name__ == '__main__':
     champ_data()   

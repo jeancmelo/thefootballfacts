@@ -111,6 +111,76 @@ color: #333333;
 a{
     color: #000000;    
 }
+.title-faq{
+    margin-bottom: 20px !important;
+}
+.panel-body {
+    padding: 20px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    border-radius: 2px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    margin-top: 0;
+    }
+
+
+.list-group.help-group {
+  margin-bottom: 20px;
+  padding-left: 0;
+  margin: 0;
+}
+
+.faq-list {
+    display: block;
+    top: auto;
+    margin: 0 0 32px;
+    border-radius: 2px;    
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 5px rgba(85, 85, 85, 0.15);
+}
+.list-group-item {
+      position: relative;
+      display: block;
+      margin: 0;
+      padding: 13px 16px;
+      background-color: #fff;
+      border: 0;
+      border-bottom: 1px solid #ddd;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      color: #616161;
+      transition: background-color .2s;
+}
+
+.tab-content.panels-faq {
+  padding: 0;
+  border: 0;
+}
+
+.panel.panel-help {
+  box-shadow: 0 1px 5px rgba(85, 85, 85, 0.15);
+  padding-bottom: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  background-color: #fff;
+  margin: 0 0 16px;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.panel-heading {
+    background-color: #FFF;
+    padding: 0 16px;
+    line-height: 48px;
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+    color: rgba(0,0,0,.87);
+}
+.collapsed{
+   a:hover:; 
+}
 
 /* Cosmetic only */
 #easyPaginate {width:300px;}

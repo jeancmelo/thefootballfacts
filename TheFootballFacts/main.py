@@ -27,9 +27,11 @@ app = Flask(__name__)
 def html_home():
     
     c = champ.select_club_by_champ("Brasileirão%20Série%20A")
+    d = champ.Best_Score_Players(12)
         
     return render_template("index.html",
-                            champ_clubs           = c
+                            champ_clubs           = c,
+                            best_players          = d
                            ), 200
 
 @app.route("/player/<player_name>")
@@ -227,10 +229,23 @@ def html_championship(championship_name):
     except Exception as e:
         return render_template("404.html"), 404                       
 
+@app.route('/player')
+def html_players():
+    
+    d = champ.Best_Score_Players(0)
+        
+    return render_template("players.html",
+                            best_players          = d
+                           ), 200
+
 @app.errorhandler(404)
 def page_not_found(e):
     # note that we set the 404 status explicitly
     return render_template('404.html'), 404
+
+@app.route("/perguntas-frequentes")
+def html_faq():
+    return render_template('perguntas-frequentes.html'), 200
 
 
 
